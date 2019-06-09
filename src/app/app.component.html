@@ -1,0 +1,27 @@
+<!-- mat toolbar mat sidenav container mat sidenav mat sidenav content -->
+<mat-toolbar id="mainToolbar" color="primary">
+  <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">menu</mat-icon>
+  <span>Matrimonial Biodata</span>
+  <span class="toolbarSpacer"></span>
+  <mat-icon class="toolbarIcon">add</mat-icon>
+</mat-toolbar>
+
+<mat-sidenav-container id="sidenavContainer" fullscreen>
+  <mat-sidenav
+    #sidenav
+    id="sideNav"
+    mode="side"
+    [ngClass]="{ 'menu-open': isMenuOpen, 'menu-close': !isMenuOpen }"
+    opened
+  >
+    <mat-nav-list>
+      <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+      <a href="#" mat-list-item>Menu Item 1</a>
+      <a href="#" mat-list-item>Menu Item 2</a>
+      <a href="#" mat-list-item>Menu Item 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

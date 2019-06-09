@@ -1,0 +1,35 @@
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+// }
+
+#toolbarMenu {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+#mainToolbar .toolbarSpacer {
+  flex: 1 1 auto;
+}
+
+#mainToolbar .toolbarIcon {
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+#sidenavContainer {
+  margin-top: 64px;
+}
+
+#sideNav {
+  width: 240px;
+}
+
+#sideNav.menu-open {
+  width: 240px;
+}
+
+#sideNav.menu-close {
+  width: 70px;
+}
