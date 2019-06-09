@@ -41,6 +41,13 @@ yarn-error.log
 testem.log
 /typings
 
+#settings file
+angular.json
+package.json
+tsconfig.json
+
 # System Files
 .DS_Store
 Thumbs.db
+
+
