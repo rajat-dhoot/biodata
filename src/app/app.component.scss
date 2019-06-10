@@ -19,17 +19,9 @@
 }
 
 #sidenavContainer {
-  margin-top: 64px;
+  margin-top: 56px;
 }
 
 #sideNav {
-  width: 240px;
-}
-
-#sideNav.menu-open {
-  width: 240px;
-}
-
-#sideNav.menu-close {
-  width: 70px;
+  transition: all 0.4s ease;
 }
