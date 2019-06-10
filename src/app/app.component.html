@@ -10,18 +10,17 @@
   <mat-sidenav
     #sidenav
     id="sideNav"
-    mode="side"
-    [ngClass]="{ 'menu-open': isMenuOpen, 'menu-close': !isMenuOpen }"
-    opened
+    [mode]="mode"
+    [style.width.px]="sideNavWidth"
+    opened="{{ isNavOpen }}"
   >
     <mat-nav-list>
-      <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
       <a href="#" mat-list-item>Menu Item 1</a>
       <a href="#" mat-list-item>Menu Item 2</a>
       <a href="#" mat-list-item>Menu Item 3</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+  <mat-sidenav-content [style.margin-left.px]="contentMargin">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

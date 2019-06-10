@@ -7,26 +7,34 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  public isMenuOpen: Boolean;
+  private isMenuOpen: Boolean = false;
   public contentMargin: Number;
+  public mode: String;
+  public sideNavWidth: Number;
+  public isNavOpen: Boolean = false;
   constructor(breakpointObserver: BreakpointObserver) {
-    this.isMenuOpen = false;
-    this.contentMargin = 70;
     breakpointObserver.observe("(min-width : 599px)").subscribe(result => {
       if (result.matches) {
-        this.isMenuOpen = true;
-        this.contentMargin = 240;
+        this.mode = "side";
+        this.sideNavWidth = this.contentMargin = 240;
+        this.isMenuOpen = this.isNavOpen = true;
       } else {
-        this.isMenuOpen = false;
-        this.contentMargin = 70;
+        this.mode = "over";
+        this.contentMargin = 0;
+        this.isMenuOpen = this.isNavOpen = false;
       }
     });
   }
 
   onToolbarMenuToggle() {
     this.isMenuOpen = !this.isMenuOpen;
-    if (this.isMenuOpen) {
-      this.contentMargin = 240;
-    } else this.contentMargin = 70;
+    if (this.mode === "side") {
+      this.isMenuOpen
+        ? (this.sideNavWidth = this.contentMargin = 240)
+        : (this.sideNavWidth = this.contentMargin = 70);
+    } else {
+      this.sideNavWidth = this.isMenuOpen ? 240 : 0;
+      this.isNavOpen = this.isMenuOpen;
+    }
   }
 }
