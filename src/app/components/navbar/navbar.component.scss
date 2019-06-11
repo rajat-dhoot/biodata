@@ -1,0 +1,57 @@
+#mainToolbar {
+  background: #fc6a76fd;
+  color: white;
+  mat-icon {
+    color: white;
+  }
+}
+
+#toolbarMenu {
+  cursor: pointer;
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+#mainToolbar .toolbarSpacer {
+  flex: 1 1 auto;
+}
+
+#mainToolbar .toolbarIcon {
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+#sidenavContainer {
+  margin-top: 56px;
+}
+
+#sideNav {
+  transition: all 0.3s ease;
+}
+
+#sidenav .menu-item:hover {
+  background: #999;
+}
+
+mat-nav-list {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  padding-top: 0;
+  overflow: hidden;
+  mat-icon {
+    flex: 0 0 18%;
+    margin-left: 5px;
+    color: #555;
+  }
+  span {
+    font-size: 17px;
+    flex: 0 0 70%;
+    text-align: left;
+    color: #333;
+  }
+  .nav-label {
+    visibility: hidden;
+    transition: all 0.2s ease;
+  }
+}
