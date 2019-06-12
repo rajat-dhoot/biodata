@@ -1,24 +1,19 @@
 #mainToolbar {
   background: #fc6a76fd;
   color: white;
-  mat-icon {
+  #toolbarMenu {
     color: white;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-left: 5px;
   }
-}
-
-#toolbarMenu {
-  cursor: pointer;
-  margin-right: 20px;
-  margin-left: 5px;
-}
-
-#mainToolbar .toolbarSpacer {
-  flex: 1 1 auto;
-}
-
-#mainToolbar .toolbarIcon {
-  margin: 0 8px;
-  cursor: pointer;
+  .toolbarSpacer {
+    flex: 1 1 auto;
+  }
+  .toolbarIcon {
+    margin: 0 8px;
+    cursor: pointer;
+  }
 }
 
 #sidenavContainer {
@@ -27,10 +22,9 @@
 
 #sideNav {
   transition: all 0.3s ease;
-}
-
-#sidenav .menu-item:hover {
-  background: #999;
+  .menu-item:hover {
+    background: #ccc;
+  }
 }
 
 mat-nav-list {
