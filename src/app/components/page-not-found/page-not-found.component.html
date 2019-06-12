@@ -1,28 +1,18 @@
 <div
-  fxLayout="row"
+  class="container"
+  fxLayout="column"
   fxLayoutGap="30px"
   fxLayoutAlign="center center"
-  fxLayout.lt-md="column"
-  [ngStyle.lt-md]="{ padding: '30px 0px', color: '#555' }"
-  [ngStyle.gt-sm]="{ padding: '100px 0px', color: '#555' }"
+  fxLayout.gt-sm="row"
 >
-  <div
-    fxFlex="1 1 30%"
-    fxFlexOrder.lt-md="2"
-    ngStyle.lt-sm="'max-width':250px; 'text-align':center;"
-    ngStyle.sm="'max-width':300px; 'text-align':center;"
-  >
+  <div fxFlex="1 1 40%" fxFlexOrder.gt-sm="2">
+    <img src="../../../assets/minion.png" />
+  </div>
+  <div fxFlex="1 1 40%" fxFlexOrder.gt-sm="1" ngStyle.lt-md="text-align:center">
     <h1><b>Oops!</b></h1>
     <h2>We can't seem to find the page you are looking for.</h2>
     <br />
     <h3>Error Code : 404</h3>
     <button mat-raised-button>Go Home</button>
-  </div>
-  <div fxFlex="1 1 35%" fxFlexOrder.lt-md="1">
-    <img
-      src="../../../assets/minion.png"
-      [ngStyle.lt-sm]="{ 'height.px': 235 }"
-      [ngStyle.gt-xs]="{ 'height.px': 300 }"
-    />
   </div>
 </div>

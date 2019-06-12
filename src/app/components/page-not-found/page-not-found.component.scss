@@ -1,4 +1,30 @@
+.container {
+  padding: 5%;
+  color: #555;
+}
+
+img {
+  object-fit: contain;
+  max-width: 100%;
+}
+
+.content {
+  text-align: center;
+}
+
 button {
   background: #256eb3;
   color: #fff;
+}
+
+h1 {
+  font-size: 8vh;
+}
+
+h2 {
+  font-size: 4vh;
+}
+
+h3 {
+  font-size: 3vh;
 }
