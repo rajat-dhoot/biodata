@@ -38,12 +38,18 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  onToolbarMenuToggle() {
-    this.isMenuOpen = !this.isMenuOpen;
-    if (this.contentMargin > 0) {
-      this.isMenuOpen
-        ? (this.sideNavWidth = this.contentMargin = 240)
-        : (this.sideNavWidth = this.contentMargin = 70);
-    } else this.sideNavWidth = this.isMenuOpen ? 240 : 0;
+  onToolbarMenuToggle(close: string = "default") {
+    if (
+      (close === "mouseover" && !this.isMenuOpen) ||
+      close === "default" ||
+      (close === "mouseout" && this.isMenuOpen)
+    ) {
+      this.isMenuOpen = !this.isMenuOpen;
+      if (this.contentMargin > 0) {
+        this.isMenuOpen
+          ? (this.sideNavWidth = this.contentMargin = 240)
+          : (this.sideNavWidth = this.contentMargin = 70);
+      } else this.sideNavWidth = this.isMenuOpen ? 240 : 0;
+    }
   }
 }

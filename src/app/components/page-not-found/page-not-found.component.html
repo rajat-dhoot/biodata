@@ -1,18 +1,17 @@
 <div
   class="container"
   fxLayout="column"
-  fxLayoutGap="30px"
+  fxLayoutGap="20px"
   fxLayoutAlign="center center"
   fxLayout.gt-sm="row"
 >
   <div fxFlex="40%" fxFlexOrder.gt-sm="2">
     <img src="../../../assets/minion.png" />
   </div>
-  <div fxFlex="40%" fxFlexOrder.gt-sm="1" ngStyle.lt-md="text-align:center">
+  <div fxFlex="35%" fxFlexOrder.gt-sm="1" ngStyle.lt-md="text-align:center">
     <h1><b>Oops!</b></h1>
     <h2>We can't seem to find the page you are looking for.</h2>
-    <br />
     <h3>Error Code : 404</h3>
-    <button mat-raised-button>Go Home</button>
+    <button mat-raised-button routerLink="/home">Go Home</button>
   </div>
 </div>
