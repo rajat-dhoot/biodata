@@ -1,0 +1,27 @@
+<div class="container">
+  <mat-horizontal-stepper linear>
+    <mat-step [completed]="isCompleted">
+      <ng-template matStepLabel><span class="label">Design</span></ng-template>
+      <router-outlet *ngIf="!isCompleted"></router-outlet>
+      <div>
+        <button
+          mat-raised-button
+          matStepperNext
+          (click)="isCompleted && switchSection()"
+        >
+          Next
+        </button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel
+        ><span class="label">Add Details</span></ng-template
+      >
+      <router-outlet *ngIf="isCompleted"></router-outlet>
+      <div>
+        <!-- create a back button if feasible -->
+        <button mat-raised-button matStepperNext>Create</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

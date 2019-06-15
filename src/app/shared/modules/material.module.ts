@@ -23,7 +23,8 @@ import {
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatStepperModule
 } from "@angular/material";
 
 const MATERIAL_MODULES = [
@@ -42,7 +43,7 @@ const MATERIAL_MODULES = [
   MatSidenavModule,
   MatTabsModule,
   MatToolbarModule,
-
+  MatStepperModule,
   // These modules include providers.
   MatButtonToggleModule,
   MatDialogModule,

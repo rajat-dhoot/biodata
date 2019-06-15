@@ -1,9 +1,18 @@
 import { NgModule } from "@angular/core";
 import { SharedModule } from "../shared/shared.module";
-import { MaterialModule } from "../shared/modules/material.module";
+import { DesignBioComponent } from "./design-bio/design-bio.component";
+import { DetailsBioComponent } from "./details-bio/details-bio.component";
+import { PreviewBioComponent } from "./preview-bio/preview-bio.component";
+import { CreateBioComponent } from "./create-bio/create-bio.component";
+import { BioRoutingModule } from "./bio-routing.module";
 
 @NgModule({
-  declarations: [],
-  imports: [SharedModule, MaterialModule]
+  declarations: [
+    DesignBioComponent,
+    DetailsBioComponent,
+    PreviewBioComponent,
+    CreateBioComponent
+  ],
+  imports: [SharedModule, BioRoutingModule]
 })
 export class BioModule {}

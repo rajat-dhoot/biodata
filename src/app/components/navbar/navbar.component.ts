@@ -18,9 +18,8 @@ export class NavbarComponent implements OnInit {
 
   public listItems = {
     key1: { name: "Home", icon: "home" },
-    key2: { name: "Create", icon: "create" },
-    key3: { name: "Settings", icon: "settings" },
-    key4: { name: "Feedback", icon: "feedback" }
+    key2: { name: "Settings", icon: "settings" },
+    key3: { name: "Feedback", icon: "feedback" }
   };
 
   constructor(breakpointObserver: BreakpointObserver) {

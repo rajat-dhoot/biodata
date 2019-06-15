@@ -1,0 +1,40 @@
+form {
+  margin-bottom: 20px;
+}
+
+.selectColor {
+  max-width: 400px;
+}
+
+.header {
+  font-size: 1.2rem;
+}
+
+.outerbox {
+  height: 100px;
+  width: 100px;
+  margin: 7px 0px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 1px #ccc;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .innerbox {
+    object-fit: contain;
+    padding: 10px;
+  }
+}
+
+.isSelected {
+  outline: 1px solid #333;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.demo {
+  height: 150px;
+  width: 100px;
+  background-color: #fff;
+  border: 1px solid;
+  font-weight: bold;
+}
