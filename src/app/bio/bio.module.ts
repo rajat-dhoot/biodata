@@ -5,6 +5,7 @@ import { DetailsBioComponent } from "./details-bio/details-bio.component";
 import { PreviewBioComponent } from "./preview-bio/preview-bio.component";
 import { CreateBioComponent } from "./create-bio/create-bio.component";
 import { BioRoutingModule } from "./bio-routing.module";
+import { BioService } from "./bio.service";
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { BioRoutingModule } from "./bio-routing.module";
     PreviewBioComponent,
     CreateBioComponent
   ],
-  imports: [SharedModule, BioRoutingModule]
+  imports: [SharedModule, BioRoutingModule],
+  providers: [BioService]
 })
 export class BioModule {}

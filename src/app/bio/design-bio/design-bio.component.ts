@@ -1,7 +1,15 @@
-import { Component, OnInit, ViewChild, SecurityContext } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  SecurityContext,
+  Input,
+  SimpleChanges
+} from "@angular/core";
 import { DesignModel } from "../models/DesignModel";
 import { NgForm } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
+import { BioService } from "../bio.service";
 
 const maxBorderNum = 4;
 
@@ -12,14 +20,24 @@ const maxBorderNum = 4;
 })
 export class DesignBioComponent implements OnInit {
   @ViewChild("myForm", { static: false }) form: NgForm;
-
   colors = {};
   borderImage: any;
+  designModel: DesignModel;
   borderStyles = {};
+  currentSection: number = 1;
 
-  constructor(private _sanitizer: DomSanitizer) {}
+  constructor(
+    private _sanitizer: DomSanitizer,
+    private _bioservice: BioService
+  ) {}
 
   ngOnInit() {
+    this.designModel = { ...this._bioservice.getDesignModel() };
+    this._bioservice.currentSection$.subscribe(current => {
+      if (current === 2) this._bioservice.setDesignModel(this.designModel);
+      else this.designModel = { ...this._bioservice.getDesignModel() };
+    });
+
     for (let i = 1; i < maxBorderNum; i++)
       this.colors[i] = `assets/border/${i}.png`;
   }
@@ -37,11 +55,16 @@ export class DesignBioComponent implements OnInit {
 
   setBorder() {
     let value = this.designModel.borderNum;
-    if (value !== "1") {
+    let border;
+    if (value === "1") {
+      // default border
+      border = {
+        border: "1px solid black"
+      };
+    } else {
+      // if any other border is selected update that border
       let imgUrl = this.colors[this.designModel.borderNum];
-      this.borderStyles = {
-        "background-color": this.designModel.bColor,
-        color: this.designModel.fColor,
+      border = {
         "border-image-source": this._sanitizer.sanitize(
           SecurityContext.URL,
           `url('${imgUrl}')`
@@ -50,14 +73,12 @@ export class DesignBioComponent implements OnInit {
         "border-image-width": 5,
         "border-image-repeat": this.designModel.borderStyle
       };
-    } else {
-      this.borderStyles = {
-        border: "1px solid black",
-        "background-color": this.designModel.bColor,
-        color: this.designModel.fColor
-      };
     }
+    // updating the border style
+    this.borderStyles = {
+      "background-color": this.designModel.bColor,
+      color: this.designModel.fColor,
+      ...border
+    };
   }
-
-  designModel = new DesignModel("#000000", "#ffffff", "1", "round", false);
 }

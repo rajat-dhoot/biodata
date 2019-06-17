@@ -1,5 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
+import { BioService } from "../bio.service";
+import { MatStepper } from "@angular/material";
 
 @Component({
   selector: "app-create-bio",
@@ -8,12 +10,18 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class CreateBioComponent implements OnInit {
   currentSection: number = 1;
-  constructor(private route: ActivatedRoute, private router: Router) {}
-  switchSection() {
-    this.currentSection = this.currentSection === 1 ? 2 : 1;
-    let route = this.currentSection === 1 ? "./design" : "./details";
-    this.router.navigate([route], { relativeTo: this.route });
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private bioservice: BioService
+  ) {}
 
   ngOnInit() {}
+
+  switchSection(e) {
+    this.currentSection = e.selectedIndex + 1;
+    this.bioservice.setCurrentSection(this.currentSection);
+    let routes = this.currentSection === 1 ? "./design" : "./details";
+    this.router.navigate([routes], { relativeTo: this.route });
+  }
 }
