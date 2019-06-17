@@ -9,7 +9,7 @@
 <!-- mat sidenav container mat sidenav mat sidenav content -->
 <mat-sidenav-container
   id="sidenavContainer"
-  (click)="onToolbarMenuToggle('mouseout')"
+  (click)="onToolbarMenuToggle('close')"
   fullscreen
 >
   <mat-sidenav
@@ -26,8 +26,6 @@
           mat-list-item
           routerLink="{{ item.value.icon }}"
           (click)="onToolbarMenuToggle()"
-          (mouseover)="contentMargin && onToolbarMenuToggle('mouseover')"
-          (mouseout)="contentMargin && onToolbarMenuToggle('mouseout')"
         >
           <mat-icon>{{ item.value.icon }}</mat-icon>
           <span [class.nav-label]="!isMenuOpen">{{ item.value.name }}</span>

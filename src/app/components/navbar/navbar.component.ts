@@ -18,8 +18,9 @@ export class NavbarComponent implements OnInit {
 
   public listItems = {
     key1: { name: "Home", icon: "home" },
-    key2: { name: "Settings", icon: "settings" },
-    key3: { name: "Feedback", icon: "feedback" }
+    key2: { name: "Create", icon: "create" },
+    key3: { name: "Settings", icon: "settings" },
+    key4: { name: "Feedback", icon: "feedback" }
   };
 
   constructor(breakpointObserver: BreakpointObserver) {
@@ -37,18 +38,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  onToolbarMenuToggle(close: string = "default") {
-    if (
-      (close === "mouseover" && !this.isMenuOpen) ||
-      close === "default" ||
-      (close === "mouseout" && this.isMenuOpen)
-    ) {
-      this.isMenuOpen = !this.isMenuOpen;
-      if (this.contentMargin > 0) {
-        this.isMenuOpen
-          ? (this.sideNavWidth = this.contentMargin = 240)
-          : (this.sideNavWidth = this.contentMargin = 70);
-      } else this.sideNavWidth = this.isMenuOpen ? 240 : 0;
-    }
+  onToolbarMenuToggle(value = "default") {
+    if (value === "close" && !this.isMenuOpen) return;
+    this.isMenuOpen = !this.isMenuOpen;
+    if (this.contentMargin > 0) {
+      this.isMenuOpen
+        ? (this.sideNavWidth = this.contentMargin = 240)
+        : (this.sideNavWidth = this.contentMargin = 70);
+    } else this.sideNavWidth = this.isMenuOpen ? 240 : 0;
   }
 }
