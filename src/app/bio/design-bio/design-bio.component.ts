@@ -11,7 +11,7 @@ import { NgForm } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { BioService } from "../bio.service";
 
-const maxBorderNum = 4;
+const maxBorderNum = 15;
 
 @Component({
   selector: "app-design-bio",
@@ -21,10 +21,8 @@ const maxBorderNum = 4;
 export class DesignBioComponent implements OnInit {
   @ViewChild("myForm", { static: false }) form: NgForm;
   colors = {};
-  borderImage: any;
   designModel: DesignModel;
   borderStyles = {};
-  currentSection: number = 1;
 
   constructor(
     private _sanitizer: DomSanitizer,
@@ -69,9 +67,9 @@ export class DesignBioComponent implements OnInit {
           SecurityContext.URL,
           `url('${imgUrl}')`
         ),
-        "border-image-slice": 25,
-        "border-image-width": 5,
-        "border-image-repeat": this.designModel.borderStyle
+        "border-image-slice": 20,
+        "border-image-width": 15,
+        "border-image-repeat": "round"
       };
     }
     // updating the border style
