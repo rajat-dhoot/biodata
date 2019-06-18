@@ -22,9 +22,12 @@ import {
   MatRadioModule,
   MatSliderModule,
   MatSlideToggleModule,
+  MatExpansionModule,
   MatSnackBarModule,
   MatTooltipModule,
-  MatStepperModule
+  MatStepperModule,
+  MatNativeDateModule,
+  MatDatepickerModule
 } from "@angular/material";
 
 const MATERIAL_MODULES = [
@@ -45,6 +48,9 @@ const MATERIAL_MODULES = [
   MatToolbarModule,
   MatStepperModule,
   // These modules include providers.
+  MatExpansionModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   MatButtonToggleModule,
   MatDialogModule,
   MatIconModule,
