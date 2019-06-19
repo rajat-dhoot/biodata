@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  SecurityContext,
-  Input,
-  SimpleChanges
-} from "@angular/core";
+import { Component, OnInit, ViewChild, SecurityContext } from "@angular/core";
 import { DesignModel } from "../models/DesignModel";
 import { NgForm } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
@@ -53,7 +46,7 @@ export class DesignBioComponent implements OnInit {
 
   setBorder() {
     let value = this.designModel.borderNum;
-    let border;
+    let border = {};
     if (value === "1") {
       // default border
       border = {

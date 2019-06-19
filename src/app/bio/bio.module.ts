@@ -6,6 +6,7 @@ import { PreviewBioComponent } from "./preview-bio/preview-bio.component";
 import { CreateBioComponent } from "./create-bio/create-bio.component";
 import { BioRoutingModule } from "./bio-routing.module";
 import { BioService } from "./bio.service";
+import { MAT_DATE_LOCALE } from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { BioService } from "./bio.service";
     CreateBioComponent
   ],
   imports: [SharedModule, BioRoutingModule],
-  providers: [BioService]
+  providers: [BioService, { provide: MAT_DATE_LOCALE, useValue: "en-GB" }]
 })
 export class BioModule {}

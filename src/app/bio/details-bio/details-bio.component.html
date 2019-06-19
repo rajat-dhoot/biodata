@@ -1,9 +1,10 @@
-<form>
-  <mat-accordion class="example-headers-align">
+<form [formGroup]="detailsForm">
+  <mat-accordion>
     <mat-expansion-panel
       [expanded]="step === 0"
       (opened)="setStep(0)"
       hideToggle
+      formGroupName="personal"
     >
       <mat-expansion-panel-header fxLayout="row">
         <mat-panel-title fxFlex="grow">
@@ -15,16 +16,27 @@
       </mat-expansion-panel-header>
       <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
       <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Name" />
+        <input matInput placeholder="Name" formControlName="fullName" (blur)="logValidationMessage('personal')">
+        <mat-error *ngIf="formErrors.personal.fullName">{{formErrors.personal.fullName}}</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field fxFlex="45%">
+        <input matInput placeholder="Birth Place" formControlName="birthPlace" (blur)="logValidationMessage('personal')">
+        <mat-error *ngIf="formErrors.personal.birthPlace">{{formErrors.personal.birthPlace}}</mat-error>
       </mat-form-field>
 
       <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Date of Birth" />
+        <input matInput placeholder="Date of Birth" [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" formControlName="birthDate" (blur)="logValidationMessage('personal')" readonly>
+        <mat-datepicker touchUi #picker></mat-datepicker>
+        <mat-error *ngIf="formErrors.personal.birthDate">{{formErrors.personal.birthDate}}</mat-error>
+      </mat-form-field>
+      
+      
+      <mat-form-field fxFlex="45%">
+        <input matInput placeholder="Birth Time" />
       </mat-form-field>
 
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Birth Place" />
-      </mat-form-field>
 
       <mat-form-field fxFlex="45%">
         <input matInput placeholder="Height" />
