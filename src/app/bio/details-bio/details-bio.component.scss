@@ -1,9 +1,16 @@
 mat-form-field {
-  margin-right: 12px;
+  margin-right: 10px;
 }
 
 form {
-  margin-bottom: 20px;
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+mat-button-toggle-group {
+  height: 32px;
+  align-self: center;
+  align-items: center;
 }
 
 .has-error {

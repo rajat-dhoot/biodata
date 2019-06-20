@@ -1,5 +1,7 @@
 <form [formGroup]="detailsForm">
   <mat-accordion>
+
+    <!-- ############################## Personal Details ######################################### -->
     <mat-expansion-panel
       [expanded]="step === 0"
       (opened)="setStep(0)"
@@ -14,58 +16,77 @@
           <mat-icon>account_circle</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
-      <mat-form-field fxFlex="45%">
+
+      <div fxLayout="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Name" formControlName="fullName" (blur)="logValidationMessage('personal')">
-        <mat-error *ngIf="formErrors.personal.fullName">{{formErrors.personal.fullName}}</mat-error>
+        <mat-error>{{formErrors.personal.fullName}}</mat-error>
       </mat-form-field>
 
-
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Birth Place" formControlName="birthPlace" (blur)="logValidationMessage('personal')">
-        <mat-error *ngIf="formErrors.personal.birthPlace">{{formErrors.personal.birthPlace}}</mat-error>
-      </mat-form-field>
-
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Date of Birth" [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" formControlName="birthDate" (blur)="logValidationMessage('personal')" readonly>
         <mat-datepicker touchUi #picker></mat-datepicker>
-        <mat-error *ngIf="formErrors.personal.birthDate">{{formErrors.personal.birthDate}}</mat-error>
+        <mat-error>{{formErrors.personal.birthDate}}</mat-error>
+      </mat-form-field>
+        
+      <mat-form-field fxFlex>  
+        <input matInput type="time" id="birthTime" formControlName="birthTime" max="12:59" min="01:00" placeholder="HH:MM" (blur)="logValidationMessage('personal')"/>
+        <mat-error>{{formErrors.personal.birthTime}}</mat-error>
+        <mat-button-toggle-group name="timeInterval" formControlName="timeInterval" fxFlex="none">
+          <mat-button-toggle value="am">AM</mat-button-toggle>
+          <mat-button-toggle value="pm">PM</mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-hint>Birth Time</mat-hint>
       </mat-form-field>
       
-      
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Birth Time" />
+    <mat-form-field fxFlex>
+        <input matInput placeholder="Height" formControlName="height" (blur)="logValidationMessage('personal')">
+        <mat-hint>Hyphen(-) Seperated (e.g. 5-10)</mat-hint>
+        <mat-error>{{formErrors.personal.height}}</mat-error>
       </mat-form-field>
 
+      <mat-form-field fxFlex>
+          <input matInput placeholder="Birth Place" formControlName="hobbies" (blur)="logValidationMessage('personal')">
+          <mat-error>{{formErrors.personal.hobbies}}</mat-error>
+        </mat-form-field>
 
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Height" />
+        <!-- validation doesn't work on first time however it works from form control parent object -->
+        <mat-form-field fxFlex>
+          <mat-label>Select an Option</mat-label>
+          <mat-select formControlName="complexion" (blur)="logValidationMessage('personal')">
+            <mat-option *ngFor="let colour of complexion" [value]="colour">{{colour | titlecase}}</mat-option>
+          </mat-select>
+          <mat-error>{{formErrors.personal.complexion}}</mat-error>
+        </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Blood Group" formControlName="bloodGroup" (blur)="logValidationMessage('personal')"/>
+        <mat-error>{{formErrors.personal.bloodGroup}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Complexion" />
+      <mat-form-field fxFlex>
+          <input matInput placeholder="Qualification" formControlName="qualification" (blur)="logValidationMessage('personal')">
+          <mat-error>{{formErrors.personal.qualification}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Blood Group" />
+      <mat-form-field fxFlex>
+          <input matInput placeholder="Occupation" formControlName="occupation" (blur)="logValidationMessage('personal')">
+          <mat-error>{{formErrors.personal.occupation}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Education" />
-      </mat-form-field>
-
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Occupation" />
-      </mat-form-field>
-
-      <mat-form-field fxFlex="45%">
-        <input matInput placeholder="Hobbies" />
+      <mat-form-field fxFlex>
+          <input matInput placeholder="Hobbies" formControlName="hobbies" (blur)="logValidationMessage('personal')">
+          <mat-error>{{formErrors.personal.hobbies}}</mat-error>
       </mat-form-field>
     </div>
+
       <mat-action-row>
         <button mat-button color="primary" (click)="nextStep()">Next</button>
       </mat-action-row>
+
     </mat-expansion-panel>
+
+    <!-- ############################## Family Details ######################################### -->
 
     <mat-expansion-panel
       [expanded]="step === 1"
@@ -81,16 +102,16 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Father's Name" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Father's Occupation" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Mother's Name" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Mother's Occupation" />
       </mat-form-field>
       </div>
@@ -113,6 +134,8 @@
       </mat-action-row>
     </mat-expansion-panel>
 
+<!-- ############################## Contact Details ######################################### -->
+
     <mat-expansion-panel
       [expanded]="step === 2"
       (opened)="setStep(2)"
@@ -127,16 +150,16 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Residence Address" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Contact #1" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Contact #2" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Email" />
       </mat-form-field>
     </div>
@@ -146,6 +169,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
+    <!-- ############################## Paternal Details ######################################### -->
     
     <mat-expansion-panel
       [expanded]="step === 3"
@@ -161,10 +185,10 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Grand Father's Name" />
       </mat-form-field>
-      <mat-form-field fxFlex="45%">
+      <mat-form-field fxFlex>
         <input matInput placeholder="Grand Mother's Name" />
       </mat-form-field>
     </div>
@@ -188,6 +212,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
+<!-- ############################## Maternal Details ######################################### -->
     
     <mat-expansion-panel
       [expanded]="step === 4"
