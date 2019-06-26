@@ -19,19 +19,19 @@
 
       <div fxLayout="column" fxLayoutGap="20px">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Name" formControlName="fullName" (blur)="logValidationMessage('personal')">
-        <mat-error>{{formErrors.personal.fullName}}</mat-error>
+        <input matInput placeholder="Name" formControlName="fullName" (blur)="logValidationMessage()">
+        <mat-error>{{formErrors.fullName}}</mat-error>
       </mat-form-field>
 
       <mat-form-field fxFlex>
-        <input matInput placeholder="Date of Birth" [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" formControlName="birthDate" (blur)="logValidationMessage('personal')" readonly>
+        <input matInput placeholder="Date of Birth" [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" formControlName="birthDate" (blur)="logValidationMessage()" readonly>
         <mat-datepicker touchUi #picker></mat-datepicker>
-        <mat-error>{{formErrors.personal.birthDate}}</mat-error>
+        <mat-error>{{formErrors.birthDate}}</mat-error>
       </mat-form-field>
         
       <mat-form-field fxFlex>  
-        <input matInput type="time" id="birthTime" formControlName="birthTime" max="12:59" min="01:00" placeholder="HH:MM" (blur)="logValidationMessage('personal')"/>
-        <mat-error>{{formErrors.personal.birthTime}}</mat-error>
+        <input matInput type="time" id="birthTime" formControlName="birthTime" max="12:59" min="01:00" placeholder="HH:MM" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors.birthTime}}</mat-error>
         <mat-button-toggle-group name="timeInterval" formControlName="timeInterval" fxFlex="none">
           <mat-button-toggle value="am">AM</mat-button-toggle>
           <mat-button-toggle value="pm">PM</mat-button-toggle>
@@ -40,48 +40,48 @@
       </mat-form-field>
       
     <mat-form-field fxFlex>
-        <input matInput placeholder="Height" formControlName="height" (blur)="logValidationMessage('personal')">
-        <mat-hint>Hyphen(-) Seperated (e.g. 5-10)</mat-hint>
-        <mat-error>{{formErrors.personal.height}}</mat-error>
+        <input matInput placeholder="Height" formControlName="height" (blur)="logValidationMessage()">
+        <mat-hint>Format foot'inch" (e.g. 5'10")</mat-hint>
+        <mat-error>{{formErrors.height}}</mat-error>
       </mat-form-field>
 
       <mat-form-field fxFlex>
-          <input matInput placeholder="Birth Place" formControlName="hobbies" (blur)="logValidationMessage('personal')">
-          <mat-error>{{formErrors.personal.hobbies}}</mat-error>
+          <input matInput placeholder="Birth Place" formControlName="birthPlace" (blur)="logValidationMessage()">
+          <mat-error>{{formErrors.birthPlace}}</mat-error>
         </mat-form-field>
 
         <!-- validation doesn't work on first time however it works from form control parent object -->
         <mat-form-field fxFlex>
           <mat-label>Select an Option</mat-label>
-          <mat-select formControlName="complexion" (blur)="logValidationMessage('personal')">
+          <mat-select formControlName="complexion" (blur)="logValidationMessage()">
             <mat-option *ngFor="let colour of complexion" [value]="colour">{{colour | titlecase}}</mat-option>
           </mat-select>
-          <mat-error>{{formErrors.personal.complexion}}</mat-error>
+          <mat-error>{{formErrors.complexion}}</mat-error>
         </mat-form-field>
 
       <mat-form-field fxFlex>
-        <input matInput placeholder="Blood Group" formControlName="bloodGroup" (blur)="logValidationMessage('personal')"/>
-        <mat-error>{{formErrors.personal.bloodGroup}}</mat-error>
+        <input matInput placeholder="Blood Group" formControlName="bloodGroup" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors.bloodGroup}}</mat-error>
       </mat-form-field>
 
       <mat-form-field fxFlex>
-          <input matInput placeholder="Qualification" formControlName="qualification" (blur)="logValidationMessage('personal')">
-          <mat-error>{{formErrors.personal.qualification}}</mat-error>
+          <input matInput placeholder="Qualification" formControlName="qualification" (blur)="logValidationMessage()">
+          <mat-error>{{formErrors.qualification}}</mat-error>
       </mat-form-field>
 
       <mat-form-field fxFlex>
-          <input matInput placeholder="Occupation" formControlName="occupation" (blur)="logValidationMessage('personal')">
-          <mat-error>{{formErrors.personal.occupation}}</mat-error>
+          <input matInput placeholder="Occupation" formControlName="occupation" (blur)="logValidationMessage()">
+          <mat-error>{{formErrors.occupation}}</mat-error>
       </mat-form-field>
 
       <mat-form-field fxFlex>
-          <input matInput placeholder="Hobbies" formControlName="hobbies" (blur)="logValidationMessage('personal')">
-          <mat-error>{{formErrors.personal.hobbies}}</mat-error>
+          <input matInput placeholder="Hobbies" formControlName="hobbies" (blur)="logValidationMessage()">
+          <mat-error>{{formErrors.hobbies}}</mat-error>
       </mat-form-field>
     </div>
 
       <mat-action-row>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
       </mat-action-row>
 
     </mat-expansion-panel>
@@ -92,6 +92,7 @@
       [expanded]="step === 1"
       (opened)="setStep(1)"
       hideToggle
+      formGroupName="family"
     >
       <mat-expansion-panel-header fxLayout="row">
         <mat-panel-title fxFlex="grow">
@@ -101,19 +102,52 @@
           <mat-icon>people</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
+      <div fxLayout="column" fxLayoutGap="20px">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Father's Name" />
+          <input matInput placeholder="Father's Name" formControlName="fatherName" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors.fatherName}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Father's Occupation" />
+          <input matInput placeholder="Father's Occupation'" formControlName="fatherOccupation" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors.fatherOccupation}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Mother's Name" />
+          <input matInput placeholder="Mother's Name" formControlName="motherName" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors['motherName']}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Mother's Occupation" />
+          <input matInput placeholder="Mother's Occupation" formControlName="motherOccupation" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors.motherOccupation}}</mat-error>
       </mat-form-field>
+
+      <div formArrayName="brothers" fxFlex>
+        <div *ngFor="let brother of detailsForm.get('family').get('brothers').controls; let i = index" formGroupName={{i}} fxLayout="column" fxLayoutGap="20px" style="margin-bottom:20px;">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Brother's Name" formControlName="{{'brotherName'+ i}}" (blur)="logValidationMessage()"/>
+            <mat-error>{{formErrors['brotherName'+i]}}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+            <input matInput placeholder="Brother's Occupation, City" formControlName="{{'brotherOccupation'+ i}}" (blur)="logValidationMessage()"/>
+            <mat-hint>Alternatively you can mention his qualification</mat-hint>
+            <mat-error>{{formErrors['brotherOccupation'+i]}}</mat-error>
+        </mat-form-field>
+        </div>
+      </div>
+
+      <div formArrayName="sisters" fxFlex>
+        <div *ngFor="let sister of detailsForm.get('family').get('sisters').controls; let i = index" formGroupName={{i}} fxLayout="column" fxLayoutGap="20px" style="margin-bottom:20px;">
+          <mat-form-field fxFlex>
+            <input matInput placeholder="Sister's Name" formControlName="{{'sisterName'+ i}}" (blur)="logValidationMessage()"/>
+            <mat-error>{{formErrors['sisterName'+i]}}</mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+            <input matInput placeholder="Sister's Occupation, City" formControlName="{{'sisterOccupation'+ i}}" (blur)="logValidationMessage()"/>
+            <mat-hint>Alternatively you can mention her qualification</mat-hint>
+            <mat-error>{{formErrors['sisterOccupation'+i]}}</mat-error>
+        </mat-form-field>
+        </div>
+      </div>
+
       </div>
       <mat-action-row
         fxLayout="row"
@@ -121,16 +155,16 @@
         fxLayoutGap="10px"
         fxLayoutAlign="space-between center"
       >
-        <button mat-stroked-button fxFlex="none" (click)="(addBrother)">
+        <button mat-stroked-button fxFlex="none" type="button" (click)="addBrother()">
           Add Brother
         </button>
-        <button mat-stroked-button fxFlex="none" (click)="(addSister)">
+        <button mat-stroked-button fxFlex="none" type="button" (click)="addSister()">
           Add Sister
         </button>
       </mat-action-row>
       <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
       </mat-action-row>
     </mat-expansion-panel>
 
@@ -140,6 +174,7 @@
       [expanded]="step === 2"
       (opened)="setStep(2)"
       hideToggle
+      formGroupName="contact"
     >
       <mat-expansion-panel-header fxLayout="row">
         <mat-panel-title fxFlex="grow">
@@ -149,23 +184,27 @@
           <mat-icon>contacts</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
+      <div fxLayout="column" fxLayoutGap="20px">
       <mat-form-field fxFlex>
-        <input matInput placeholder="Residence Address" />
+        <input matInput placeholder="Residence Address" formControlName="address" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors.address}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Contact #1" />
+        <input matInput placeholder="Contact #1" formControlName="contact1" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors['contact1']}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Contact #2" />
+        <input matInput placeholder="Contact #2" formControlName="contact2" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors['contact2']}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Email" />
+        <input matInput placeholder="Email" formControlName="email" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors.email}}</mat-error>
       </mat-form-field>
     </div>
       <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
       </mat-action-row>
     </mat-expansion-panel>
 
@@ -175,6 +214,7 @@
       [expanded]="step === 3"
       (opened)="setStep(3)"
       hideToggle
+      formGroupName="paternal"
     >
       <mat-expansion-panel-header fxLayout="row">
         <mat-panel-title fxFlex="grow">
@@ -184,31 +224,62 @@
           <mat-icon>view_list</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Grand Father's Name" />
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Grand Mother's Name" />
-      </mat-form-field>
-    </div>
+      <div fxLayout="column" fxLayoutGap="20px">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="GrandFather's Name" formControlName="grandfatherName" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors.grandfatherName}}</mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex>
+            <input matInput placeholder="GrandMother's Name" formControlName="grandmotherName" (blur)="logValidationMessage()"/>
+            <mat-error>{{formErrors.grandmotherName}}</mat-error>
+                  </mat-form-field>
+  
+          <div formArrayName="uncles" fxFlex>
+            <div *ngFor="let uncle of detailsForm.get('paternal').get('uncles').controls; let i = index" formGroupName={{i}} fxLayout="column" fxLayoutGap="20px" style="margin-bottom:10px;">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Uncle's Name" formControlName="{{'uncleName'+ i}}" (blur)="logValidationMessage()"/>
+                <mat-hint>Chacha's Name</mat-hint>
+                <mat-error>{{formErrors['uncleName'+i]}}</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Uncle's Occupation, City" formControlName="{{'uncleOccupation'+ i}}" (blur)="logValidationMessage()"/>
+                <mat-error>{{formErrors['uncleOccupation'+i]}}</mat-error>
+            </mat-form-field>
+            </div>
+          </div>
+  
+          <div formArrayName="aunts" fxFlex>
+            <div *ngFor="let aunt of detailsForm.get('paternal').get('aunts').controls; let i = index" formGroupName={{i}} fxLayout="column" fxLayoutGap="20px" style="margin-bottom:20px;">
+              <mat-form-field fxFlex>
+                <input matInput placeholder="Aunt's Name" formControlName="{{'auntName'+ i}}" (blur)="logValidationMessage()"/>
+                <mat-hint>Bua's Name</mat-hint>
+                <mat-error>{{formErrors['auntName'+i]}}</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Aunt's Occupation, City" formControlName="{{'auntOccupation'+ i}}" (blur)="logValidationMessage()"/>
+                <mat-error>{{formErrors['auntOccupation'+i]}}</mat-error>
+            </mat-form-field>
+            </div>
+          </div>
+  
+        </div>
       <mat-action-row
       fxLayout="row"
       style="padding:10px;"
       fxLayoutGap="10px"
       fxLayoutAlign="space-between center"
     >
-      <button mat-stroked-button fxFlex="none" (click)="(addBrother)">
+      <button mat-stroked-button fxFlex="none" type="button" (click)="addUncle('paternal')">
         Add Uncle
       </button>
-      <button mat-stroked-button fxFlex="none" (click)="(addSister)">
+      <button mat-stroked-button fxFlex="none" type="button" (click)="addAunt('paternal')">
         Add Aunt
       </button>
     </mat-action-row>
 
       <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
       </mat-action-row>
     </mat-expansion-panel>
 
@@ -218,6 +289,7 @@
       [expanded]="step === 4"
       (opened)="setStep(4)"
       hideToggle
+      formGroupName="maternal"
     >
       <mat-expansion-panel-header fxLayout="row">
         <mat-panel-title fxFlex="grow">
@@ -227,13 +299,44 @@
           <mat-icon>view_list</mat-icon>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <div fxLayout="row wrap" fxLayout.lt-md="column" fxLayoutGap.gt-sm="40px">
-      <mat-form-field fxFlex="45%">
-          <input matInput placeholder="Grand Father's Name" />
+      <div fxLayout="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="GrandFather's Name" formControlName="grandfatherName#" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors['grandfatherName#']}}</mat-error>
         </mat-form-field>
-        <mat-form-field fxFlex="45%">
-          <input matInput placeholder="Grand Mother's Name" />
-        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="GrandMother's Name" formControlName="grandmotherName#" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors['grandmotherName#']}}</mat-error>
+                </mat-form-field>
+
+        <div formArrayName="uncles#" fxFlex fxLayout="column" fxLayoutGap="20px">
+          <div *ngFor="let uncle of detailsForm.get('maternal').get('uncles#').controls; let i = index" formGroupName={{i}} fxLayout="column" fxLayoutGap="20px">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Uncle's Name" formControlName="{{'uncleName#'+ i}}" (blur)="logValidationMessage()"/>
+              <mat-hint>Mama Name</mat-hint>
+              <mat-error>{{formErrors['uncleName#'+i]}}</mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex>
+              <input matInput placeholder="Uncle's Occupation, City" formControlName="{{'uncleOccupation#'+ i}}" (blur)="logValidationMessage()"/>
+              <mat-error>{{formErrors['uncleOccupation#'+i]}}</mat-error>
+          </mat-form-field>
+          </div>
+        </div>
+
+        <div formArrayName="aunts#" fxFlex fxLayout="column" fxLayoutGap="20px">
+          <div *ngFor="let aunt of detailsForm.get('maternal').get('aunts#').controls; let i = index" formGroupName={{i}} fxLayout="column" fxLayoutGap="20px">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Aunt's Name" formControlName="{{'auntName#'+ i}}" (blur)="logValidationMessage()"/>
+              <mat-hint>Masi Name</mat-hint>
+              <mat-error>{{formErrors['auntName#'+i]}}</mat-error>
+          </mat-form-field>
+          <mat-form-field fxFlex>
+              <input matInput placeholder="Aunt's Occupation, City" formControlName="{{'auntOccupation#'+ i}}" (blur)="logValidationMessage()"/>
+              <mat-error>{{formErrors['auntOccupation#'+i]}}</mat-error>
+          </mat-form-field>
+          </div>
+        </div>
+
       </div>
         <mat-action-row
         fxLayout="row"
@@ -241,17 +344,17 @@
         fxLayoutGap="10px"
         fxLayoutAlign="space-between center"
       >
-        <button mat-stroked-button fxFlex="none" (click)="(addBrother)">
+        <button mat-stroked-button fxFlex="none" type="button" (click)="addUncle('maternal', '#')">
           Add Uncle
         </button>
-        <button mat-stroked-button fxFlex="none" (click)="(addSister)">
+        <button mat-stroked-button fxFlex="none" type="button" (click)="addAunt('maternal', '#')">
           Add Aunt
         </button>
       </mat-action-row>
   
       <mat-action-row>
-        <button mat-button color="warn" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" (click)="nextStep()">Next</button>
+        <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
       </mat-action-row>
     </mat-expansion-panel>
 

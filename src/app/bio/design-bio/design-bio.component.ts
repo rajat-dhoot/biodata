@@ -4,7 +4,7 @@ import { NgForm } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { BioService } from "../bio.service";
 
-const maxBorderNum = 15;
+const maxBorderNum = 10;
 
 @Component({
   selector: "app-design-bio",

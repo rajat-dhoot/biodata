@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
+import { CustomValidator } from "../bio.validators";
 import {
   FormBuilder,
   FormGroup,
   Validators,
   NgForm,
-  AbstractControl
+  AbstractControl,
+  FormArray
 } from "@angular/forms";
 
 @Component({
@@ -20,52 +22,37 @@ export class DetailsBioComponent implements OnInit {
   maxDate = new Date(2002, 0, 1);
   complexion = ["light", "fair", "wheatish", "olive", "brown", "dark"];
   validationMessages = {
-    fullName: {
-      minlength: "Full Name must be greater than 2 characters.",
-      maxlength: "Full Name must be less than 30 characters."
-    },
-    bloodGroup: {
-      pattern: "Enter a valid blood group O|A|B|AB (+|-)"
-    },
-    height: {
-      heightMismatch: "Enter a valid height e.g. 5-11"
-    }
+    minlength: "Full Name must be greater than 2 characters.",
+    maxlength: "Full Name must be less than 30 characters.",
+    pattern: "Enter a valid blood group O|A|B|AB (+|-)",
+    heightMismatch: "Enter a valid height e.g. 5'11\"",
+    invalidEmail: "Enter a valid email id",
+    invalidContact: "Enter a 10 digit valid contact number."
   };
-  formErrors = {
-    personal: {
-      fullName: "",
-      birthDate: "",
-      birthPlace: "",
-      birthTime: "",
-      height: "",
-      complexion: "",
-      qualification: "",
-      occupation: "",
-      hobbies: "",
-      bloodGroup: ""
-    }
-  };
+  formErrors = {};
 
-  logValidationMessage(groupName: string): void {
-    const group = <FormGroup>this.detailsForm.get(groupName);
-    // this.formErrors[groupName]["isInvalid"] = group.invalid;
+  logValidationMessage(group: FormGroup = this.detailsForm): void {
     Object.keys(group.controls).forEach((key: string) => {
       const abstractControl = group.get(key);
-      console.log(abstractControl);
       if (
         abstractControl &&
         !abstractControl.valid &&
         (abstractControl.dirty || abstractControl.touched)
       ) {
-        const message = this.validationMessages[key];
         for (const errorKey in abstractControl.errors) {
           if (errorKey === "required")
-            this.formErrors[groupName][key] = this.getRequiredErrorMessage(key);
+            this.formErrors[key] = this.getRequiredErrorMessage(key);
           else if (errorKey) {
-            this.formErrors[groupName][key] = message[errorKey];
+            this.formErrors[key] = this.validationMessages[errorKey];
           }
         }
+        console.log(this.formErrors);
       }
+      if (abstractControl instanceof FormGroup)
+        this.logValidationMessage(abstractControl);
+      if (abstractControl instanceof FormArray)
+        for (const control of abstractControl.controls)
+          if (control instanceof FormGroup) this.logValidationMessage(control);
     });
   }
 
@@ -86,7 +73,7 @@ export class DetailsBioComponent implements OnInit {
         birthPlace: ["", Validators.required],
         birthTime: ["", Validators.required],
         timeInterval: ["am"],
-        height: ["", [Validators.required, heightValidator]],
+        height: ["", [Validators.required, CustomValidator.validateHeight]],
         complexion: ["", Validators.required],
         qualification: ["", Validators.required],
         occupation: ["", Validators.required],
@@ -95,15 +82,70 @@ export class DetailsBioComponent implements OnInit {
           "",
           [Validators.required, Validators.pattern("^(A|B|AB|O)[+-]$")]
         ]
+      }),
+      family: this.fb.group({
+        fatherName: ["", Validators.required],
+        fatherOccupation: ["", Validators.required],
+        motherName: ["", Validators.required],
+        motherOccupation: ["", Validators.required],
+        brothers: this.fb.array([]),
+        sisters: this.fb.array([])
+      }),
+      contact: this.fb.group({
+        address: ["", Validators.required],
+        contact1: ["", [Validators.required, CustomValidator.validateContact]],
+        contact2: ["", [Validators.required, CustomValidator.validateContact]],
+        email: ["", [Validators.required, CustomValidator.validateEmail]]
+      }),
+      paternal: this.fb.group({
+        grandfatherName: ["", Validators.required],
+        grandmotherName: ["", Validators.required],
+        uncles: this.fb.array([]),
+        aunts: this.fb.array([])
+      }),
+      maternal: this.fb.group({
+        "grandfatherName#": ["", Validators.required],
+        "grandmotherName#": ["", Validators.required],
+        "uncles#": this.fb.array([]),
+        "aunts#": this.fb.array([])
       })
     });
     // need to associate time interval with birthTime
     this.detailsForm.valueChanges.subscribe(value => {
-      for (let group in value) this.logValidationMessage(group);
+      for (let group in value)
+        this.logValidationMessage(<FormGroup>this.detailsForm.get(group));
     });
   }
-  addBrother() {}
-  addSister() {}
+
+  addFormGroup(person: string, index: number, para: string = ""): FormGroup {
+    let name: string = person + "Name" + para + index;
+    let occ: string = person + "Occupation" + para + index;
+    return this.fb.group({
+      [name]: ["", Validators.required],
+      [occ]: ["", Validators.required]
+    });
+  }
+
+  addBrother() {
+    let brothers = <FormArray>this.detailsForm.get("family").get("brothers");
+    brothers.push(this.addFormGroup("brother", brothers.length));
+  }
+  addSister() {
+    let sisters = <FormArray>this.detailsForm.get("family").get("sisters");
+    sisters.push(this.addFormGroup("sister", sisters.length));
+  }
+
+  addUncle(groupName: string, para: string = "") {
+    let uncles = <FormArray>(
+      this.detailsForm.get(groupName).get(`uncles${para}`)
+    );
+    uncles.push(this.addFormGroup("uncle", uncles.length, para));
+  }
+  addAunt(groupName: string, para: string = "") {
+    let aunts = <FormArray>this.detailsForm.get(groupName).get(`aunts${para}`);
+    aunts.push(this.addFormGroup("aunt", aunts.length, para));
+  }
+
   setStep(index: number) {
     this.step = index;
   }
@@ -123,22 +165,15 @@ export class DetailsBioComponent implements OnInit {
     let message = "";
     if (pos) {
       let index = pos.index;
-      message = `${this.capFirst(key.substring(0, index))} ${key.substring(
-        index,
-        key.length
-      )} is required.`;
-    } else message = this.capFirst(key) + " is required.";
+      let word = /([a-zA-Z]+)/.exec(key.substring(index, key.length))[0]; // for extracting number out of the word
+      message = `${this.capFirst(
+        key.substring(0, index)
+      )} ${word} is required.`;
+    } else {
+      let word = /([a-zA-Z]+)/.exec(key)[0];
+      console.log(word);
+      message = this.capFirst(word) + " is required.";
+    }
     return message;
   }
 }
-
-function heightValidator(
-  control: AbstractControl
-): { [key: string]: any } | null {
-  const height: string = control.value;
-  const pattern = "^[4-6]?-?(1[0-1]|[0-9])$";
-  if (height.match(pattern)) return null;
-  else return { heightMismatch: true };
-}
-// for custom validator with parameter we need to return the above mentioned function (as an arrow function) **Closure
-// we can also declare a custom validator class and make this method static and call it using CustomValidator.func
