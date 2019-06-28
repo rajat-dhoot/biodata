@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { CustomValidator } from "../bio.validators";
+import { Observable } from "rxjs";
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +9,7 @@ import {
   AbstractControl,
   FormArray
 } from "@angular/forms";
+import { DialogService } from "../dialog.service";
 
 @Component({
   selector: "app-details-bio",
@@ -17,7 +19,7 @@ import {
 export class DetailsBioComponent implements OnInit {
   step = 0;
   detailsForm: FormGroup;
-  myForm: NgForm;
+  @ViewChild("myForm", { static: false }) myForm: NgForm;
   minDate = new Date(1975, 0, 1);
   maxDate = new Date(2002, 0, 1);
   complexion = ["light", "fair", "wheatish", "olive", "brown", "dark"];
@@ -56,7 +58,7 @@ export class DetailsBioComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private dialogService: DialogService) {}
 
   ngOnInit() {
     this.detailsForm = this.fb.group({
@@ -72,7 +74,6 @@ export class DetailsBioComponent implements OnInit {
         birthDate: ["", Validators.required],
         birthPlace: ["", Validators.required],
         birthTime: ["", Validators.required],
-        timeInterval: ["am"],
         height: ["", [Validators.required, CustomValidator.validateHeight]],
         complexion: ["", Validators.required],
         qualification: ["", Validators.required],
@@ -110,7 +111,6 @@ export class DetailsBioComponent implements OnInit {
         "aunts#": this.fb.array([])
       })
     });
-    // need to associate time interval with birthTime
     this.detailsForm.valueChanges.subscribe(value => {
       for (let group in value)
         this.logValidationMessage(<FormGroup>this.detailsForm.get(group));
@@ -175,5 +175,14 @@ export class DetailsBioComponent implements OnInit {
       message = this.capFirst(word) + " is required.";
     }
     return message;
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.myForm.dirty && !this.myForm.valid) {
+      return this.dialogService.confirm(
+        "Changes will not be saved if you leave the page. Discard changes?"
+      );
+    }
+    return true;
   }
 }

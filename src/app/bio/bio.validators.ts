@@ -5,7 +5,7 @@ export class CustomValidator {
     control: AbstractControl
   ): { [key: string]: any } | null {
     const height: string = control.value;
-    const pattern = "^[4-6]'((1[0-1]|[0-9])\")?$"; //wrong reg
+    const pattern = "^[4-6]'((1[0-1]|[0-9])\")?$";
     if (!height || height.match(pattern)) return null;
     else return { heightMismatch: true };
   }

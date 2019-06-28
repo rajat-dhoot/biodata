@@ -19,3 +19,7 @@ h2 {
 h3 {
   font-size: 3vh;
 }
+
+.mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}

@@ -1,17 +1,23 @@
-import { Component, OnInit, ViewChild, SecurityContext } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  SecurityContext,
+  OnDestroy
+} from "@angular/core";
 import { DesignModel } from "../models/DesignModel";
 import { NgForm } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { BioService } from "../bio.service";
 
-const maxBorderNum = 10;
+const maxBorderNum = 9;
 
 @Component({
   selector: "app-design-bio",
   templateUrl: "./design-bio.component.html",
   styleUrls: ["./design-bio.component.scss"]
 })
-export class DesignBioComponent implements OnInit {
+export class DesignBioComponent implements OnInit, OnDestroy {
   @ViewChild("myForm", { static: false }) form: NgForm;
   colors = {};
   designModel: DesignModel;
@@ -24,11 +30,6 @@ export class DesignBioComponent implements OnInit {
 
   ngOnInit() {
     this.designModel = { ...this._bioservice.getDesignModel() };
-    this._bioservice.currentSection$.subscribe(current => {
-      if (current === 2) this._bioservice.setDesignModel(this.designModel);
-      else this.designModel = { ...this._bioservice.getDesignModel() };
-    });
-
     for (let i = 1; i < maxBorderNum; i++)
       this.colors[i] = `assets/border/${i}.png`;
   }
@@ -37,6 +38,10 @@ export class DesignBioComponent implements OnInit {
     this.form.control.valueChanges.subscribe(values =>
       setTimeout(() => this.setBorder(), 100)
     );
+  }
+
+  ngOnDestroy(): void {
+    this._bioservice.setDesignModel(this.designModel);
   }
 
   selectBorder(value) {

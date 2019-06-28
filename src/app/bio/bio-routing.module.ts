@@ -4,6 +4,7 @@ import { DesignBioComponent } from "./design-bio/design-bio.component";
 import { DetailsBioComponent } from "./details-bio/details-bio.component";
 import { PreviewBioComponent } from "./preview-bio/preview-bio.component";
 import { CreateBioComponent } from "./create-bio/create-bio.component";
+import { CanDeactivateGuard } from "./can-deactivate-guard.service";
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       },
       {
         path: "details",
-        component: DetailsBioComponent
+        component: DetailsBioComponent,
+        canDeactivate: [CanDeactivateGuard]
       },
       {
         path: "",

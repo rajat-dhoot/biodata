@@ -1,54 +1,68 @@
-<form class="container" fxLayout="column" fxLayoutGap="15px" #myForm="ngForm">
-  <div fxFlex style="color:#333;" class="header">Colour</div>
-  <div fxLayout="row wrap" fxLayoutGap="10px" class="selectColor">
-    <mat-form-field fxFlex="0 0 80%">
-      <input
-        matInput
-        type="color"
-        placeholder="Font-Color"
-        name="fontColor"
-        [(ngModel)]="designModel.fColor"
-      />
-    </mat-form-field>
-    <mat-form-field fxFlex="0 0 80%">
-      <input
-        matInput
-        type="color"
-        name="backgroundColor"
-        placeholder="Background-Color"
-        [(ngModel)]="designModel.bColor"
-      />
-    </mat-form-field>
-  </div>
-  <mat-divider></mat-divider>
-
-  <div fxFlex style="color:#333;" class="header">Border</div>
-  <div fxFlex style="color:#666;">Pattern</div>
-  <div fxLayout="row wrap" fxLayoutGap="14px">
-    <div
-      class="outerbox"
-      flex="none"
-      matRipple
-      matRippleColor="rgba(0, 0, 0, 0.06)"
-      *ngFor="let color of colors | keyvalue"
-      [class.isSelected]="designModel.borderNum === color.key"
-      (click)="selectBorder(color.key)"
-    >
-      <img class="innerbox" [src]="color.value" />
-    </div>
-  </div>
-  <br />
-  <mat-divider></mat-divider>
-
-  <div fxFlex style="color:#333;" class="header">Preview</div>
-  <div fxFlex>
-    <div
-      class="demo"
-      [ngStyle]="borderStyles"
-      fxLayout="column"
-      fxLayoutAlign="center center"
-    >
-      Font
-    </div>
+<form #myForm="ngForm">
+  <div class="design" fxLayout="column" fxLayoutGap="15px">
+    <mat-card fxFlex>
+      <mat-card-title>Colour</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content
+        fxLayout="row wrap"
+        fxLayoutGap="20px"
+        fxLayoutGap.lt-sm="10px"
+      >
+        <mat-form-field fxFlex="0 1 auto" class="selectColor">
+          <input
+            matInput
+            type="color"
+            placeholder="Font-Color"
+            name="fontColor"
+            [(ngModel)]="designModel.fColor"
+          />
+        </mat-form-field>
+        <mat-form-field fxFlex="0 1 auto" class="selectColor">
+          <input
+            matInput
+            type="color"
+            name="backgroundColor"
+            placeholder="Background-Color"
+            [(ngModel)]="designModel.bColor"
+          />
+        </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex>
+      <mat-card-title>Border</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content
+        fxLayout="row wrap"
+        fxLayoutGap="14px"
+        fxLayoutGap.lt-sm="5px"
+        fxLayoutAlign.lt-sm="space-around start"
+      >
+        <div
+          class="outerbox"
+          flex="none"
+          matRipple
+          matRippleColor="rgba(0, 0, 0, 0.06)"
+          *ngFor="let color of colors | keyvalue"
+          [class.isSelected]="designModel.borderNum === color.key"
+          (click)="selectBorder(color.key)"
+        >
+          <img class="innerbox" [src]="color.value" />
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card fxFlex>
+      <mat-card-title>Preview</mat-card-title>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div
+          class="demo"
+          [ngStyle]="borderStyles"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+        >
+          Font
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
 </form>

@@ -5,7 +5,9 @@ import { DetailsBioComponent } from "./details-bio/details-bio.component";
 import { PreviewBioComponent } from "./preview-bio/preview-bio.component";
 import { CreateBioComponent } from "./create-bio/create-bio.component";
 import { BioRoutingModule } from "./bio-routing.module";
+import { CanDeactivateGuard } from "./can-deactivate-guard.service";
 import { BioService } from "./bio.service";
+import { DialogService } from "./dialog.service";
 import { MAT_DATE_LOCALE } from "@angular/material";
 
 @NgModule({
@@ -16,6 +18,11 @@ import { MAT_DATE_LOCALE } from "@angular/material";
     CreateBioComponent
   ],
   imports: [SharedModule, BioRoutingModule],
-  providers: [BioService, { provide: MAT_DATE_LOCALE, useValue: "en-GB" }]
+  providers: [
+    BioService,
+    CanDeactivateGuard,
+    DialogService,
+    { provide: MAT_DATE_LOCALE, useValue: "en-GB" }
+  ]
 })
 export class BioModule {}
