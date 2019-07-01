@@ -2,8 +2,6 @@
 <mat-toolbar id="mainToolbar">
   <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">menu</mat-icon>
   <span>Biodata</span>
-  <span class="toolbarSpacer"></span>
-  <a routerLink="create"><mat-icon class="toolbarIcon">create</mat-icon></a>
 </mat-toolbar>
 
 <!-- mat sidenav container mat sidenav mat sidenav content -->
@@ -27,7 +25,11 @@
           routerLink="{{ item.value.icon }}"
           (click)="onToolbarMenuToggle()"
         >
-          <mat-icon>{{ item.value.icon }}</mat-icon>
+          <mat-icon
+            matTooltip="{{ item.value.name }}"
+            matTooltipPosition="above"
+            >{{ item.value.icon }}</mat-icon
+          >
           <span [class.nav-label]="!isMenuOpen">{{ item.value.name }}</span>
         </a>
       </mat-nav-list>

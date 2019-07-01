@@ -13,6 +13,10 @@ mat-button-toggle-group {
   align-items: center;
 }
 
+input:not([type="email"]) {
+  text-transform: capitalize;
+}
+
 .has-error {
   background-color: antiquewhite;
 }

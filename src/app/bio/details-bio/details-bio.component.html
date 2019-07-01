@@ -194,7 +194,7 @@
         <mat-error>{{formErrors['contact2']}}</mat-error>
       </mat-form-field>
       <mat-form-field fxFlex>
-        <input matInput placeholder="Email" formControlName="email" (blur)="logValidationMessage()"/>
+        <input type="email" matInput placeholder="Email" formControlName="email" (blur)="logValidationMessage()"/>
         <mat-error>{{formErrors.email}}</mat-error>
       </mat-form-field>
     </div>
@@ -265,10 +265,10 @@
       fxLayoutGap="10px"
       fxLayoutAlign="space-between center"
     >
-      <button mat-stroked-button fxFlex="none" type="button" (click)="addUncle('paternal')">
+      <button mat-stroked-button fxFlex="none" type="button" matTooltip="Chacha" matTooltipPosition="above" (click)="addUncle('paternal')">
         Add Uncle
       </button>
-      <button mat-stroked-button fxFlex="none" type="button" (click)="addAunt('paternal')">
+      <button mat-stroked-button fxFlex="none" type="button" matTooltip="Bua" matTooltipPosition="above" (click)="addAunt('paternal')">
         Add Aunt
       </button>
     </mat-action-row>
@@ -340,10 +340,10 @@
         fxLayoutGap="10px"
         fxLayoutAlign="space-between center"
       >
-        <button mat-stroked-button fxFlex="none" type="button" (click)="addUncle('maternal', '#')">
+        <button mat-stroked-button fxFlex="none" type="button" matTooltip="Mama" matTooltipPosition="above" (click)="addUncle('maternal', '#')">
           Add Uncle
         </button>
-        <button mat-stroked-button fxFlex="none" type="button" (click)="addAunt('maternal', '#')">
+        <button mat-stroked-button fxFlex="none" type="button" matTooltip="Masi" matTooltipPosition="above" (click)="addAunt('maternal', '#')">
           Add Aunt
         </button>
       </mat-action-row>

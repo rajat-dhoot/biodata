@@ -1,0 +1,79 @@
+<div class="outside">
+  <div [ngStyle]="borderStyle">
+    <div class="container">
+      <div class="head">Personal Details</div>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>{{ data.personal.name | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>Birth Details</td>
+          <td>{{ data.personal.dob + ", " + data.personal.birthTime }}</td>
+        </tr>
+        <tr>
+          <td>Birth Place</td>
+          <td>{{ data.personal.birthPlace | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>Blood Group</td>
+          <td>{{ data.personal.bloodGroup | uppercase }}</td>
+        </tr>
+        <tr>
+          <td>Height</td>
+          <td>{{ data.personal.height }}</td>
+        </tr>
+        <tr>
+          <td>Complexion</td>
+          <td>{{ data.personal.complexion | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>Qualification</td>
+          <td>{{ data.personal.qualification | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>Occupation</td>
+          <td>{{ data.personal.occupation | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>Hobbies</td>
+          <td>{{ data.personal.hobbies | titlecase }}</td>
+        </tr>
+      </table>
+
+      <div class="head">Family Details</div>
+      <table>
+        <tr>
+          <td rowspan="2" style="vertical-align:initial">Father</td>
+          <td>{{ data.family.fatherName | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>{{ data.family.fatherOccupation | titlecase }}</td>
+        </tr>
+        <tr>
+          <td rowspan="2" style="vertical-align:initial">Mother</td>
+          <td>{{ data.family.motherName | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>{{ data.family.motherOccupation | titlecase }}</td>
+        </tr>
+      </table>
+
+      <div class="head">Contact Details</div>
+      <table>
+        <tr>
+          <td>Address</td>
+          <td>{{ data.contact.address | titlecase }}</td>
+        </tr>
+        <tr>
+          <td>Contact</td>
+          <td>{{ data.contact.contact1 + "," + data.contact.contact2 }}</td>
+        </tr>
+        <tr>
+          <td>Email Id</td>
+          <td>{{ data.contact.email }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

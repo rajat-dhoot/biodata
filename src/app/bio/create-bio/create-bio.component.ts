@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import { BioService } from "../bio.service";
+import { BioService } from "../services/bio.service";
 import { MatStepper } from "@angular/material";
 import { Event, NavigationEnd } from "@angular/router";
 
@@ -13,6 +13,8 @@ export class CreateBioComponent implements OnInit {
   @ViewChild("stepper", { static: false }) stepper: MatStepper;
   currentSection: number;
   currentUrl: string;
+  disableButton: boolean;
+  isCompleted: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,10 +32,17 @@ export class CreateBioComponent implements OnInit {
         }
       }
     });
+    this.bioservice
+      .getDisableBtn()
+      .subscribe(value => (this.disableButton = value));
   }
 
   move(index: number) {
     this.stepper.selectedIndex = index;
+  }
+
+  submitForm() {
+    this.router.navigate(["../download"], { relativeTo: this.route });
   }
 
   switchSection(e) {

@@ -8,9 +8,9 @@ import {
 import { DesignModel } from "../models/DesignModel";
 import { NgForm } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
-import { BioService } from "../bio.service";
+import { BioService } from "../services/bio.service";
 
-const maxBorderNum = 9;
+const maxBorderNum = 7;
 
 @Component({
   selector: "app-design-bio",

@@ -1,0 +1,39 @@
+.container {
+  padding: 20px;
+  margin-top: 15px;
+  line-height: 24px;
+
+  .waitMessage {
+    color: #666;
+    text-align: center;
+  }
+
+  .downloadMessage {
+    color: #256eb3;
+  }
+
+  .info {
+    text-align: justify;
+    color: #333;
+  }
+
+  mat-card {
+    margin: 15px 0px;
+    max-height: 600px;
+    overflow: auto;
+  }
+
+  .center {
+    text-align: center;
+  }
+}
+
+button {
+  background: #256eb3;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.trial {
+  border: 1px solid black;
+}

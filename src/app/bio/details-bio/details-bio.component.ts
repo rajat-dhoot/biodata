@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
 import { CustomValidator } from "../bio.validators";
 import { Observable } from "rxjs";
 import {
@@ -9,14 +9,15 @@ import {
   AbstractControl,
   FormArray
 } from "@angular/forms";
-import { DialogService } from "../dialog.service";
+import { DialogService } from "../services/dialog.service";
+import { BioService } from "../services/bio.service";
 
 @Component({
   selector: "app-details-bio",
   templateUrl: "./details-bio.component.html",
   styleUrls: ["./details-bio.component.scss"]
 })
-export class DetailsBioComponent implements OnInit {
+export class DetailsBioComponent implements OnInit, OnDestroy {
   step = 0;
   detailsForm: FormGroup;
   @ViewChild("myForm", { static: false }) myForm: NgForm;
@@ -48,7 +49,6 @@ export class DetailsBioComponent implements OnInit {
             this.formErrors[key] = this.validationMessages[errorKey];
           }
         }
-        console.log(this.formErrors);
       }
       if (abstractControl instanceof FormGroup)
         this.logValidationMessage(abstractControl);
@@ -58,7 +58,11 @@ export class DetailsBioComponent implements OnInit {
     });
   }
 
-  constructor(private fb: FormBuilder, private dialogService: DialogService) {}
+  constructor(
+    private fb: FormBuilder,
+    private dialogService: DialogService,
+    private _bioservice: BioService
+  ) {}
 
   ngOnInit() {
     this.detailsForm = this.fb.group({
@@ -81,7 +85,7 @@ export class DetailsBioComponent implements OnInit {
         hobbies: ["", Validators.required],
         bloodGroup: [
           "",
-          [Validators.required, Validators.pattern("^(A|B|AB|O)[+-]$")]
+          [Validators.required, Validators.pattern("^(A|B|O|AB|ab|o|a|b)[+-]$")]
         ]
       }),
       family: this.fb.group({
@@ -114,6 +118,7 @@ export class DetailsBioComponent implements OnInit {
     this.detailsForm.valueChanges.subscribe(value => {
       for (let group in value)
         this.logValidationMessage(<FormGroup>this.detailsForm.get(group));
+      if (this.detailsForm.valid) this._bioservice.setDisableBtn(false);
     });
   }
 
@@ -175,6 +180,11 @@ export class DetailsBioComponent implements OnInit {
       message = this.capFirst(word) + " is required.";
     }
     return message;
+  }
+
+  ngOnDestroy() {
+    if (this.myForm.dirty && this.myForm.valid)
+      this._bioservice.setDetailsModel(this.detailsForm);
   }
 
   canDeactivate(): Observable<boolean> | boolean {

@@ -1,0 +1,24 @@
+table,
+tr {
+  width: 100%;
+}
+
+td {
+  vertical-align: top;
+  width: 50%;
+}
+
+.container {
+  padding: 50px;
+  font-size: 1.5rem;
+  font-weight: 200;
+  .head {
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 15px 0px;
+  }
+}
+
+.outside {
+  margin:30px;
+}

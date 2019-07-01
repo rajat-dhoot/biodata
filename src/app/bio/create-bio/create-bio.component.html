@@ -1,7 +1,9 @@
 <div class="container">
   <mat-horizontal-stepper #stepper (selectionChange)="switchSection($event)">
     <mat-step>
-      <ng-template matStepLabel><span class="label">Design</span></ng-template>
+      <ng-template matStepLabel
+        ><span class="label">Add Details</span></ng-template
+      >
       <router-outlet></router-outlet>
       <div style="text-align:center">
         <button type="button" mat-raised-button matStepperNext>
@@ -11,11 +13,18 @@
     </mat-step>
     <mat-step>
       <ng-template matStepLabel
-        ><span class="label">Add Details</span></ng-template
+        ><span class="label">Download</span></ng-template
       >
       <router-outlet></router-outlet>
       <div style="text-align:center">
-        <button type="button" mat-raised-button matStepperNext>Create</button>
+        <button
+          type="submit"
+          mat-raised-button
+          (click)="submitForm()"
+          [disabled]="disableButton"
+        >
+          Download
+        </button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
