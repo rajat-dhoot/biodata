@@ -6,20 +6,21 @@ import {
   FormGroup,
   Validators,
   NgForm,
-  AbstractControl,
   FormArray
 } from "@angular/forms";
 import { DialogService } from "../services/dialog.service";
 import { BioService } from "../services/bio.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-details-bio",
   templateUrl: "./details-bio.component.html",
   styleUrls: ["./details-bio.component.scss"]
 })
-export class DetailsBioComponent implements OnInit, OnDestroy {
+export class DetailsBioComponent implements OnInit {
   step = 0;
   detailsForm: FormGroup;
+  isDisabled: boolean;
   @ViewChild("myForm", { static: false }) myForm: NgForm;
   minDate = new Date(1975, 0, 1);
   maxDate = new Date(2002, 0, 1);
@@ -61,10 +62,13 @@ export class DetailsBioComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private dialogService: DialogService,
-    private _bioservice: BioService
+    private _bioservice: BioService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    this.isDisabled = true;
     this.detailsForm = this.fb.group({
       personal: this.fb.group({
         fullName: [
@@ -118,8 +122,43 @@ export class DetailsBioComponent implements OnInit, OnDestroy {
     this.detailsForm.valueChanges.subscribe(value => {
       for (let group in value)
         this.logValidationMessage(<FormGroup>this.detailsForm.get(group));
-      if (this.detailsForm.valid) this._bioservice.setDisableBtn(false);
+      this.isDisabled = !(this.detailsForm.valid && this.detailsForm.dirty);
     });
+
+    let model = this._bioservice.getDetailsModel();
+    if (model) {
+      let data = model.value;
+      data.family.brothers.forEach(brother => this.addBrother());
+      data.family.sisters.forEach(sister => this.addSister());
+      data.paternal.uncles.forEach(uncle => this.addUncle("paternal"));
+      data.paternal.aunts.forEach(aunt => this.addAunt("paternal"));
+      data.maternal["uncles#"].forEach(uncle => this.addUncle("maternal", "#"));
+      data.maternal["aunts#"].forEach(aunt => this.addAunt("maternal", "#"));
+      setTimeout(() => this.detailsForm.setValue({ ...data }), 1000);
+      this.detailsForm.markAsDirty();
+      this.isDisabled = !(this.detailsForm.valid && this.detailsForm.dirty);
+    }
+  }
+
+  resetForm() {
+    this.detailsForm.reset();
+    this._bioservice.setDetailsModel("");
+  }
+
+  createBiodata() {
+    if (this.myForm && this.myForm.dirty && this.myForm.valid) {
+      this._bioservice.setDetailsModel(this.detailsForm);
+    }
+    this.router.navigate(["../download"], { relativeTo: this.route });
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.myForm.dirty && !this.myForm.valid) {
+      return this.dialogService.confirm(
+        "Changes will not be saved if you leave the page. Discard changes?"
+      );
+    }
+    return true;
   }
 
   addFormGroup(person: string, index: number, para: string = ""): FormGroup {
@@ -176,23 +215,73 @@ export class DetailsBioComponent implements OnInit, OnDestroy {
       )} ${word} is required.`;
     } else {
       let word = /([a-zA-Z]+)/.exec(key)[0];
-      console.log(word);
       message = this.capFirst(word) + " is required.";
     }
     return message;
   }
 
-  ngOnDestroy() {
-    if (this.myForm.dirty && this.myForm.valid)
-      this._bioservice.setDetailsModel(this.detailsForm);
-  }
-
-  canDeactivate(): Observable<boolean> | boolean {
-    if (this.myForm.dirty && !this.myForm.valid) {
-      return this.dialogService.confirm(
-        "Changes will not be saved if you leave the page. Discard changes?"
-      );
-    }
-    return true;
+  loadData() {
+    let data = {
+      personal: {
+        fullName: "rajat",
+        birthDate: new Date(1994, 5, 16),
+        birthTime: "10:20",
+        height: "5'11\"",
+        birthPlace: "varanasi",
+        complexion: "fair",
+        bloodGroup: "o+",
+        qualification: "B.tech Bits Pilani",
+        occupation: "Software Engineer, Amazon Bangalore",
+        hobbies: "Reading, Dancing, Singing"
+      },
+      family: {
+        fatherName: "ram",
+        fatherOccupation: "Silk Yarn Business Varanasi",
+        motherName: "jaishri",
+        motherOccupation: "homeMaker",
+        brothers: [
+          {
+            brotherName0: "Rajat",
+            brotherOccupation0: "Btech"
+          },
+          {
+            brotherName1: "Vijay",
+            brotherOccupation1: "Pursuing CA"
+          }
+        ],
+        sisters: [
+          {
+            sisterName0: "Payal",
+            sisterOccupation0: "Tax Management"
+          }
+        ]
+      },
+      contact: {
+        address: "rathyatra, mahmoorganj, varanasi",
+        contact1: "9898989898",
+        contact2: "9898989898",
+        email: "rajat.dhoot@gmail.com"
+      },
+      paternal: {
+        grandfatherName: "gfName",
+        grandmotherName: "gmName",
+        uncles: [],
+        aunts: []
+      },
+      maternal: {
+        "grandfatherName#": "gfName",
+        "grandmotherName#": "gmName",
+        "uncles#": [],
+        "aunts#": []
+      }
+    };
+    data.family.brothers.forEach(brother => this.addBrother());
+    data.family.sisters.forEach(sister => this.addSister());
+    data.paternal.uncles.forEach(uncle => this.addUncle("paternal"));
+    data.paternal.aunts.forEach(aunt => this.addAunt("paternal"));
+    data.maternal["uncles#"].forEach(uncle => this.addUncle("maternal", "#"));
+    data.maternal["aunts#"].forEach(aunt => this.addAunt("maternal", "#"));
+    setTimeout(() => this.detailsForm.setValue({ ...data }), 1000);
+    this.detailsForm.markAsDirty();
   }
 }

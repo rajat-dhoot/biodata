@@ -1,5 +1,6 @@
-import { Component, OnInit, SecurityContext } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+import { Component, OnInit } from "@angular/core";
+import { BioService } from "../services/bio.service";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-prepare-bio",
@@ -8,49 +9,24 @@ import { DomSanitizer } from "@angular/platform-browser";
 })
 export class PrepareBioComponent implements OnInit {
   borderStyle = {
-    "background-color": "lightyellow",
     "font-color": "black",
-    border: "1px solid"
+    border: "1px solid grey"
   };
 
-  data = {
-    personal: {
-      name: "rajat",
-      dob: "dob",
-      birthTime: "10:00",
-      height: "5'11\"",
-      birthPlace: "varanasi",
-      complexion: "fair",
-      bloodGroup: "o+",
-      qualification: "qual",
-      occupation: "occ",
-      hobbies: "hob"
-    },
-    family: {
-      fatherName: "ram",
-      fatherOccupation: "business",
-      motherName: "jaishri",
-      motherOccupation: "homeMaker"
-    },
-    contact: {
-      address: "rathyatra, mahmoorganj, varanasi",
-      contact1: "9898989898",
-      contact2: "9898989898",
-      email: "rajat.dhoot@gmail.com"
-    },
-    maternal: {
-      grandfatherName: "gfName",
-      grandMotherName: "gmName"
-    },
-    paternal: {
-      grandfatherName: "gfName",
-      grandMotherName: "gmName"
-    }
-  };
+  formData: any;
+  data: any;
 
-  constructor(private _sanitizer: DomSanitizer) {}
+  constructor(
+    private _bioservice: BioService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formData = this._bioservice.getDetailsModel();
+    console.log(this.formData.value);
+    if (this.formData) this.data = { ...this.formData.value };
+  }
 }
 
 /* 

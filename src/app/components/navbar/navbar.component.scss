@@ -46,6 +46,9 @@ mat-nav-list {
     visibility: hidden;
     transition: all 0s ease;
   }
+  .active {
+    background-color: #ccc;
+  }
 }
 
 mat-sidenav-content {

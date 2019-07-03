@@ -1,3 +1,6 @@
+<div class="container">
+  <div class="header"></div> <!-- Need to add header here-->
+  <div class="forms">
 <form #myForm="ngForm" [formGroup]="detailsForm">
   <mat-accordion>
 
@@ -67,6 +70,7 @@
 
       <mat-form-field fxFlex>
           <input matInput placeholder="Occupation" formControlName="occupation" (blur)="logValidationMessage()">
+          <mat-hint>Mention current city as well (XYZ, City)</mat-hint>
           <mat-error>{{formErrors.occupation}}</mat-error>
       </mat-form-field>
 
@@ -356,3 +360,10 @@
 
   </mat-accordion>
 </form>
+</div>
+<div class="button-group" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button fxFlex="none" (click)="loadData()">Load</button> <!--need to remove this-->
+  <button mat-raised-button fxFlex="none" (click)="resetForm()">Reset</button>
+  <button mat-raised-button fxFlex="none" (click)="createBiodata()" [disabled]="isDisabled">Create</button>
+</div>
+</div>

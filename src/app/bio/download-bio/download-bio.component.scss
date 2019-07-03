@@ -22,18 +22,14 @@
     max-height: 600px;
     overflow: auto;
   }
-
-  .center {
-    text-align: center;
-  }
 }
 
 button {
   background: #256eb3;
   color: #fff;
-  font-size: 1rem;
+  font-size: 16px;
 }
 
-.trial {
-  border: 1px solid black;
+.center {
+  text-align: center;
 }

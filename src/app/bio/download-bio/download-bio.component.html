@@ -1,10 +1,12 @@
-<div
-  class="container"
-  [ngStyle.gt-md]="{ 'line-height.px': 32 }"
-  [ngStyle.gt-xs]="{ 'line-height.px': 28 }"
->
+<div class="container">
   <div fxLayout="row" fxLayoutAlign="center center">
-    <div class="info" fxFlex.gt-sm="70%" fxFlex="90%">
+    <div
+      class="info"
+      fxFlex.gt-sm="70%"
+      fxFlex="90%"
+      [ngStyle.gt-md]="{ 'line-height.px': 32 }"
+      [ngStyle.gt-xs]="{ 'line-height.px': 28 }"
+    >
       Thank you for using our services for making your biodata. We are working
       towards making the website more dynamic and user-friendly. You can provide
       your valuable feedback <a href="#">here</a>. If you wish to contribute to
@@ -24,12 +26,12 @@
 <div *ngIf="timeleft === 0">
   <br />
   <hr />
-  <div class="trial">
-    <!-- <mat-card fxFlex="50%" fxFlex.lt-sm="100%"> -->
-    <app-prepare-bio #htmlToConvert id="reqHtml"></app-prepare-bio>
-    <!-- </mat-card> -->
+  <app-prepare-bio
+    #htmlToConvert
+    id="reqHtml"
+    style="display:none"
+  ></app-prepare-bio>
+  <div class="center">
+    <button mat-raised-button (click)="downloadPdf()">Download</button>
   </div>
-  <!-- <div class="center">
-      <button mat-raised-button (click)="downloadPdf()">Download</button>
-    </div> -->
 </div>

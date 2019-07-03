@@ -1,79 +1,382 @@
-<div class="outside">
-  <div [ngStyle]="borderStyle">
+<div class="outside" style="background-color:lightyellow">
+<div [ngStyle]="borderStyle">
+  <div class="ganeshaImg">
+    <img src="assets/ganesha.png">
+  </div>
     <div class="container">
       <div class="head">Personal Details</div>
       <table>
         <tr>
-          <td>Name</td>
-          <td>{{ data.personal.name | titlecase }}</td>
+          <td class="label">Name</td>
+          <td>{{ data?.personal.fullName | titlecase }}</td>
         </tr>
         <tr>
-          <td>Birth Details</td>
-          <td>{{ data.personal.dob + ", " + data.personal.birthTime }}</td>
+          <td class="label">Birth Details</td>
+          <td>
+            {{ data?.personal.birthDate | date: "d MMM y" }},
+            {{ data?.personal.birthTime | timePipe }}
+          </td>
         </tr>
         <tr>
-          <td>Birth Place</td>
-          <td>{{ data.personal.birthPlace | titlecase }}</td>
+          <td class="label">Birth Place</td>
+          <td>{{ data?.personal.birthPlace | titlecase }}</td>
         </tr>
         <tr>
-          <td>Blood Group</td>
-          <td>{{ data.personal.bloodGroup | uppercase }}</td>
+          <td class="label">Blood Group</td>
+          <td>{{ data?.personal.bloodGroup | uppercase }}</td>
         </tr>
         <tr>
-          <td>Height</td>
-          <td>{{ data.personal.height }}</td>
+          <td class="label">Height</td>
+          <td>{{ data?.personal.height }}</td>
         </tr>
         <tr>
-          <td>Complexion</td>
-          <td>{{ data.personal.complexion | titlecase }}</td>
+          <td class="label">Complexion</td>
+          <td>{{ data?.personal.complexion | titlecase }}</td>
         </tr>
         <tr>
-          <td>Qualification</td>
-          <td>{{ data.personal.qualification | titlecase }}</td>
+          <td class="label">Qualification</td>
+          <td>{{ data?.personal.qualification | titlecase }}</td>
         </tr>
         <tr>
-          <td>Occupation</td>
-          <td>{{ data.personal.occupation | titlecase }}</td>
+          <td class="label">Occupation</td>
+          <td>{{ data?.personal.occupation | titlecase }}</td>
         </tr>
         <tr>
-          <td>Hobbies</td>
-          <td>{{ data.personal.hobbies | titlecase }}</td>
+          <td class="label">Hobbies</td>
+          <td>{{ data?.personal.hobbies | titlecase }}</td>
         </tr>
       </table>
 
       <div class="head">Family Details</div>
       <table>
         <tr>
-          <td rowspan="2" style="vertical-align:initial">Father</td>
-          <td>{{ data.family.fatherName | titlecase }}</td>
+          <td rowspan="2" style="vertical-align:initial" class="label">Father</td>
+          <td>{{ data?.family.fatherName | titlecase }}</td>
         </tr>
         <tr>
-          <td>{{ data.family.fatherOccupation | titlecase }}</td>
+          <td>{{ data?.family.fatherOccupation | titlecase }}</td>
         </tr>
         <tr>
-          <td rowspan="2" style="vertical-align:initial">Mother</td>
-          <td>{{ data.family.motherName | titlecase }}</td>
+          <td rowspan="2" style="vertical-align:initial" class="label">Mother</td>
+          <td>{{ data?.family.motherName | titlecase }}</td>
         </tr>
         <tr>
-          <td>{{ data.family.motherOccupation | titlecase }}</td>
+          <td>{{ data?.family.motherOccupation | titlecase }}</td>
         </tr>
+
+        <tr *ngIf="data?.family.brothers.length>0">
+          <td
+            attr.rowspan="{{
+              data?.family.brothers.length*2}}"
+            style="vertical-align:initial"
+            class="label"
+          >
+            {{ data?.family.brothers.length > 1 ? "Brothers" : "Brother" }}
+          </td>
+          <td>
+            {{ (data?.family.brothers)[0]["brotherName" + "0"] | titlecase }}
+          </td>
+        </tr>
+        <tr *ngIf="data?.family.brothers.length>0">
+          <td>
+            {{
+              (data?.family.brothers)[0]["brotherOccupation" + "0"] | titlecase
+            }}
+          </td>
+        </tr>
+        <div
+          *ngFor="
+            let brother of data?.family.brothers | slice: 1;
+            let i = index
+          "
+        >
+          <tr>
+            <td>
+              {{
+                (data?.family.brothers)[i + 1]["brotherName" + (i + 1)]
+                  | titlecase
+              }}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              {{
+                (data?.family.brothers)[i + 1]["brotherOccupation" + (i + 1)]
+                  | titlecase
+              }}
+            </td>
+          </tr>
+        </div>
+
+        <tr *ngIf="data?.family.sisters.length>0">
+            <td
+              attr.rowspan="{{
+                data?.family.sisters.length*2}}"
+              style="vertical-align:initial"
+              class="label"
+            >
+              {{ data?.family.sisters.length > 1 ? "Sisters" : "Sister" }}
+            </td>
+            <td>
+              {{ (data?.family.sisters)[0]["sisterName" + "0"] | titlecase }}
+            </td>
+          </tr>
+          <tr *ngIf="data?.family.sisters.length>0">
+            <td>
+              {{
+                (data?.family.sisters)[0]["sisterOccupation" + "0"] | titlecase
+              }}
+            </td>
+          </tr>
+          <div
+            *ngFor="
+              let sister of data?.family.sisters | slice: 1;
+              let i = index
+            "
+          >
+            <tr>
+              <td>
+                {{
+                  (data?.family.sisters)[i + 1]["sisterName" + (i + 1)]
+                    | titlecase
+                }}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                {{
+                  (data?.family.sisters)[i + 1]["sisterOccupation" + (i + 1)]
+                    | titlecase
+                }}
+              </td>
+            </tr>
+          </div>
       </table>
 
       <div class="head">Contact Details</div>
-      <table>
+      <table class="html2pdf__page-break">
         <tr>
-          <td>Address</td>
-          <td>{{ data.contact.address | titlecase }}</td>
+          <td class="label">Address</td>
+          <td>{{ data?.contact.address | titlecase }}</td>
         </tr>
         <tr>
-          <td>Contact</td>
-          <td>{{ data.contact.contact1 + "," + data.contact.contact2 }}</td>
+          <td class="label">Contact</td>
+          <td>
+            {{
+              "+91-" +
+                data?.contact.contact1 +
+                ", " +
+                "+91-" +
+                data?.contact.contact2
+            }}
+          </td>
         </tr>
         <tr>
-          <td>Email Id</td>
-          <td>{{ data.contact.email }}</td>
+          <td class="label">Email Id</td>
+          <td>{{ data?.contact.email }}</td>
         </tr>
       </table>
+      
+
+      <div class="head" style="margin-top:80px;">Paternal</div>
+      <table>
+        <tr>
+          <td class="label">GrandFather</td>
+          <td>{{ data?.paternal.grandfatherName | titlecase }}</td>
+        </tr>
+        <tr>
+            <td class="label">GrandMother</td>
+            <td>{{ data?.paternal.grandmotherName | titlecase }}</td>
+          </tr>
+
+          <tr *ngIf="data?.paternal.uncles.length>0">
+              <td
+                attr.rowspan="{{
+                  data?.paternal.uncles.length*2}}"
+                style="vertical-align:initial" class="label"
+              >
+                {{ data?.paternal.uncles.length > 1 ? "Uncles" : "Uncle" }}
+              </td>
+              <td>
+                {{ (data?.paternal.uncles)[0]["uncleName" + "0"] | titlecase }}
+              </td>
+            </tr>
+            <tr *ngIf="data?.paternal.uncles.length>0">
+              <td>
+                {{
+                  (data?.paternal.uncles)[0]["uncleOccupation" + "0"] | titlecase
+                }}
+              </td>
+            </tr>
+            <div
+              *ngFor="
+                let uncle of data?.paternal.uncles | slice: 1;
+                let i = index
+              "
+            >
+              <tr>
+                <td>
+                  {{
+                    (data?.paternal.uncles)[i + 1]["uncleName" + (i + 1)]
+                      | titlecase
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    (data?.paternal.uncles)[i + 1]["uncleOccupation" + (i + 1)]
+                      | titlecase
+                  }}
+                </td>
+              </tr>
+            </div>
+
+            <tr *ngIf="data?.paternal.aunts.length>0">
+                <td
+                  attr.rowspan="{{
+                    data?.paternal.aunts.length*2}}"
+                  style="vertical-align:initial"
+                  class="label"
+                >
+                  {{ data?.paternal.aunts.length > 1 ? "Aunts" : "Aunt" }}
+                </td>
+                <td>
+                  {{ (data?.paternal.aunts)[0]["auntName" + "0"] | titlecase }}
+                </td>
+              </tr>
+              <tr *ngIf="data?.paternal.aunts.length>0">
+                <td>
+                  {{
+                    (data?.paternal.aunts)[0]["auntOccupation" + "0"] | titlecase
+                  }}
+                </td>
+              </tr>
+              <div
+                *ngFor="
+                  let aunt of data?.paternal.aunts | slice: 1;
+                  let i = index
+                "
+              >
+                <tr>
+                  <td>
+                    {{
+                      (data?.paternal.aunts)[i + 1]["auntName" + (i + 1)]
+                        | titlecase
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{
+                      (data?.paternal.aunts)[i + 1]["auntOccupation" + (i + 1)]
+                        | titlecase
+                    }}
+                  </td>
+                </tr>
+              </div>
+        
+      </table>
+
+      <div class="head">Maternal</div>
+      <table>
+        <tr>
+          <td class="label">GrandFather</td>
+          <td>{{ data?.maternal['grandfatherName#'] | titlecase }}</td>
+        </tr>
+        <tr>
+            <td class="label">GrandMother</td>
+            <td>{{ data?.maternal['grandmotherName#'] | titlecase }}</td>
+          </tr>
+
+          <tr *ngIf="data?.maternal['uncles#'].length>0">
+              <td
+                attr.rowspan="{{
+                  data?.maternal['uncles#'].length*2}}"
+                style="vertical-align:initial" class="label"
+              >
+                {{ data?.maternal['uncles#'].length > 1 ? "Uncles" : "Uncle" }}
+              </td>
+              <td>
+                {{ data?.maternal['uncles#'][0]["uncleName#" + "0"] | titlecase }}
+              </td>
+            </tr>
+            <tr *ngIf="data?.maternal['uncles#'].length>0">
+              <td>
+                {{
+                  data?.maternal['uncles#'][0]["uncleOccupation#" + "0"] | titlecase
+                }}
+              </td>
+            </tr>
+            <div
+              *ngFor="
+                let uncle of data?.maternal['uncles#'] | slice: 1;
+                let i = index
+              "
+            >
+              <tr>
+                <td>
+                  {{
+                    data?.maternal['uncles#'][i + 1]["uncleName#" + (i + 1)]
+                      | titlecase
+                  }}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  {{
+                    data?.maternal['uncles#'][i + 1]["uncleOccupation#" + (i + 1)]
+                      | titlecase
+                  }}
+                </td>
+              </tr>
+            </div>
+
+            <tr *ngIf="data?.maternal['aunts#'].length>0">
+                <td
+                  attr.rowspan="{{
+                    data?.maternal['aunts#'].length*2}}"
+                  style="vertical-align:initial" class="label"
+                >
+                  {{ data?.maternal['aunts#'].length > 1 ? "Aunts" : "Aunt" }}
+                </td>
+                <td>
+                  {{ data?.maternal['aunts#'][0]["auntName#" + "0"] | titlecase }}
+                </td>
+              </tr>
+              <tr *ngIf="data?.maternal['aunts#'].length>0">
+                <td>
+                  {{
+                    data?.maternal['aunts#'][0]["auntOccupation#" + "0"] | titlecase
+                  }}
+                </td>
+              </tr>
+              <div
+                *ngFor="
+                  let aunt of data?.maternal['aunts#'] | slice: 1;
+                  let i = index
+                "
+              >
+                <tr>
+                  <td>
+                    {{
+                      data?.maternal['aunts#'][i + 1]["auntName#" + (i + 1)]
+                        | titlecase
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {{
+                      data?.maternal['aunts#'][i + 1]["auntOccupation#" + (i + 1)]
+                        | titlecase
+                    }}
+                  </td>
+                </tr>
+              </div>
+        
+      </table>
+
     </div>
   </div>
 </div>

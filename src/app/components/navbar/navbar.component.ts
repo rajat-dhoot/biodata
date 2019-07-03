@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { ActivatedRoute, Router, Event, NavigationEnd } from "@angular/router";
 
 const SMALL_WIDTH_BREAKPOINT = 600;
 
@@ -17,15 +18,19 @@ export class NavbarComponent implements OnInit {
   isScreenSmall: Observable<boolean>;
 
   public listItems = {
-    key1: { name: "Home", icon: "home" },
-    key2: { name: "Create", icon: "create" },
-    key3: { name: "Feedback", icon: "feedback" },
-    key4: { name: "Help", icon: "help" },
-    key5: { name: "Contact Us", icon: "contacts" },
-    key6: { name: "Contribute", icon: "\u20B9" }
+    key1: { name: "Home", icon: "home", link: "home" },
+    key2: { name: "Create", icon: "create", link: "create" },
+    key3: { name: "Feedback", icon: "feedback", link: "feedback" },
+    key4: { name: "Help", icon: "help", link: "help" },
+    key5: { name: "Contact Us", icon: "contacts", link: "contact" },
+    key6: { name: "Contribute", icon: "\u20B9", link: "contribute" }
   };
 
-  constructor(breakpointObserver: BreakpointObserver) {
+  constructor(
+    breakpointObserver: BreakpointObserver,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.isMenuOpen = false;
     this.isScreenSmall = breakpointObserver
       .observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)

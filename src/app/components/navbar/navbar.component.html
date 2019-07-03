@@ -22,8 +22,9 @@
         <a
           class="menu-item"
           mat-list-item
-          routerLink="{{ item.value.icon }}"
+          routerLink="{{ item.value.link }}"
           (click)="onToolbarMenuToggle()"
+          routerLinkActive="active"
         >
           <mat-icon
             matTooltip="{{ item.value.name }}"

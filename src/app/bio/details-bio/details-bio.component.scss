@@ -17,6 +17,6 @@ input:not([type="email"]) {
   text-transform: capitalize;
 }
 
-.has-error {
-  background-color: antiquewhite;
-}
+.button-group:hover{
+  cursor: pointer; 
+} 

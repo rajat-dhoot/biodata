@@ -1,24 +1,30 @@
 table,
 tr {
   width: 100%;
-}
-
-td {
-  vertical-align: top;
-  width: 50%;
-}
-
-.container {
-  padding: 50px;
-  font-size: 1.5rem;
-  font-weight: 200;
-  .head {
-    font-size: 2rem;
-    font-weight: 500;
-    margin: 15px 0px;
+  td {
+    vertical-align: top;
+    width: 50%;
   }
 }
 
+.container {
+  padding: 20px 50px;
+  font-family: Calibri, Roboto;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  .head {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0px;
+  }
+}
+
+.ganeshaImg {
+  padding: 10px;
+  text-align: center;
+}
+
 .outside {
-  margin:30px;
+  padding: 30px;
 }
