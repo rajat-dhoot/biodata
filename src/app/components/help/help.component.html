@@ -1,0 +1,218 @@
+<div class="container">
+  <header>
+    <h2>Guidelines for filling form</h2>
+  </header>
+  <div class="details">
+    <mat-accordion>
+      <mat-expansion-panel
+        [expanded]="step === 0"
+        (opened)="setStep(0)"
+        hideToggle
+      >
+        <mat-expansion-panel-header fxLayout="row">
+          <mat-panel-title fxFlex="grow">
+            Personal Details
+          </mat-panel-title>
+          <mat-panel-description fxFlex="nogrow">
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutAlign="start center"
+          class="buttonGroup"
+        >
+          <button *ngFor="let field of personal"
+            mat-stroked-button
+            fxFlex="45%"
+            fxFlex.sm="30%"
+            fxFlex.gt-sm="18%"
+            [class.selected]="rule.personal === field.rule"
+            (click)="getRule('personal', field)"
+          >
+            {{field.fieldName}}
+          </button>
+        </div>
+        <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+          <span class="highlight">Instruction :&nbsp;</span> {{ rule.personal }}
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 1"
+        (opened)="setStep(1)"
+        hideToggle
+      >
+        <mat-expansion-panel-header fxLayout="row">
+          <mat-panel-title fxFlex="grow">
+            Family Details
+          </mat-panel-title>
+          <mat-panel-description fxFlex="nogrow">
+            <mat-icon>people</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start center"
+        class="buttonGroup"
+      >
+        <button *ngFor="let field of family"
+          mat-stroked-button
+          fxFlex="45%"
+          fxFlex.sm="30%"
+          fxFlex.gt-sm="18%"
+          [class.selected]="rule.family === field.rule"
+          (click)="getRule('family', field)"
+        >
+          {{field.fieldName}}
+        </button>
+      </div>
+      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+        <span class="highlight">Instruction :&nbsp;</span> {{ rule.family }}
+      </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 2"
+        (opened)="setStep(2)"
+        hideToggle
+      >
+        <mat-expansion-panel-header fxLayout="row">
+          <mat-panel-title fxFlex="grow">
+            Contact Details
+          </mat-panel-title>
+          <mat-panel-description fxFlex="nogrow">
+            <mat-icon>contacts</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start center"
+        class="buttonGroup"
+      >
+        <button *ngFor="let field of contact"
+          mat-stroked-button
+          fxFlex="45%"
+          fxFlex.sm="30%"
+          fxFlex.gt-sm="18%"
+          [class.selected]="rule.contact === field.rule"
+          (click)="getRule('contact', field)"
+        >
+          {{field.fieldName}}
+        </button>
+      </div>
+      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+        <span class="highlight">Instruction :&nbsp;</span> {{ rule.contact }}
+      </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 3"
+        (opened)="setStep(3)"
+        hideToggle
+      >
+        <mat-expansion-panel-header fxLayout="row">
+          <mat-panel-title fxFlex="grow">
+            Paternal Details
+          </mat-panel-title>
+          <mat-panel-description fxFlex="nogrow">
+            <mat-icon>view_list</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start center"
+        class="buttonGroup"
+      >
+        <button *ngFor="let field of paternal"
+          mat-stroked-button
+          fxFlex="45%"
+          fxFlex.sm="30%"
+          fxFlex.gt-sm="18%"
+          [class.selected]="rule.paternal === field.rule"
+          (click)="getRule('paternal', field)"
+        >
+          {{field.fieldName}}
+        </button>
+      </div>
+      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+        <span class="highlight">Instruction :&nbsp;</span> {{ rule.paternal }}
+      </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 4"
+        (opened)="setStep(4)"
+        hideToggle
+      >
+        <mat-expansion-panel-header fxLayout="row">
+          <mat-panel-title fxFlex="grow">
+            Maternal Details
+          </mat-panel-title>
+          <mat-panel-description fxFlex="nogrow">
+            <mat-icon>view_list</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start center"
+        class="buttonGroup"
+      >
+        <button *ngFor="let field of maternal"
+          mat-stroked-button
+          fxFlex="45%"
+          fxFlex.sm="30%"
+          fxFlex.gt-sm="18%"
+          [class.selected]="rule.maternal === field.rule"
+          (click)="getRule('maternal', field)"
+        >
+          {{field.fieldName}}
+        </button>
+      </div>
+      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+        <span class="highlight">Instruction :&nbsp;</span> {{ rule.maternal }}
+      </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 5"
+        (opened)="setStep(5)"
+        hideToggle
+      >
+        <mat-expansion-panel-header fxLayout="row">
+          <mat-panel-title fxFlex="grow">
+            Color Schema
+          </mat-panel-title>
+          <mat-panel-description fxFlex="nogrow">
+            <mat-icon>color_lens</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div
+        fxLayout="row wrap"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start center"
+        class="buttonGroup"
+      >
+        <button *ngFor="let field of colorSchema"
+          mat-stroked-button
+          fxFlex="45%"
+          fxFlex.sm="30%"
+          fxFlex.gt-sm="18%"
+          [class.selected]="rule.colorSchema === field.rule"
+          (click)="getRule('colorSchema', field)"
+        >
+          {{field.fieldName}}
+        </button>
+      </div>
+      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+        <span class="highlight">Instruction :&nbsp;</span> {{ rule.colorSchema }}
+      </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

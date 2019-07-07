@@ -26,6 +26,7 @@ import {
   MatSnackBarModule,
   MatTooltipModule,
   MatStepperModule,
+  MatTableModule,
   MatNativeDateModule,
   MatDatepickerModule
 } from "@angular/material";
@@ -34,6 +35,7 @@ const MATERIAL_MODULES = [
   MatAutocompleteModule,
   MatButtonModule,
   MatCardModule,
+  MatTableModule,
   MatChipsModule,
   MatCheckboxModule,
   MatGridListModule,

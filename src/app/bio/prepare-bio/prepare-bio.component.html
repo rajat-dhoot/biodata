@@ -1,9 +1,10 @@
-<div class="outside" style="background-color:lightyellow">
-<div [ngStyle]="borderStyle">
+<div class="outside" [ngStyle]="colorProp">
+<div class="middle" style="border:1px solid grey">
   <div class="ganeshaImg">
     <img src="assets/ganesha.png">
   </div>
     <div class="container">
+      <section>
       <div class="head">Personal Details</div>
       <table>
         <tr>
@@ -46,7 +47,10 @@
           <td>{{ data?.personal.hobbies | titlecase }}</td>
         </tr>
       </table>
+    </section>
 
+   
+    <section>
       <div class="head">Family Details</div>
       <table>
         <tr>
@@ -63,37 +67,39 @@
         <tr>
           <td>{{ data?.family.motherOccupation | titlecase }}</td>
         </tr>
-
-        <tr *ngIf="data?.family.brothers.length>0">
+        
+        <tr *ngIf="brothers.length>0">
           <td
             attr.rowspan="{{
-              data?.family.brothers.length*2}}"
-            style="vertical-align:initial"
+              brothers.length*2 + brothers.length-1}}"
             class="label"
           >
-            {{ data?.family.brothers.length > 1 ? "Brothers" : "Brother" }}
+            {{ brothers.length > 1 ? "Brothers" : "Brother" }}
           </td>
           <td>
-            {{ (data?.family.brothers)[0]["brotherName" + "0"] | titlecase }}
+            {{ brothers[0]["brotherName" + "0"] | titlecase }}
           </td>
         </tr>
-        <tr *ngIf="data?.family.brothers.length>0">
+        <tr *ngIf="brothers.length>0">
           <td>
             {{
-              (data?.family.brothers)[0]["brotherOccupation" + "0"] | titlecase
+              brothers[0]["brotherOccupation" + "0"] | titlecase
             }}
           </td>
         </tr>
         <div
           *ngFor="
-            let brother of data?.family.brothers | slice: 1;
+            let brother of brothers | slice: 1;
             let i = index
           "
         >
+        <tr style="height:5px !important">
+            <td></td>
+        </tr>
           <tr>
             <td>
               {{
-                (data?.family.brothers)[i + 1]["brotherName" + (i + 1)]
+                brothers[i + 1]["brotherName" + (i + 1)]
                   | titlecase
               }}
             </td>
@@ -101,43 +107,46 @@
           <tr>
             <td>
               {{
-                (data?.family.brothers)[i + 1]["brotherOccupation" + (i + 1)]
+                brothers[i + 1]["brotherOccupation" + (i + 1)]
                   | titlecase
               }}
             </td>
           </tr>
         </div>
 
-        <tr *ngIf="data?.family.sisters.length>0">
+        <tr *ngIf="sisters.length>0">
             <td
               attr.rowspan="{{
-                data?.family.sisters.length*2}}"
+                sisters.length*2 + sisters.length - 1}}"
               style="vertical-align:initial"
               class="label"
             >
-              {{ data?.family.sisters.length > 1 ? "Sisters" : "Sister" }}
+              {{ sisters.length > 1 ? "Sisters" : "Sister" }}
             </td>
             <td>
-              {{ (data?.family.sisters)[0]["sisterName" + "0"] | titlecase }}
+              {{ sisters[0]["sisterName" + "0"] | titlecase }}
             </td>
           </tr>
-          <tr *ngIf="data?.family.sisters.length>0">
+          <tr *ngIf="sisters.length>0">
             <td>
               {{
-                (data?.family.sisters)[0]["sisterOccupation" + "0"] | titlecase
+                sisters[0]["sisterOccupation" + "0"] | titlecase
               }}
             </td>
           </tr>
           <div
             *ngFor="
-              let sister of data?.family.sisters | slice: 1;
+              let sister of sisters | slice: 1;
               let i = index
             "
           >
+          <tr style="height:5px !important">
+              <td></td>
+          </tr>
             <tr>
               <td>
                 {{
-                  (data?.family.sisters)[i + 1]["sisterName" + (i + 1)]
+                  sisters[i + 1]["sisterName" + (i + 1)]
                     | titlecase
                 }}
               </td>
@@ -145,40 +154,44 @@
             <tr>
               <td>
                 {{
-                  (data?.family.sisters)[i + 1]["sisterOccupation" + (i + 1)]
+                  sisters[i + 1]["sisterOccupation" + (i + 1)]
                     | titlecase
                 }}
               </td>
             </tr>
           </div>
-      </table>
+      </table>      
+    </section>
 
-      <div class="head">Contact Details</div>
-      <table class="html2pdf__page-break">
-        <tr>
-          <td class="label">Address</td>
-          <td>{{ data?.contact.address | titlecase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Contact</td>
-          <td>
-            {{
-              "+91-" +
-                data?.contact.contact1 +
-                ", " +
+    <section>
+        <div class="head">Contact Details</div>
+        <table>
+          <tr>
+            <td class="label">Address</td>
+            <td>{{ data?.contact.address | titlecase }}</td>
+          </tr>
+          <tr>
+            <td class="label">Contact</td>
+            <td>
+              {{
                 "+91-" +
-                data?.contact.contact2
-            }}
-          </td>
-        </tr>
-        <tr>
-          <td class="label">Email Id</td>
-          <td>{{ data?.contact.email }}</td>
-        </tr>
-      </table>
-      
+                  data?.contact.contact1 +
+                  ", " +
+                  "+91-" +
+                  data?.contact.contact2
+              }}
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Email Id</td>
+            <td>{{ data?.contact.email }}</td>
+          </tr>
+        </table>
+      </section>
 
-      <div class="head" style="margin-top:80px;">Paternal</div>
+    <section>
+      <div style="padding:30px;"></div>
+      <div class="head">Paternal</div>
       <table>
         <tr>
           <td class="label">GrandFather</td>
@@ -189,35 +202,38 @@
             <td>{{ data?.paternal.grandmotherName | titlecase }}</td>
           </tr>
 
-          <tr *ngIf="data?.paternal.uncles.length>0">
+          <tr *ngIf="pUncles.length>0">
               <td
                 attr.rowspan="{{
-                  data?.paternal.uncles.length*2}}"
+                  pUncles.length*2 + pUncles.length - 1}}"
                 style="vertical-align:initial" class="label"
               >
-                {{ data?.paternal.uncles.length > 1 ? "Uncles" : "Uncle" }}
+                {{ pUncles.length > 1 ? "Uncles" : "Uncle" }}
               </td>
               <td>
-                {{ (data?.paternal.uncles)[0]["uncleName" + "0"] | titlecase }}
+                {{ pUncles[0]["uncleName" + "0"] | titlecase }}
               </td>
             </tr>
-            <tr *ngIf="data?.paternal.uncles.length>0">
+            <tr *ngIf="pUncles.length>0">
               <td>
                 {{
-                  (data?.paternal.uncles)[0]["uncleOccupation" + "0"] | titlecase
+                  pUncles[0]["uncleOccupation" + "0"] | titlecase
                 }}
               </td>
             </tr>
             <div
               *ngFor="
-                let uncle of data?.paternal.uncles | slice: 1;
+                let uncle of pUncles | slice: 1;
                 let i = index
               "
             >
+            <tr style="height:5px !important">
+                <td></td>
+            </tr>
               <tr>
                 <td>
                   {{
-                    (data?.paternal.uncles)[i + 1]["uncleName" + (i + 1)]
+                    pUncles[i + 1]["uncleName" + (i + 1)]
                       | titlecase
                   }}
                 </td>
@@ -225,43 +241,46 @@
               <tr>
                 <td>
                   {{
-                    (data?.paternal.uncles)[i + 1]["uncleOccupation" + (i + 1)]
+                    pUncles[i + 1]["uncleOccupation" + (i + 1)]
                       | titlecase
                   }}
                 </td>
               </tr>
             </div>
 
-            <tr *ngIf="data?.paternal.aunts.length>0">
+            <tr *ngIf="pAunts.length>0">
                 <td
                   attr.rowspan="{{
-                    data?.paternal.aunts.length*2}}"
+                    pAunts.length*2 + pAunts.length - 1}}"
                   style="vertical-align:initial"
                   class="label"
                 >
-                  {{ data?.paternal.aunts.length > 1 ? "Aunts" : "Aunt" }}
+                  {{ pAunts.length > 1 ? "Aunts" : "Aunt" }}
                 </td>
                 <td>
-                  {{ (data?.paternal.aunts)[0]["auntName" + "0"] | titlecase }}
+                  {{ pAunts[0]["auntName" + "0"] | titlecase }}
                 </td>
               </tr>
-              <tr *ngIf="data?.paternal.aunts.length>0">
+              <tr *ngIf="pAunts.length>0">
                 <td>
                   {{
-                    (data?.paternal.aunts)[0]["auntOccupation" + "0"] | titlecase
+                    pAunts[0]["auntOccupation" + "0"] | titlecase
                   }}
                 </td>
               </tr>
               <div
                 *ngFor="
-                  let aunt of data?.paternal.aunts | slice: 1;
+                  let aunt of pAunts | slice: 1;
                   let i = index
                 "
               >
+              <tr style="height:5px !important">
+                  <td></td>
+              </tr>
                 <tr>
                   <td>
                     {{
-                      (data?.paternal.aunts)[i + 1]["auntName" + (i + 1)]
+                      pAunts[i + 1]["auntName" + (i + 1)]
                         | titlecase
                     }}
                   </td>
@@ -269,7 +288,7 @@
                 <tr>
                   <td>
                     {{
-                      (data?.paternal.aunts)[i + 1]["auntOccupation" + (i + 1)]
+                      pAunts[i + 1]["auntOccupation" + (i + 1)]
                         | titlecase
                     }}
                   </td>
@@ -277,7 +296,9 @@
               </div>
         
       </table>
+    </section>
 
+    <section>
       <div class="head">Maternal</div>
       <table>
         <tr>
@@ -289,35 +310,38 @@
             <td>{{ data?.maternal['grandmotherName#'] | titlecase }}</td>
           </tr>
 
-          <tr *ngIf="data?.maternal['uncles#'].length>0">
+          <tr *ngIf="mUncles.length>0">
               <td
                 attr.rowspan="{{
-                  data?.maternal['uncles#'].length*2}}"
+                  mUncles.length*2 + mUncles.length - 1}}"
                 style="vertical-align:initial" class="label"
               >
-                {{ data?.maternal['uncles#'].length > 1 ? "Uncles" : "Uncle" }}
+                {{ mUncles.length > 1 ? "Uncles" : "Uncle" }}
               </td>
               <td>
-                {{ data?.maternal['uncles#'][0]["uncleName#" + "0"] | titlecase }}
+                {{ mUncles[0]["uncleName#" + "0"] | titlecase }}
               </td>
             </tr>
-            <tr *ngIf="data?.maternal['uncles#'].length>0">
+            <tr *ngIf="mUncles.length>0">
               <td>
                 {{
-                  data?.maternal['uncles#'][0]["uncleOccupation#" + "0"] | titlecase
+                  mUncles[0]["uncleOccupation#" + "0"] | titlecase
                 }}
               </td>
             </tr>
             <div
               *ngFor="
-                let uncle of data?.maternal['uncles#'] | slice: 1;
+                let uncle of mUncles | slice: 1;
                 let i = index
               "
             >
+            <tr style="height:5px !important">
+                <td></td>
+            </tr>
               <tr>
                 <td>
                   {{
-                    data?.maternal['uncles#'][i + 1]["uncleName#" + (i + 1)]
+                    mUncles[i + 1]["uncleName#" + (i + 1)]
                       | titlecase
                   }}
                 </td>
@@ -325,42 +349,45 @@
               <tr>
                 <td>
                   {{
-                    data?.maternal['uncles#'][i + 1]["uncleOccupation#" + (i + 1)]
+                    mUncles[i + 1]["uncleOccupation#" + (i + 1)]
                       | titlecase
                   }}
                 </td>
               </tr>
             </div>
 
-            <tr *ngIf="data?.maternal['aunts#'].length>0">
+            <tr *ngIf="mAunts.length>0">
                 <td
                   attr.rowspan="{{
-                    data?.maternal['aunts#'].length*2}}"
+                    mAunts.length*2 + mAunts.length - 1}}"
                   style="vertical-align:initial" class="label"
                 >
-                  {{ data?.maternal['aunts#'].length > 1 ? "Aunts" : "Aunt" }}
+                  {{ mAunts.length > 1 ? "Aunts" : "Aunt" }}
                 </td>
                 <td>
-                  {{ data?.maternal['aunts#'][0]["auntName#" + "0"] | titlecase }}
+                  {{ mAunts[0]["auntName#" + "0"] | titlecase }}
                 </td>
               </tr>
-              <tr *ngIf="data?.maternal['aunts#'].length>0">
+              <tr *ngIf="mAunts.length>0">
                 <td>
                   {{
-                    data?.maternal['aunts#'][0]["auntOccupation#" + "0"] | titlecase
+                    mAunts[0]["auntOccupation#" + "0"] | titlecase
                   }}
                 </td>
               </tr>
               <div
                 *ngFor="
-                  let aunt of data?.maternal['aunts#'] | slice: 1;
+                  let aunt of mAunts | slice: 1;
                   let i = index
                 "
               >
+              <tr style="height:5px !important">
+                  <td></td>
+              </tr>
                 <tr>
                   <td>
                     {{
-                      data?.maternal['aunts#'][i + 1]["auntName#" + (i + 1)]
+                      mAunts[i + 1]["auntName#" + (i + 1)]
                         | titlecase
                     }}
                   </td>
@@ -368,7 +395,7 @@
                 <tr>
                   <td>
                     {{
-                      data?.maternal['aunts#'][i + 1]["auntOccupation#" + (i + 1)]
+                      mAunts[i + 1]["auntOccupation#" + (i + 1)]
                         | titlecase
                     }}
                   </td>
@@ -376,6 +403,9 @@
               </div>
         
       </table>
+    </section>
+
+     
 
     </div>
   </div>

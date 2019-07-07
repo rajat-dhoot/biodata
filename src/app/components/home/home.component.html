@@ -1,4 +1,46 @@
 <section fxLayout="column" fxLayoutAlign="center center" class="container">
-  <img src="../../../assets/wip.png" alt="workInProgress" class="wipImg" />
-  <button mat-raised-button>Create</button>
+  <section class="header"><h1>Create simple biodata</h1></section>
+  <section
+    class="light"
+    fxLayout="row"
+    fxLayoutAlign="center start"
+    fxLayout.xs="column"
+    fxLayoutAlign.xs="start center"
+  >
+    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <img src="assets/create.png" />
+      <span>Add Details</span>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center center"
+      fxFlexAlign="center"
+      fxLayout.xs="column"
+    >
+      <hr fxHide.xs />
+      <p class="vertical" fxHide.gt-xs></p>
+      <button mat-stroked-button routerLink="/create">Create</button>
+      <p class="vertical" fxHide.gt-xs></p>
+      <hr fxHide.xs />
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+      <img src="assets/biodata.png" />
+      <span>Download</span>
+    </div>
+  </section>
+  <section class="footer">
+    <h2>Sample Biodata</h2>
+    <hr />
+    <div
+      class="sampleBiodata"
+      fxLayout="row wrap"
+      fxLayoutAlign="space-evenly center"
+    >
+      <mat-card></mat-card>
+      <mat-card></mat-card>
+      <mat-card></mat-card>
+      <mat-card></mat-card>
+    </div>
+  </section>
 </section>

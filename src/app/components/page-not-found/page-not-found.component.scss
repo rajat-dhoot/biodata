@@ -13,6 +13,12 @@ img {
 }
 
 button {
-  background: #256eb3;
-  color: #fff;
+  color: #256eb3;
+  border-color: #256eb3;
+  transition-duration: 0.4s;
+  &:hover {
+    background: #256eb3;
+    color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.24);
+  }
 }

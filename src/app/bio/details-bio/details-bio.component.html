@@ -1,5 +1,9 @@
+<div class="header" fxLayout="row" fxLayoutAlign="center center">
+    <img src="assets/details.png">
+  </div>
+
 <div class="container">
-  <div class="header"></div> <!-- Need to add header here-->
+ <!-- Need to add header here-->
   <div class="forms">
 <form #myForm="ngForm" [formGroup]="detailsForm">
   <mat-accordion>
@@ -69,8 +73,7 @@
       </mat-form-field>
 
       <mat-form-field fxFlex>
-          <input matInput placeholder="Occupation" formControlName="occupation" (blur)="logValidationMessage()">
-          <mat-hint>Mention current city as well (XYZ, City)</mat-hint>
+          <input matInput placeholder="Occupation, Current City" formControlName="occupation" (blur)="logValidationMessage()">
           <mat-error>{{formErrors.occupation}}</mat-error>
       </mat-form-field>
 
@@ -358,6 +361,33 @@
       </mat-action-row>
     </mat-expansion-panel>
 
+<!-- adding color schema -->
+<mat-expansion-panel
+      [expanded]="step === 5"
+      (opened)="setStep(5)"
+      hideToggle
+      formGroupName="colorSchema"
+    >
+      <mat-expansion-panel-header fxLayout="row">
+        <mat-panel-title fxFlex="grow">
+          Color Schema
+        </mat-panel-title>
+        <mat-panel-description fxFlex="nogrow">
+          <mat-icon>color_lens</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
+      <mat-form-field fxFlex>
+        <input matInput type="color" placeholder="Background Color" formControlName="bgColor">
+      </mat-form-field>
+      <mat-form-field fxFlex>
+          <input matInput type="color" placeholder="Font Color" formControlName="fColor">
+        </mat-form-field>
+
+      </div>
+</mat-expansion-panel>
+
   </mat-accordion>
 </form>
 </div>
@@ -367,3 +397,10 @@
   <button mat-raised-button fxFlex="none" (click)="createBiodata()" [disabled]="isDisabled">Create</button>
 </div>
 </div>
+
+<!-- 
+<div class="loader" fxLayout="row" fxLayoutAlign="center center" [fxHide]="hideLoader">
+    <img src="assets/loading.gif">
+  </div> 
+this.router.events.subscribe(enable at NavigationStart and disable at NavigationEnd/after ngOnInit);
+-->

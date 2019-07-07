@@ -1,14 +1,47 @@
-.wipImg {
-  object-fit: contain;
-  max-width: 100%;
-}
-
 .container {
-  padding: 4%;
-}
+  overflow-x: hidden;
 
-button {
-  background: #256eb3;
-  color: #fff;
-  font-size: 1rem;
+  .header {
+    background-color: ivory;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .footer {
+    background-color: darken($color: ivory, $amount: 3);
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    .sampleBiodata > mat-card {
+      width: 200px;
+      height: 300px;
+      margin: 20px 0px;
+    }
+  }
+  .light {
+    padding: 40px 20px;
+    width: 100%;
+    img {
+      width: 150px;
+    }
+    hr {
+      width: 100px;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      transition-duration: 0.4s;
+      border-color: burlywood;
+      &:hover {
+        color: white;
+        background-color: burlywood;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.24);
+      }
+    }
+    .vertical {
+      border: 1px solid grey;
+      height: 75px;
+    }
+  }
 }

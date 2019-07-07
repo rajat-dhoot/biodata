@@ -67,8 +67,7 @@ export class DetailsBioComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.isDisabled = true;
+  initializeForm() {
     this.detailsForm = this.fb.group({
       personal: this.fb.group({
         fullName: [
@@ -117,8 +116,17 @@ export class DetailsBioComponent implements OnInit {
         "grandmotherName#": ["", Validators.required],
         "uncles#": this.fb.array([]),
         "aunts#": this.fb.array([])
+      }),
+      colorSchema: this.fb.group({
+        bgColor: ["#ffffff"],
+        fColor: ["#000000"]
       })
     });
+  }
+
+  ngOnInit() {
+    this.isDisabled = true;
+    this.initializeForm();
     this.detailsForm.valueChanges.subscribe(value => {
       for (let group in value)
         this.logValidationMessage(<FormGroup>this.detailsForm.get(group));
@@ -141,7 +149,7 @@ export class DetailsBioComponent implements OnInit {
   }
 
   resetForm() {
-    this.detailsForm.reset();
+    this.initializeForm();
     this._bioservice.setDetailsModel("");
   }
 
@@ -265,14 +273,24 @@ export class DetailsBioComponent implements OnInit {
       paternal: {
         grandfatherName: "gfName",
         grandmotherName: "gmName",
-        uncles: [],
-        aunts: []
+        uncles: [
+          { uncleName0: "Pawan", uncleOccupation0: "Business" },
+          { uncleName1: "XYZ", uncleOccupation1: "Business" }
+        ],
+        aunts: [{ auntName0: "Sushila", auntOccupation0: "Housewife" }]
       },
       maternal: {
         "grandfatherName#": "gfName",
         "grandmotherName#": "gmName",
-        "uncles#": [],
-        "aunts#": []
+        "uncles#": [
+          { "uncleName#0": "Dinesh", "uncleOccupation#0": "Business" },
+          { "uncleName#1": "Sunil", "uncleOccupation#1": "Business" }
+        ],
+        "aunts#": [{ "auntName#0": "Rajshree", "auntOccupation#0": "LIC" }]
+      },
+      colorSchema: {
+        bgColor: "#ffcccc",
+        fColor: "#000000"
       }
     };
     data.family.brothers.forEach(brother => this.addBrother());

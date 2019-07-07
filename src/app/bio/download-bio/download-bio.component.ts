@@ -19,6 +19,7 @@ import html2pdf from "html2pdf.js";
 export class DownloadBioComponent implements OnInit, AfterViewInit {
   @ViewChild("htmlToConvert", { read: ViewContainerRef, static: false })
   pdfHTML;
+  hideLoader: boolean;
   timeleft: number = 5;
   timer: any;
   data;
@@ -32,35 +33,40 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
+    this.hideLoader = false;
     this.data = this._bioservice.getDetailsModel();
     if (!this.data)
       this.router.navigate(["../details"], { relativeTo: this.route });
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar
-      .open(message, action, {
-        duration: 2000
-      })
-      .onAction()
-      .subscribe(() => this.downloadPdf());
   }
 
   ngAfterViewInit() {
     this.timer = setInterval(() => {
       if (!this.timeleft) {
         clearInterval(this.timer);
-        this.openSnackBar("Biodata is ready", "Download");
         this.requiredHtml = this.pdfHTML.element.nativeElement.innerHTML;
+        this.downloadPdf();
       } else this.timeleft--;
     }, 1000);
   }
 
   downloadPdf() {
+    var opt = {
+      filename: "myfile.pdf",
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+    };
+
     html2pdf()
-      .set({ image: { type: "png", quality: 1 } })
+      .set(opt)
       .from(this.requiredHtml)
       .save();
+    setTimeout(() => {
+      this.hideLoader = true;
+    }, 2000);
+    setTimeout(() => {
+      this.router.navigate(["/home"]);
+    }, 20000);
   }
 
   ngOnDestroy(): void {

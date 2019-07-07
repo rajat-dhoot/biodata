@@ -8,13 +8,18 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ["./prepare-bio.component.scss"]
 })
 export class PrepareBioComponent implements OnInit {
-  borderStyle = {
-    "font-color": "black",
-    border: "1px solid grey"
-  };
-
   formData: any;
   data: any;
+  brothers: any;
+  sisters: any;
+  pUncles: any;
+  pAunts: any;
+  mUncles: any;
+  mAunts: any;
+  colorProp = {
+    "background-color": "#ffffff",
+    color: "#000"
+  };
 
   constructor(
     private _bioservice: BioService,
@@ -24,8 +29,15 @@ export class PrepareBioComponent implements OnInit {
 
   ngOnInit() {
     this.formData = this._bioservice.getDetailsModel();
-    console.log(this.formData.value);
     if (this.formData) this.data = { ...this.formData.value };
+    this.colorProp["background-color"] = this.data.colorSchema.bgColor;
+    this.colorProp.color = this.data.colorSchema.fColor;
+    this.brothers = this.data.family.brothers;
+    this.sisters = this.data.family.sisters;
+    this.pUncles = this.data.paternal.uncles;
+    this.pAunts = this.data.paternal.aunts;
+    this.mUncles = this.data.maternal["uncles#"];
+    this.mAunts = this.data.maternal["aunts#"];
   }
 }
 

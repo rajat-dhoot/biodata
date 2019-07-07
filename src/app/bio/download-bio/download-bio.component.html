@@ -1,4 +1,24 @@
 <div class="container">
+  <div
+    class="downloadBanner"
+    fxLayout="row wrap"
+    fxLayoutAlign="center center"
+    fxLayoutGap="5px"
+  >
+    <div fxFlex="none" class="label">Download</div>
+    <img fxFlex="none" fxFlexAlign="end" src="assets/download.png" />
+  </div>
+
+  <!-- Loader  -->
+  <div
+    class="loader"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    [fxHide]="hideLoader"
+  >
+    <img src="assets/loading.gif" />
+  </div>
+  <!-- Message -->
   <div fxLayout="row" fxLayoutAlign="center center">
     <div
       class="info"
@@ -13,6 +33,8 @@
       us, you can do it <a href="#">here</a>.<br />
     </div>
   </div>
+
+  <!-- Timer Message -->
   <div
     class="waitMessage"
     *ngIf="timeleft > 0"
@@ -23,15 +45,11 @@
   </div>
 </div>
 
+<!-- biodata section and download button which appears at t=0 -->
 <div *ngIf="timeleft === 0">
-  <br />
-  <hr />
   <app-prepare-bio
     #htmlToConvert
     id="reqHtml"
-    style="display:none"
+    style="display:none;"
   ></app-prepare-bio>
-  <div class="center">
-    <button mat-raised-button (click)="downloadPdf()">Download</button>
-  </div>
 </div>
