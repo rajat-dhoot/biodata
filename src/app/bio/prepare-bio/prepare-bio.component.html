@@ -1,178 +1,176 @@
-<div class="outside" [ngStyle]="colorProp">
-<div class="middle" style="border:1px solid grey">
+<div style="border:1px solid grey">
   <div class="ganeshaImg">
     <img src="assets/ganesha.png">
   </div>
     <div class="container">
       <section>
       <div class="head">Personal Details</div>
-      <table>
-        <tr>
-          <td class="label">Name</td>
-          <td>{{ data?.personal.fullName | titlecase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Birth Details</td>
-          <td>
-            {{ data?.personal.birthDate | date: "d MMM y" }},
-            {{ data?.personal.birthTime | timePipe }}
-          </td>
-        </tr>
-        <tr>
-          <td class="label">Birth Place</td>
-          <td>{{ data?.personal.birthPlace | titlecase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Blood Group</td>
-          <td>{{ data?.personal.bloodGroup | uppercase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Height</td>
-          <td>{{ data?.personal.height }}</td>
-        </tr>
-        <tr>
-          <td class="label">Complexion</td>
-          <td>{{ data?.personal.complexion | titlecase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Qualification</td>
-          <td>{{ data?.personal.qualification | titlecase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Occupation</td>
-          <td>{{ data?.personal.occupation | titlecase }}</td>
-        </tr>
-        <tr>
-          <td class="label">Hobbies</td>
-          <td>{{ data?.personal.hobbies | titlecase }}</td>
-        </tr>
-      </table>
+      <div class="row" fxLayout="row">
+        <div class="label" fxFlex="50%">Name</div>
+        <div class="value" fxFlex="50%">{{ data?.personal.fullName | titlecase }}</div>
+      </div>
+
+        <div class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">Birth Details</div>
+            <div class="value" fxFlex="50%">{{ data?.personal.birthDate | date: "d MMM y" }},
+                {{ data?.personal.birthTime | timePipe }}</div>
+          </div>
+
+          <div class="row" fxLayout="row">
+              <div class="label" fxFlex="50%">Birth Place</div>
+              <div class="value" fxFlex="50%">{{ data?.personal.birthPlace | titlecase }}</div>
+            </div>
+
+            <div class="row" fxLayout="row">
+                <div class="label" fxFlex="50%">Blood Group</div>
+                <div class="value" fxFlex="50%">{{ data?.personal.bloodGroup | uppercase }}</div>
+              </div>
+
+              <div class="row" fxLayout="row">
+                  <div class="label" fxFlex="50%">Height</div>
+                  <div class="value" fxFlex="50%">{{ data?.personal.height }}</div>
+                </div>
+        <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">Complexion</div>
+          <div class="value" fxFlex="50%">{{ data?.personal.complexion | titlecase }}</div>
+        </div>
+        <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">Qualification</div>
+          <div class="value" fxFlex="50%">{{ data?.personal.qualification | titlecase }}</div>
+        </div>
+        <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">Occupation</div>
+          <div class="value" fxFlex="50%">{{ data?.personal.occupation | titlecase }}</div>
+        </div>
+        <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">Hobbies</div>
+          <div class="value" fxFlex="50%">{{ data?.personal.hobbies | titlecase }}</div>
+        </div>
     </section>
 
    
     <section>
       <div class="head">Family Details</div>
-      <table>
-        <tr>
-          <td rowspan="2" style="vertical-align:initial" class="label">Father</td>
-          <td>{{ data?.family.fatherName | titlecase }}</td>
-        </tr>
-        <tr>
-          <td>{{ data?.family.fatherOccupation | titlecase }}</td>
-        </tr>
-        <tr>
-          <td rowspan="2" style="vertical-align:initial" class="label">Mother</td>
-          <td>{{ data?.family.motherName | titlecase }}</td>
-        </tr>
-        <tr>
-          <td>{{ data?.family.motherOccupation | titlecase }}</td>
-        </tr>
-        
-        <tr *ngIf="brothers.length>0">
-          <td
-            attr.rowspan="{{
-              brothers.length*2 + brothers.length-1}}"
-            class="label"
-          >
-            {{ brothers.length > 1 ? "Brothers" : "Brother" }}
-          </td>
-          <td>
-            {{ brothers[0]["brotherName" + "0"] | titlecase }}
-          </td>
-        </tr>
-        <tr *ngIf="brothers.length>0">
-          <td>
-            {{
-              brothers[0]["brotherOccupation" + "0"] | titlecase
-            }}
-          </td>
-        </tr>
-        <div
-          *ngFor="
-            let brother of brothers | slice: 1;
-            let i = index
-          "
-        >
-        <tr style="height:5px !important">
-            <td></td>
-        </tr>
-          <tr>
-            <td>
-              {{
-                brothers[i + 1]["brotherName" + (i + 1)]
-                  | titlecase
-              }}
-            </td>
-          </tr>
-          <tr>
-            <td>
-              {{
-                brothers[i + 1]["brotherOccupation" + (i + 1)]
-                  | titlecase
-              }}
-            </td>
-          </tr>
+        <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">Father</div>
+          <div class="value" fxFlex="50%">
+            <div> {{ data?.family.fatherName | titlecase }}</div>
+              <div>{{ data?.family.fatherOccupation | titlecase }}</div>
+          </div>
         </div>
 
-        <tr *ngIf="sisters.length>0">
-            <td
-              attr.rowspan="{{
-                sisters.length*2 + sisters.length - 1}}"
-              style="vertical-align:initial"
-              class="label"
-            >
-              {{ sisters.length > 1 ? "Sisters" : "Sister" }}
-            </td>
-            <td>
-              {{ sisters[0]["sisterName" + "0"] | titlecase }}
-            </td>
-          </tr>
-          <tr *ngIf="sisters.length>0">
-            <td>
-              {{
-                sisters[0]["sisterOccupation" + "0"] | titlecase
-              }}
-            </td>
-          </tr>
-          <div
-            *ngFor="
-              let sister of sisters | slice: 1;
-              let i = index
-            "
-          >
-          <tr style="height:5px !important">
-              <td></td>
-          </tr>
-            <tr>
-              <td>
-                {{
-                  sisters[i + 1]["sisterName" + (i + 1)]
-                    | titlecase
-                }}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                {{
-                  sisters[i + 1]["sisterOccupation" + (i + 1)]
-                    | titlecase
-                }}
-              </td>
-            </tr>
+        <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">Mother</div>
+          <div class="value" fxFlex="50%">
+            <div>{{ data?.family.motherName | titlecase }}</div>
+              <div>{{ data?.family.motherOccupation | titlecase }}</div>
           </div>
-      </table>      
+        </div>
+        <div *ngIf="brothers.length>0" class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">{{ brothers.length > 1 ? "Brothers" : "Brother" }}</div>
+          <div class="value" fxFlex="50%">
+                <div fxLayout="column" fxLayoutGap="5px">
+                  <div *ngFor="let brother of brothers;let i = index">
+                    <div>{{ brother["brotherName" + i] | titlecase }}</div>
+                    <div>{{ brother["brotherOccupation" + i] | titlecase}} </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+
+        <div *ngIf="sisters.length>0" class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">{{ sisters.length > 1 ? "Sisters" : "Sister" }}</div>
+            <div class="value" fxFlex="50%">
+                  <div fxLayout="column" fxLayoutGap="5px">
+                    <div *ngFor="let sister of sisters;let i = index">
+                      <div>{{ sister["sisterName" + i] | titlecase }}</div>
+                      <div>{{ sister["sisterOccupation" + i] | titlecase}} </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+    </section>
+
+   
+    
+    <section>
+      <div class="head">Paternal Details</div>
+      <div class="row" fxLayout="row">
+          <div class="label" fxFlex="50%">GrandFather</div>
+          <div class="value" fxFlex="50%">{{ data?.paternal.grandfatherName | titlecase }}</div>
+        </div>
+        <div class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">GrandMother</div>
+            <div class="value" fxFlex="50%">{{ data?.paternal.grandmotherName | titlecase }}</div>
+          </div>
+          <div *ngIf="pUncles.length>0" class="row" fxLayout="row">
+              <div class="label" fxFlex="50%">{{ pUncles.length > 1 ? "Uncles" : "Uncle" }}</div>
+              <div class="value" fxFlex="50%">
+                    <div fxLayout="column" fxLayoutGap="5px">
+                      <div *ngFor="let uncle of pUncles;let i = index">
+                        <div>{{ uncle["uncleName" + i] | titlecase }}</div>
+                        <div>{{ uncle["uncleOccupation" + i] | titlecase}} </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
+    
+            <div *ngIf="pAunts.length>0" class="row" fxLayout="row">
+                <div class="label" fxFlex="50%">{{ pAunts.length > 1 ? "Aunts" : "Aunt" }}</div>
+                <div class="value" fxFlex="50%">
+                      <div fxLayout="column" fxLayoutGap="5px">
+                        <div *ngFor="let aunt of pAunts;let i = index">
+                          <div>{{ aunt["auntName" + i] | titlecase }}</div>
+                          <div>{{ aunt["auntOccupation" + i] | titlecase}} </div>
+                        </div>
+                      </div>
+                </div>
+              </div>
     </section>
 
     <section>
+        <div class="head">Maternal Details</div>
+        <div class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">GrandFather</div>
+            <div class="value" fxFlex="50%">{{ data?.maternal['grandfatherName#'] | titlecase }}</div>
+          </div>
+          <div class="row" fxLayout="row">
+              <div class="label" fxFlex="50%">GrandMother</div>
+              <div class="value" fxFlex="50%">{{ data?.maternal['grandmotherName#'] | titlecase }}</div>
+            </div>
+            <div *ngIf="mUncles.length>0" class="row" fxLayout="row">
+                <div class="label" fxFlex="50%">{{ mUncles.length > 1 ? "Uncles" : "Uncle" }}</div>
+                <div class="value" fxFlex="50%">
+                      <div fxLayout="column" fxLayoutGap="5px">
+                        <div *ngFor="let uncle of mUncles;let i = index">
+                          <div>{{ uncle["uncleName#" + i] | titlecase }}</div>
+                          <div>{{ uncle["uncleOccupation#" + i] | titlecase}} </div>
+                        </div>
+                      </div>
+                </div>
+              </div>
+      
+              <div *ngIf="mAunts.length>0" class="row" fxLayout="row">
+                  <div class="label" fxFlex="50%">{{ mAunts.length > 1 ? "Aunts" : "Aunt" }}</div>
+                  <div class="value" fxFlex="50%">
+                        <div fxLayout="column" fxLayoutGap="5px">
+                          <div *ngFor="let aunt of mAunts;let i = index">
+                            <div>{{ aunt["auntName#" + i] | titlecase }}</div>
+                            <div>{{ aunt["auntOccupation#" + i] | titlecase}} </div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+      </section>
+      <section>
         <div class="head">Contact Details</div>
-        <table>
-          <tr>
-            <td class="label">Address</td>
-            <td>{{ data?.contact.address | titlecase }}</td>
-          </tr>
-          <tr>
-            <td class="label">Contact</td>
-            <td>
+          <div class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">Address</div>
+            <div class="value" fxFlex="50%">{{ data?.contact.address | titlecase }}</div>
+          </div>
+          <div class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">Contact</div>
+            <div class="value" fxFlex="50%">
               {{
                 "+91-" +
                   data?.contact.contact1 +
@@ -180,233 +178,12 @@
                   "+91-" +
                   data?.contact.contact2
               }}
-            </td>
-          </tr>
-          <tr>
-            <td class="label">Email Id</td>
-            <td>{{ data?.contact.email }}</td>
-          </tr>
-        </table>
+            </div>
+          </div>
+          <div class="row" fxLayout="row">
+            <div class="label" fxFlex="50%">Email Id</div>
+            <div class="value" fxFlex="50%">{{ data?.contact.email }}</div>
+          </div>
       </section>
-
-    <section>
-      <div style="padding:30px;"></div>
-      <div class="head">Paternal</div>
-      <table>
-        <tr>
-          <td class="label">GrandFather</td>
-          <td>{{ data?.paternal.grandfatherName | titlecase }}</td>
-        </tr>
-        <tr>
-            <td class="label">GrandMother</td>
-            <td>{{ data?.paternal.grandmotherName | titlecase }}</td>
-          </tr>
-
-          <tr *ngIf="pUncles.length>0">
-              <td
-                attr.rowspan="{{
-                  pUncles.length*2 + pUncles.length - 1}}"
-                style="vertical-align:initial" class="label"
-              >
-                {{ pUncles.length > 1 ? "Uncles" : "Uncle" }}
-              </td>
-              <td>
-                {{ pUncles[0]["uncleName" + "0"] | titlecase }}
-              </td>
-            </tr>
-            <tr *ngIf="pUncles.length>0">
-              <td>
-                {{
-                  pUncles[0]["uncleOccupation" + "0"] | titlecase
-                }}
-              </td>
-            </tr>
-            <div
-              *ngFor="
-                let uncle of pUncles | slice: 1;
-                let i = index
-              "
-            >
-            <tr style="height:5px !important">
-                <td></td>
-            </tr>
-              <tr>
-                <td>
-                  {{
-                    pUncles[i + 1]["uncleName" + (i + 1)]
-                      | titlecase
-                  }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  {{
-                    pUncles[i + 1]["uncleOccupation" + (i + 1)]
-                      | titlecase
-                  }}
-                </td>
-              </tr>
-            </div>
-
-            <tr *ngIf="pAunts.length>0">
-                <td
-                  attr.rowspan="{{
-                    pAunts.length*2 + pAunts.length - 1}}"
-                  style="vertical-align:initial"
-                  class="label"
-                >
-                  {{ pAunts.length > 1 ? "Aunts" : "Aunt" }}
-                </td>
-                <td>
-                  {{ pAunts[0]["auntName" + "0"] | titlecase }}
-                </td>
-              </tr>
-              <tr *ngIf="pAunts.length>0">
-                <td>
-                  {{
-                    pAunts[0]["auntOccupation" + "0"] | titlecase
-                  }}
-                </td>
-              </tr>
-              <div
-                *ngFor="
-                  let aunt of pAunts | slice: 1;
-                  let i = index
-                "
-              >
-              <tr style="height:5px !important">
-                  <td></td>
-              </tr>
-                <tr>
-                  <td>
-                    {{
-                      pAunts[i + 1]["auntName" + (i + 1)]
-                        | titlecase
-                    }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    {{
-                      pAunts[i + 1]["auntOccupation" + (i + 1)]
-                        | titlecase
-                    }}
-                  </td>
-                </tr>
-              </div>
-        
-      </table>
-    </section>
-
-    <section>
-      <div class="head">Maternal</div>
-      <table>
-        <tr>
-          <td class="label">GrandFather</td>
-          <td>{{ data?.maternal['grandfatherName#'] | titlecase }}</td>
-        </tr>
-        <tr>
-            <td class="label">GrandMother</td>
-            <td>{{ data?.maternal['grandmotherName#'] | titlecase }}</td>
-          </tr>
-
-          <tr *ngIf="mUncles.length>0">
-              <td
-                attr.rowspan="{{
-                  mUncles.length*2 + mUncles.length - 1}}"
-                style="vertical-align:initial" class="label"
-              >
-                {{ mUncles.length > 1 ? "Uncles" : "Uncle" }}
-              </td>
-              <td>
-                {{ mUncles[0]["uncleName#" + "0"] | titlecase }}
-              </td>
-            </tr>
-            <tr *ngIf="mUncles.length>0">
-              <td>
-                {{
-                  mUncles[0]["uncleOccupation#" + "0"] | titlecase
-                }}
-              </td>
-            </tr>
-            <div
-              *ngFor="
-                let uncle of mUncles | slice: 1;
-                let i = index
-              "
-            >
-            <tr style="height:5px !important">
-                <td></td>
-            </tr>
-              <tr>
-                <td>
-                  {{
-                    mUncles[i + 1]["uncleName#" + (i + 1)]
-                      | titlecase
-                  }}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  {{
-                    mUncles[i + 1]["uncleOccupation#" + (i + 1)]
-                      | titlecase
-                  }}
-                </td>
-              </tr>
-            </div>
-
-            <tr *ngIf="mAunts.length>0">
-                <td
-                  attr.rowspan="{{
-                    mAunts.length*2 + mAunts.length - 1}}"
-                  style="vertical-align:initial" class="label"
-                >
-                  {{ mAunts.length > 1 ? "Aunts" : "Aunt" }}
-                </td>
-                <td>
-                  {{ mAunts[0]["auntName#" + "0"] | titlecase }}
-                </td>
-              </tr>
-              <tr *ngIf="mAunts.length>0">
-                <td>
-                  {{
-                    mAunts[0]["auntOccupation#" + "0"] | titlecase
-                  }}
-                </td>
-              </tr>
-              <div
-                *ngFor="
-                  let aunt of mAunts | slice: 1;
-                  let i = index
-                "
-              >
-              <tr style="height:5px !important">
-                  <td></td>
-              </tr>
-                <tr>
-                  <td>
-                    {{
-                      mAunts[i + 1]["auntName#" + (i + 1)]
-                        | titlecase
-                    }}
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    {{
-                      mAunts[i + 1]["auntOccupation#" + (i + 1)]
-                        | titlecase
-                    }}
-                  </td>
-                </tr>
-              </div>
-        
-      </table>
-    </section>
-
-     
-
     </div>
   </div>
-</div>

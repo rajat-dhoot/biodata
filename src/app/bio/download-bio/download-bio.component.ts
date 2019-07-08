@@ -20,7 +20,7 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
   @ViewChild("htmlToConvert", { read: ViewContainerRef, static: false })
   pdfHTML;
   hideLoader: boolean;
-  timeleft: number = 5;
+  timeleft: number = 10;
   timer: any;
   data;
   requiredHtml;
@@ -51,6 +51,7 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
 
   downloadPdf() {
     var opt = {
+      margin: [0.5, 0.5],
       filename: "myfile.pdf",
       image: { type: "jpeg", quality: 1 },
       html2canvas: { scale: 2 },
@@ -66,7 +67,7 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
     }, 2000);
     setTimeout(() => {
       this.router.navigate(["/home"]);
-    }, 20000);
+    }, 4000);
   }
 
   ngOnDestroy(): void {

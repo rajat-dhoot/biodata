@@ -116,10 +116,6 @@ export class DetailsBioComponent implements OnInit {
         "grandmotherName#": ["", Validators.required],
         "uncles#": this.fb.array([]),
         "aunts#": this.fb.array([])
-      }),
-      colorSchema: this.fb.group({
-        bgColor: ["#ffffff"],
-        fColor: ["#000000"]
       })
     });
   }
@@ -251,11 +247,11 @@ export class DetailsBioComponent implements OnInit {
           {
             brotherName0: "Rajat",
             brotherOccupation0: "Btech"
-          },
-          {
-            brotherName1: "Vijay",
-            brotherOccupation1: "Pursuing CA"
           }
+          // {
+          //   brotherName1: "Vijay",
+          //   brotherOccupation1: "Pursuing CA"
+          // }
         ],
         sisters: [
           {
@@ -276,6 +272,8 @@ export class DetailsBioComponent implements OnInit {
         uncles: [
           { uncleName0: "Pawan", uncleOccupation0: "Business" },
           { uncleName1: "XYZ", uncleOccupation1: "Business" }
+          // { uncleName2: "XYZ", uncleOccupation2: "Business" },
+          // { uncleName3: "XYZ", uncleOccupation3: "Business" }
         ],
         aunts: [{ auntName0: "Sushila", auntOccupation0: "Housewife" }]
       },
@@ -287,10 +285,6 @@ export class DetailsBioComponent implements OnInit {
           { "uncleName#1": "Sunil", "uncleOccupation#1": "Business" }
         ],
         "aunts#": [{ "auntName#0": "Rajshree", "auntOccupation#0": "LIC" }]
-      },
-      colorSchema: {
-        bgColor: "#ffcccc",
-        fColor: "#000000"
       }
     };
     data.family.brothers.forEach(brother => this.addBrother());

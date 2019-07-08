@@ -361,33 +361,6 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-<!-- adding color schema -->
-<mat-expansion-panel
-      [expanded]="step === 5"
-      (opened)="setStep(5)"
-      hideToggle
-      formGroupName="colorSchema"
-    >
-      <mat-expansion-panel-header fxLayout="row">
-        <mat-panel-title fxFlex="grow">
-          Color Schema
-        </mat-panel-title>
-        <mat-panel-description fxFlex="nogrow">
-          <mat-icon>color_lens</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <div fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
-      <mat-form-field fxFlex>
-        <input matInput type="color" placeholder="Background Color" formControlName="bgColor">
-      </mat-form-field>
-      <mat-form-field fxFlex>
-          <input matInput type="color" placeholder="Font Color" formControlName="fColor">
-        </mat-form-field>
-
-      </div>
-</mat-expansion-panel>
-
   </mat-accordion>
 </form>
 </div>

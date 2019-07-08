@@ -4,17 +4,15 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "./modules/material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { TimeFormat } from "./pipes/time.pipe";
-import { SanitizeHtmlPipe } from "./pipes/sanitize.pipe";
 
 @NgModule({
-  declarations: [TimeFormat, SanitizeHtmlPipe],
+  declarations: [TimeFormat],
   imports: [],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     TimeFormat,
-    SanitizeHtmlPipe,
     MaterialModule,
     FlexLayoutModule
   ]

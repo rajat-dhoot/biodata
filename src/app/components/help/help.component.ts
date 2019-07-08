@@ -104,19 +104,6 @@ export class HelpComponent implements OnInit {
     { fieldName: "Add Aunt", rule: "Click to add paternal aunt(masi) details" }
   ];
 
-  colorSchema = [
-    {
-      fieldName: "Background",
-      rule:
-        "Choose the background color for your biodata. You can view the selected colour in preview. Use slider to select different shades."
-    },
-    {
-      fieldName: "Font Color",
-      rule:
-        "Choose the font color for your biodata. You can view the selected colour in preview. Use slider to select different shades."
-    }
-  ];
-
   getRule(field, prop) {
     this.rule[field] = prop.rule;
   }

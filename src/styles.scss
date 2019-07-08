@@ -1,27 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html {
-  font-size: 3vh;
-}
-
 body {
   font-family: cursive, Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: calc(16px + 0.3vw);
+  line-height: calc(20px + 0.8vw);
   margin: 0;
   padding: 0;
 }
 
 h1 {
-  font-size: 8vh;
+  font-size: calc(20px + 1.5vw);
 }
 
 h2 {
-  font-size: 4vh;
+  font-size: 1.2em;
 }
 
-h3 {
-  font-size: 3vh;
+h1,
+h2 {
+  font-weight: bold;
 }
+
+h1,
+h2,
+p {
+  margin: 15px 0;
+}
+
 // for scrollbar
 ::-webkit-scrollbar {
   width: 8px;

@@ -10,7 +10,6 @@ import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { HomeComponent } from "./components/home/home.component";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
-import { FeedbackComponent } from "./components/feedback/feedback.component";
 import { HelpComponent } from "./components/help/help.component";
 import { ContactComponent } from "./components/contact/contact.component";
 
@@ -19,7 +18,6 @@ import { ContactComponent } from "./components/contact/contact.component";
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    FeedbackComponent,
     PageNotFoundComponent,
     HelpComponent,
     ContactComponent

@@ -179,40 +179,6 @@
       </mat-action-row>
       </mat-expansion-panel>
 
-      <mat-expansion-panel
-        [expanded]="step === 5"
-        (opened)="setStep(5)"
-        hideToggle
-      >
-        <mat-expansion-panel-header fxLayout="row">
-          <mat-panel-title fxFlex="grow">
-            Color Schema
-          </mat-panel-title>
-          <mat-panel-description fxFlex="nogrow">
-            <mat-icon>color_lens</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayoutAlign="start center"
-        class="buttonGroup"
-      >
-        <button *ngFor="let field of colorSchema"
-          mat-stroked-button
-          fxFlex="45%"
-          fxFlex.sm="30%"
-          fxFlex.gt-sm="18%"
-          [class.selected]="rule.colorSchema === field.rule"
-          (click)="getRule('colorSchema', field)"
-        >
-          {{field.fieldName}}
-        </button>
-      </div>
-      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
-        <span class="highlight">Instruction :&nbsp;</span> {{ rule.colorSchema }}
-      </mat-action-row>
-      </mat-expansion-panel>
     </mat-accordion>
   </div>
 </div>

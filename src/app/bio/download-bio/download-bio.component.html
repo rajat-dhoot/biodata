@@ -5,7 +5,7 @@
     fxLayoutAlign="center center"
     fxLayoutGap="5px"
   >
-    <div fxFlex="none" class="label">Download</div>
+    <div fxFlex="none"><h1>Download</h1></div>
     <img fxFlex="none" fxFlexAlign="end" src="assets/download.png" />
   </div>
 
@@ -18,38 +18,22 @@
   >
     <img src="assets/loading.gif" />
   </div>
-  <!-- Message -->
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <div
-      class="info"
-      fxFlex.gt-sm="70%"
-      fxFlex="90%"
-      [ngStyle.gt-md]="{ 'line-height.px': 32 }"
-      [ngStyle.gt-xs]="{ 'line-height.px': 28 }"
-    >
-      Thank you for using our services for making your biodata. We are working
-      towards making the website more dynamic and user-friendly. You can provide
-      your valuable feedback <a href="#">here</a>. If you wish to contribute to
-      us, you can do it <a href="#">here</a>.<br />
-    </div>
-  </div>
 
   <!-- Timer Message -->
   <div
     class="waitMessage"
     *ngIf="timeleft > 0"
-    fxLayout="row"
+    fxLayout="column"
     fxLayoutAlign="center center"
+    fxLayoutGap="30px"
   >
-    <h3 fxFlex="70%">Your biodata will be ready in {{ timeleft }} seconds.</h3>
+    <div>Your biodata will be ready in</div>
+    <div class="numberCircle">{{ timeleft }}</div>
+    <div>seconds.</div>
   </div>
-</div>
 
-<!-- biodata section and download button which appears at t=0 -->
-<div *ngIf="timeleft === 0">
-  <app-prepare-bio
-    #htmlToConvert
-    id="reqHtml"
-    style="display:none;"
-  ></app-prepare-bio>
+  <!-- biodata section and download button which appears at t=0 -->
+  <div *ngIf="timeleft === 0" style="display:none">
+    <app-prepare-bio #htmlToConvert id="reqHtml"></app-prepare-bio>
+  </div>
 </div>

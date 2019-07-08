@@ -1,60 +1,41 @@
 .container {
-  padding: 20px;
+  padding: 0px 5px;
   min-height: 100%;
   background-color: oldlace;
+
+  .downloadBanner {
+    width: 100%;
+    padding: 30px 0px 10px;
+    font-family: cursive;
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
 
   .waitMessage {
     color: #666;
     text-align: center;
+    font-size: 1.2em;
+    margin-top: 30px;
   }
 
-  .downloadMessage {
-    color: #256eb3;
+  .numberCircle {
+    width: 120px;
+    line-height: 120px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 32px;
+    border: 2px solid #666;
   }
 
-  .info {
-    text-align: justify;
-    color: #333;
-    line-height: 24px;
-  }
-
-  mat-card {
-    margin: 15px 0px;
-    max-height: 600px;
-    overflow: auto;
-  }
-}
-
-button {
-  background: #256eb3;
-  color: #fff;
-  font-size: 16px;
-}
-
-.center {
-  text-align: center;
-}
-
-.loader {
-  position: absolute;
-  z-index: 999999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.downloadBanner {
-  width: 100%;
-  padding: 40px 25px;
-  font-family: cursive;
-  .label {
-    font-size: 8vh;
-    font-weight: 600;
-  }
-  img {
-    width: 50px;
-    height: 50px;
+  .loader {
+    position: absolute;
+    z-index: 999999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
   }
 }

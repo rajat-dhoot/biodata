@@ -16,10 +16,6 @@ export class PrepareBioComponent implements OnInit {
   pAunts: any;
   mUncles: any;
   mAunts: any;
-  colorProp = {
-    "background-color": "#ffffff",
-    color: "#000"
-  };
 
   constructor(
     private _bioservice: BioService,
@@ -30,8 +26,6 @@ export class PrepareBioComponent implements OnInit {
   ngOnInit() {
     this.formData = this._bioservice.getDetailsModel();
     if (this.formData) this.data = { ...this.formData.value };
-    this.colorProp["background-color"] = this.data.colorSchema.bgColor;
-    this.colorProp.color = this.data.colorSchema.fColor;
     this.brothers = this.data.family.brothers;
     this.sisters = this.data.family.sisters;
     this.pUncles = this.data.paternal.uncles;

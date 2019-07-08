@@ -20,10 +20,8 @@ export class NavbarComponent implements OnInit {
   public listItems = {
     key1: { name: "Home", icon: "home", link: "home" },
     key2: { name: "Create", icon: "create", link: "create" },
-    key3: { name: "Feedback", icon: "feedback", link: "feedback" },
-    key4: { name: "Help", icon: "help", link: "help" },
-    key5: { name: "Contact Us", icon: "contacts", link: "contact" },
-    key6: { name: "Contribute", icon: "\u20B9", link: "contribute" }
+    key3: { name: "Help", icon: "help", link: "help" },
+    key4: { name: "Contact Us", icon: "contacts", link: "contact" }
   };
 
   constructor(
