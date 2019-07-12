@@ -1,8 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./variables";
+@import "./mixins";
 
 body {
-  font-family: cursive, Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-family: $font-stack;
   font-size: calc(16px + 0.3vw);
   line-height: calc(20px + 0.8vw);
   margin: 0;
@@ -11,10 +13,12 @@ body {
 
 h1 {
   font-size: calc(20px + 1.5vw);
+  line-height: calc(24px + 1.5vw);
 }
 
 h2 {
   font-size: 1.2em;
+  line-height: 1.5em;
 }
 
 h1,
@@ -28,7 +32,7 @@ p {
   margin: 15px 0;
 }
 
-// for scrollbar
+// scrollbar styling
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -46,8 +50,4 @@ p {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-.mat-horizontal-stepper-header {
-  pointer-events: none !important;
 }

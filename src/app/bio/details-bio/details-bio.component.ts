@@ -20,6 +20,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 export class DetailsBioComponent implements OnInit {
   step = 0;
   detailsForm: FormGroup;
+  model: FormGroup;
   isDisabled: boolean;
   @ViewChild("myForm", { static: false }) myForm: NgForm;
   minDate = new Date(1975, 0, 1);
@@ -65,7 +66,9 @@ export class DetailsBioComponent implements OnInit {
     private _bioservice: BioService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+    this.model = this.route.snapshot.data["detailsModel"];
+  }
 
   initializeForm() {
     this.detailsForm = this.fb.group({
@@ -128,10 +131,8 @@ export class DetailsBioComponent implements OnInit {
         this.logValidationMessage(<FormGroup>this.detailsForm.get(group));
       this.isDisabled = !(this.detailsForm.valid && this.detailsForm.dirty);
     });
-
-    let model = this._bioservice.getDetailsModel();
-    if (model) {
-      let data = model.value;
+    if (this.model) {
+      let data = this.model.value;
       data.family.brothers.forEach(brother => this.addBrother());
       data.family.sisters.forEach(sister => this.addSister());
       data.paternal.uncles.forEach(uncle => this.addUncle("paternal"));
@@ -227,26 +228,26 @@ export class DetailsBioComponent implements OnInit {
   loadData() {
     let data = {
       personal: {
-        fullName: "rajat",
+        fullName: "Saurabh Maheshwari",
         birthDate: new Date(1994, 5, 16),
         birthTime: "10:20",
         height: "5'11\"",
-        birthPlace: "varanasi",
+        birthPlace: "Mumbai",
         complexion: "fair",
-        bloodGroup: "o+",
-        qualification: "B.tech Bits Pilani",
-        occupation: "Software Engineer, Amazon Bangalore",
+        bloodGroup: "O+",
+        qualification: "B.tech, BITS Pilani",
+        occupation: "Software Engineer, Amazon, Bangalore",
         hobbies: "Reading, Dancing, Singing"
       },
       family: {
-        fatherName: "ram",
-        fatherOccupation: "Silk Yarn Business Varanasi",
-        motherName: "jaishri",
-        motherOccupation: "homeMaker",
+        fatherName: "Rishab Maheshwari",
+        fatherOccupation: "Senior Manager, ICICI Bank, Mumbai",
+        motherName: "Saroj Maheshwari",
+        motherOccupation: "Homemaker",
         brothers: [
           {
-            brotherName0: "Rajat",
-            brotherOccupation0: "Btech"
+            brotherName0: "Abhishek Maheshari",
+            brotherOccupation0: "Pursuing CA"
           }
           // {
           //   brotherName1: "Vijay",
@@ -255,36 +256,59 @@ export class DetailsBioComponent implements OnInit {
         ],
         sisters: [
           {
-            sisterName0: "Payal",
-            sisterOccupation0: "Tax Management"
+            sisterName0: "Komal Maheshwari",
+            sisterOccupation0: "Tax Consultant, Deloitte, Hyderabad"
           }
         ]
       },
       contact: {
-        address: "rathyatra, mahmoorganj, varanasi",
+        address: "Flat No. 4, Beach Towers, Prabha Devi, Dadar, Mumbai",
         contact1: "9898989898",
         contact2: "9898989898",
-        email: "rajat.dhoot@gmail.com"
+        email: "rishab.maheshwari@gmail.com"
       },
       paternal: {
-        grandfatherName: "gfName",
-        grandmotherName: "gmName",
+        grandfatherName: "Govind Maheshwari",
+        grandmotherName: "Asha Maheshwari",
         uncles: [
-          { uncleName0: "Pawan", uncleOccupation0: "Business" },
-          { uncleName1: "XYZ", uncleOccupation1: "Business" }
-          // { uncleName2: "XYZ", uncleOccupation2: "Business" },
-          // { uncleName3: "XYZ", uncleOccupation3: "Business" }
+          {
+            uncleName0: "Aakash Maheshwari",
+            uncleOccupation0: "Clothes Business, Indore"
+          },
+          {
+            uncleName1: "Aditya Maheshwari",
+            uncleOccupation1: "Manager, Cloud Operations, TCS, USA"
+          },
+          {
+            uncleName2: "Yash Maheshwari",
+            uncleOccupation2: "Professor, Delhi University"
+          }
         ],
-        aunts: [{ auntName0: "Sushila", auntOccupation0: "Housewife" }]
+        aunts: [{ auntName0: "Radhika Somani", auntOccupation0: "Housewife" }]
       },
       maternal: {
-        "grandfatherName#": "gfName",
-        "grandmotherName#": "gmName",
+        "grandfatherName#": "Ram Rathi",
+        "grandmotherName#": "Kanta Rathi",
         "uncles#": [
-          { "uncleName#0": "Dinesh", "uncleOccupation#0": "Business" },
-          { "uncleName#1": "Sunil", "uncleOccupation#1": "Business" }
+          {
+            "uncleName#0": "Suresh Rathi",
+            "uncleOccupation#0": "Grain Merchant, Bhopal"
+          },
+          {
+            "uncleName#1": "Manoj Rathi",
+            "uncleOccupation#1": "Hardware Retailer, Bhopal"
+          },
+          {
+            "uncleName#2": "Hardik Rathi",
+            "uncleOccupation#2": "Catering Services, Bhopal"
+          }
         ],
-        "aunts#": [{ "auntName#0": "Rajshree", "auntOccupation#0": "LIC" }]
+        "aunts#": [
+          {
+            "auntName#0": "Rajshree Maheshwari",
+            "auntOccupation#0": "Boutique Shop, Kolkata"
+          }
+        ]
       }
     };
     data.family.brothers.forEach(brother => this.addBrother());

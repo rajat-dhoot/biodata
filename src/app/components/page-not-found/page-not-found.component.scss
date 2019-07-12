@@ -1,24 +1,18 @@
+@import "styles";
+
 .container {
-  padding: 5%;
-  color: #555;
-}
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 20px;
+  color: $subtitleColor;
 
-img {
-  object-fit: contain;
-  max-width: 100%;
-}
+  img {
+    object-fit: contain;
+    max-width: 100%;
+  }
 
-.content {
-  text-align: center;
-}
-
-button {
-  color: #256eb3;
-  border-color: #256eb3;
-  transition-duration: 0.4s;
-  &:hover {
-    background: #256eb3;
-    color: #fff;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.24);
+  button {
+    @include stroked-button($secondaryColor, $secondaryColor);
+    @include transition(0.5s);
   }
 }

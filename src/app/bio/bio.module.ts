@@ -9,6 +9,7 @@ import { DialogService } from "./services/dialog.service";
 import { MAT_DATE_LOCALE } from "@angular/material";
 import { DownloadBioComponent } from "./download-bio/download-bio.component";
 import { PrepareBioComponent } from "./prepare-bio/prepare-bio.component";
+import { DetailsResolverService } from "./services/details-resolver.service";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PrepareBioComponent } from "./prepare-bio/prepare-bio.component";
   imports: [SharedModule, BioRoutingModule],
   providers: [
     BioService,
+    DetailsResolverService,
     CanDeactivateGuard,
     DialogService,
     { provide: MAT_DATE_LOCALE, useValue: "en-GB" }

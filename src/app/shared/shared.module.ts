@@ -4,14 +4,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MaterialModule } from "./modules/material.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { TimeFormat } from "./pipes/time.pipe";
+import { CapitalizePipe } from "./pipes/capitalize.pipe";
 
 @NgModule({
-  declarations: [TimeFormat],
+  declarations: [TimeFormat, CapitalizePipe],
   imports: [],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CapitalizePipe,
     TimeFormat,
     MaterialModule,
     FlexLayoutModule

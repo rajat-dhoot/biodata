@@ -1,4 +1,9 @@
 <!-- mat toolbar  top panel -->
+<mat-progress-bar
+  mode="indeterminate"
+  color="warn"
+  [fxHide]="hideLoader"
+></mat-progress-bar>
 <mat-toolbar id="mainToolbar">
   <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">menu</mat-icon>
   <span>Biodata</span>

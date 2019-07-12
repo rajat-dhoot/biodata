@@ -1,47 +1,38 @@
-.container {
-  overflow-x: hidden;
+@import "styles";
 
+.container {
+  @include container();
   .header {
-    background-color: ivory;
-    text-align: center;
-    width: 100%;
-    padding: 20px;
+    @include header();
   }
 
-  .footer {
-    background-color: darken($color: ivory, $amount: 5);
-    text-align: center;
-    padding: 20px;
-    width: 100%;
+  .sample {
+    @include fullDiv(20px);
     .sampleBiodata > mat-card {
-      width: 200px;
-      height: 300px;
-      margin: 20px 0px;
+      @include box(250px, 350px);
     }
   }
-  .light {
-    padding: 40px 20px;
+
+  .visual {
+    padding: 50px 0px 40px;
     width: 100%;
     img {
       width: 150px;
     }
     hr {
       width: 100px;
+      border: 1px solid;
+      color: #555;
+    }
+    .vertical {
+      border: 1px solid #555;
+      height: 75px;
     }
     button {
       font-size: 20px;
       padding: 10px 20px;
-      transition-duration: 0.4s;
-      border-color: burlywood;
-      &:hover {
-        color: white;
-        background-color: burlywood;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.24);
-      }
-    }
-    .vertical {
-      border: 1px solid grey;
-      height: 75px;
+      @include transition(0.4s);
+      @include stroked-button($secondaryColor, $secondaryColor);
     }
   }
 }

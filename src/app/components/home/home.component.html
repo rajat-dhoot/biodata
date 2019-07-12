@@ -1,7 +1,7 @@
 <section fxLayout="column" fxLayoutAlign="center center" class="container">
   <section class="header"><h1>Create simple biodata</h1></section>
   <section
-    class="light"
+    class="visual"
     fxLayout="row"
     fxLayoutAlign="center start"
     fxLayout.xs="column"
@@ -29,16 +29,23 @@
       <span>Download</span>
     </div>
   </section>
-  <section class="footer">
+  <section class="sample">
     <h2>Sample Biodata</h2>
     <hr />
     <div
       class="sampleBiodata"
-      fxLayout="row wrap"
-      fxLayoutAlign="space-evenly center"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxLayoutGap="40px"
+      fxLayoutGap.xs="20px"
+      fxLayoutAlign="center center"
     >
-      <mat-card></mat-card>
-      <mat-card></mat-card>
+      <mat-card>
+        <img src="assets/sample1.png" />
+      </mat-card>
+      <mat-card>
+        <img src="assets/sample2.png" alt="" />
+      </mat-card>
     </div>
   </section>
 </section>

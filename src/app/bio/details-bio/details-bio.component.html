@@ -1,9 +1,6 @@
-<div class="header" fxLayout="row" fxLayoutAlign="center center">
-    <img src="assets/details.png">
-  </div>
-
 <div class="container">
- <!-- Need to add header here-->
+    <section class="header"><h1>Add Details</h1></section>
+
   <div class="forms">
 <form #myForm="ngForm" [formGroup]="detailsForm">
   <mat-accordion>
@@ -171,51 +168,13 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-<!-- ############################## Contact Details ######################################### -->
 
-    <mat-expansion-panel
-      [expanded]="step === 2"
-      (opened)="setStep(2)"
-      hideToggle
-      formGroupName="contact"
-    >
-      <mat-expansion-panel-header fxLayout="row">
-        <mat-panel-title fxFlex="grow">
-          Contact Details
-        </mat-panel-title>
-        <mat-panel-description fxFlex="nogrow">
-          <mat-icon>contacts</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div fxLayout="column" fxLayoutGap="20px">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Residence Address" formControlName="address" (blur)="logValidationMessage()"/>
-          <mat-error>{{formErrors.address}}</mat-error>
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Contact #1" formControlName="contact1" (blur)="logValidationMessage()"/>
-        <mat-error>{{formErrors['contact1']}}</mat-error>
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Contact #2" formControlName="contact2" (blur)="logValidationMessage()"/>
-        <mat-error>{{formErrors['contact2']}}</mat-error>
-      </mat-form-field>
-      <mat-form-field fxFlex>
-        <input type="email" matInput placeholder="Email" formControlName="email" (blur)="logValidationMessage()"/>
-        <mat-error>{{formErrors.email}}</mat-error>
-      </mat-form-field>
-    </div>
-      <mat-action-row>
-        <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
-        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
-      </mat-action-row>
-    </mat-expansion-panel>
 
     <!-- ############################## Paternal Details ######################################### -->
     
     <mat-expansion-panel
-      [expanded]="step === 3"
-      (opened)="setStep(3)"
+      [expanded]="step === 2"
+      (opened)="setStep(2)"
       hideToggle
       formGroupName="paternal"
     >
@@ -289,8 +248,8 @@
 <!-- ############################## Maternal Details ######################################### -->
     
     <mat-expansion-panel
-      [expanded]="step === 4"
-      (opened)="setStep(4)"
+      [expanded]="step === 3"
+      (opened)="setStep(3)"
       hideToggle
       formGroupName="maternal"
     >
@@ -361,13 +320,53 @@
       </mat-action-row>
     </mat-expansion-panel>
 
+    <!-- ############################## Contact Details ######################################### -->
+
+    <mat-expansion-panel
+      [expanded]="step === 4"
+      (opened)="setStep(4)"
+      hideToggle
+      formGroupName="contact"
+    >
+      <mat-expansion-panel-header fxLayout="row">
+        <mat-panel-title fxFlex="grow">
+          Contact Details
+        </mat-panel-title>
+        <mat-panel-description fxFlex="nogrow">
+          <mat-icon>contacts</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div fxLayout="column" fxLayoutGap="20px">
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Residence Address" formControlName="address" (blur)="logValidationMessage()"/>
+          <mat-error>{{formErrors.address}}</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Contact #1" formControlName="contact1" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors['contact1']}}</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input matInput placeholder="Contact #2" formControlName="contact2" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors['contact2']}}</mat-error>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <input type="email" matInput placeholder="Email" formControlName="email" (blur)="logValidationMessage()"/>
+        <mat-error>{{formErrors.email}}</mat-error>
+      </mat-form-field>
+    </div>
+      <mat-action-row>
+        <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
+        <button mat-button color="primary" type="button" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
   </mat-accordion>
 </form>
 </div>
-<div class="button-group" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <button mat-raised-button fxFlex="none" (click)="loadData()">Load</button> <!--need to remove this-->
-  <button mat-raised-button fxFlex="none" (click)="resetForm()">Reset</button>
-  <button mat-raised-button fxFlex="none" (click)="createBiodata()" [disabled]="isDisabled">Create</button>
+<div class="button-group" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <button mat-raised-button fxFlex="none" (click)="loadData()">Load</button>
+  <button mat-stroked-button fxFlex="none" id="reset" name="reset" (click)="resetForm()">Reset</button>
+  <button mat-stroked-button fxFlex="none" id="create" name="create" (click)="createBiodata()" [disabled]="isDisabled">Create</button>
 </div>
 </div>
 

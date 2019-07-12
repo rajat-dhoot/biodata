@@ -1,55 +1,38 @@
-mat-form-field {
-  margin-right: 10px;
-}
-
-form {
-  max-width: 800px;
-  margin: 20px auto;
-}
-
-mat-panel-title {
-  color: #555;
-  font-weight: 600;
-}
-
-mat-button-toggle-group {
-  height: 32px;
-  align-self: center;
-  align-items: center;
-}
-
-input:not([type="email"]) {
-  text-transform: capitalize;
-}
-
-.button-group:hover {
-  cursor: pointer;
-}
+@import "styles";
 
 .container {
-  padding: 10px;
-  background-color: #f5f5dc;
-}
+  @include container();
 
-.header {
-  // text-align: center;
-  background-color: transparent;
-  width: 100%;
-}
+  .header {
+    @include header();
+  }
 
-img {
-  max-width: 100%;
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-}
+  .forms {
+    box-sizing: border-box;
+    padding: 10px;
+    form {
+      max-width: 800px;
+      margin: 20px auto;
 
-// .loader {
-//   position: fixed;
-//   z-index: 999999;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background: rgba(1, 1, 1, 0.05);
-// }
+      mat-panel-title {
+        color: $subtitleColor;
+        font-weight: 600;
+      }
+
+      input:not([type="email"]) {
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  .button-group > button {
+    font-size: 16px;
+    padding: 3px 15px;
+    margin-bottom: 20px;
+    @include stroked-button($secondaryColor, $secondaryColor);
+    @include transition(0.5s);
+    &:disabled {
+      @include disabledButton();
+    }
+  }
+}

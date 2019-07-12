@@ -7,7 +7,6 @@ import {
   ElementRef
 } from "@angular/core";
 import { BioService } from "../services/bio.service";
-import { MatSnackBar } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
 import html2pdf from "html2pdf.js";
 
@@ -20,14 +19,13 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
   @ViewChild("htmlToConvert", { read: ViewContainerRef, static: false })
   pdfHTML;
   hideLoader: boolean;
-  timeleft: number = 10;
+  timeleft: number = 5;
   timer: any;
   data;
   requiredHtml;
 
   constructor(
     private _bioservice: BioService,
-    private _snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router
   ) {}

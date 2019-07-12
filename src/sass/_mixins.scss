@@ -1,0 +1,93 @@
+@import "./variables";
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin box($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin vertical-center {
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin box-shadow($box-shadow) {
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+
+@mixin stroked-button($color, $border-color) {
+  color: $color;
+  background-color: white;
+  border-color: $border-color;
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background-color: $border-color;
+    box-shadow: $buttonShadow;
+  }
+}
+
+@mixin disabledButton {
+  color: $mediumgrey;
+  border-color: $lightgrey;
+  background-color: inherit;
+  &:hover {
+    cursor: default;
+    box-shadow: none;
+    background: inherit;
+    color: $mediumgrey;
+  }
+}
+
+@mixin container() {
+  background-color: $bgColor;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+@mixin header() {
+  box-sizing: border-box;
+  padding: 50px;
+  width: 100%;
+  text-align: center;
+  background-color: $secondaryColor;
+  color: white;
+}
+
+@mixin fullDiv($padding) {
+  box-sizing: border-box;
+  padding: $padding;
+  width: 100%;
+  text-align: center;
+}

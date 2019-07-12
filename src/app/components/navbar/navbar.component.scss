@@ -1,56 +1,51 @@
+@import "styles";
+
 #mainToolbar {
-  background: #fc6a76fd;
+  background: $navbarColor;
   color: white;
   #toolbarMenu {
-    color: white;
     cursor: pointer;
     margin-right: 20px;
     margin-left: 5px;
-  }
-  .toolbarIcon {
-    margin: 0 8px;
-    cursor: pointer;
-    color: white;
   }
 }
 
 #sidenavContainer {
   margin-top: 56px;
-}
+  #sideNav {
+    transition: all 0.3s ease;
+    .menu-item:hover {
+      background: #ccc;
+    }
+  }
 
-#sideNav {
-  transition: all 0.3s ease;
-  .menu-item:hover {
-    background: #ccc;
+  mat-nav-list {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    padding-top: 0;
+    overflow: hidden;
+    mat-icon {
+      flex: 0 0 18%;
+      margin-left: 5px;
+      color: #555;
+    }
+    span {
+      font-size: 17px;
+      flex: 0 0 70%;
+      text-align: left;
+      color: #333;
+    }
+    .nav-label {
+      visibility: hidden;
+      transition: all 0s ease;
+    }
+    .active {
+      background-color: #ccc;
+    }
   }
-}
 
-mat-nav-list {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  padding-top: 0;
-  overflow: hidden;
-  mat-icon {
-    flex: 0 0 18%;
-    margin-left: 5px;
-    color: #555;
+  mat-sidenav-content {
+    background: #fff;
   }
-  span {
-    font-size: 17px;
-    flex: 0 0 70%;
-    text-align: left;
-    color: #333;
-  }
-  .nav-label {
-    visibility: hidden;
-    transition: all 0s ease;
-  }
-  .active {
-    background-color: #ccc;
-  }
-}
-
-mat-sidenav-content {
-  background: #fff;
 }

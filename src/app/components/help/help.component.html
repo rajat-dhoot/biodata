@@ -1,7 +1,6 @@
 <div class="container">
-  <header>
-    <h2>Guidelines for filling form</h2>
-  </header>
+    <section class="header"><h1>Guidelines for filling form</h1></section>
+
   <div class="details">
     <mat-accordion>
       <mat-expansion-panel
@@ -23,7 +22,8 @@
           fxLayoutAlign="start center"
           class="buttonGroup"
         >
-          <button *ngFor="let field of personal"
+          <button
+            *ngFor="let field of personal"
             mat-stroked-button
             fxFlex="45%"
             fxFlex.sm="30%"
@@ -31,7 +31,7 @@
             [class.selected]="rule.personal === field.rule"
             (click)="getRule('personal', field)"
           >
-            {{field.fieldName}}
+            {{ field.fieldName }}
           </button>
         </div>
         <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
@@ -53,25 +53,26 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayoutAlign="start center"
-        class="buttonGroup"
-      >
-        <button *ngFor="let field of family"
-          mat-stroked-button
-          fxFlex="45%"
-          fxFlex.sm="30%"
-          fxFlex.gt-sm="18%"
-          [class.selected]="rule.family === field.rule"
-          (click)="getRule('family', field)"
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutAlign="start center"
+          class="buttonGroup"
         >
-          {{field.fieldName}}
-        </button>
-      </div>
-      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
-        <span class="highlight">Instruction :&nbsp;</span> {{ rule.family }}
-      </mat-action-row>
+          <button
+            *ngFor="let field of family"
+            mat-stroked-button
+            fxFlex="45%"
+            fxFlex.sm="30%"
+            fxFlex.gt-sm="18%"
+            [class.selected]="rule.family === field.rule"
+            (click)="getRule('family', field)"
+          >
+            {{ field.fieldName }}
+          </button>
+        </div>
+        <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+          <span class="highlight">Instruction :&nbsp;</span> {{ rule.family }}
+        </mat-action-row>
       </mat-expansion-panel>
 
       <mat-expansion-panel
@@ -88,25 +89,26 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayoutAlign="start center"
-        class="buttonGroup"
-      >
-        <button *ngFor="let field of contact"
-          mat-stroked-button
-          fxFlex="45%"
-          fxFlex.sm="30%"
-          fxFlex.gt-sm="18%"
-          [class.selected]="rule.contact === field.rule"
-          (click)="getRule('contact', field)"
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutAlign="start center"
+          class="buttonGroup"
         >
-          {{field.fieldName}}
-        </button>
-      </div>
-      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
-        <span class="highlight">Instruction :&nbsp;</span> {{ rule.contact }}
-      </mat-action-row>
+          <button
+            *ngFor="let field of contact"
+            mat-stroked-button
+            fxFlex="45%"
+            fxFlex.sm="30%"
+            fxFlex.gt-sm="18%"
+            [class.selected]="rule.contact === field.rule"
+            (click)="getRule('contact', field)"
+          >
+            {{ field.fieldName }}
+          </button>
+        </div>
+        <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+          <span class="highlight">Instruction :&nbsp;</span> {{ rule.contact }}
+        </mat-action-row>
       </mat-expansion-panel>
 
       <mat-expansion-panel
@@ -123,25 +125,26 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayoutAlign="start center"
-        class="buttonGroup"
-      >
-        <button *ngFor="let field of paternal"
-          mat-stroked-button
-          fxFlex="45%"
-          fxFlex.sm="30%"
-          fxFlex.gt-sm="18%"
-          [class.selected]="rule.paternal === field.rule"
-          (click)="getRule('paternal', field)"
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutAlign="start center"
+          class="buttonGroup"
         >
-          {{field.fieldName}}
-        </button>
-      </div>
-      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
-        <span class="highlight">Instruction :&nbsp;</span> {{ rule.paternal }}
-      </mat-action-row>
+          <button
+            *ngFor="let field of paternal"
+            mat-stroked-button
+            fxFlex="45%"
+            fxFlex.sm="30%"
+            fxFlex.gt-sm="18%"
+            [class.selected]="rule.paternal === field.rule"
+            (click)="getRule('paternal', field)"
+          >
+            {{ field.fieldName }}
+          </button>
+        </div>
+        <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+          <span class="highlight">Instruction :&nbsp;</span> {{ rule.paternal }}
+        </mat-action-row>
       </mat-expansion-panel>
 
       <mat-expansion-panel
@@ -158,27 +161,27 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div
-        fxLayout="row wrap"
-        fxLayoutGap="10px"
-        fxLayoutAlign="start center"
-        class="buttonGroup"
-      >
-        <button *ngFor="let field of maternal"
-          mat-stroked-button
-          fxFlex="45%"
-          fxFlex.sm="30%"
-          fxFlex.gt-sm="18%"
-          [class.selected]="rule.maternal === field.rule"
-          (click)="getRule('maternal', field)"
+          fxLayout="row wrap"
+          fxLayoutGap="10px"
+          fxLayoutAlign="start center"
+          class="buttonGroup"
         >
-          {{field.fieldName}}
-        </button>
-      </div>
-      <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
-        <span class="highlight">Instruction :&nbsp;</span> {{ rule.maternal }}
-      </mat-action-row>
+          <button
+            *ngFor="let field of maternal"
+            mat-stroked-button
+            fxFlex="45%"
+            fxFlex.sm="30%"
+            fxFlex.gt-sm="18%"
+            [class.selected]="rule.maternal === field.rule"
+            (click)="getRule('maternal', field)"
+          >
+            {{ field.fieldName }}
+          </button>
+        </div>
+        <mat-action-row fxLayout="row wrap" fxLayoutAlign="start start">
+          <span class="highlight">Instruction :&nbsp;</span> {{ rule.maternal }}
+        </mat-action-row>
       </mat-expansion-panel>
-
     </mat-accordion>
   </div>
 </div>

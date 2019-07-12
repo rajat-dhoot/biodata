@@ -2,7 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { BreakpointObserver } from "@angular/cdk/layout";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { ActivatedRoute, Router, Event, NavigationEnd } from "@angular/router";
+import {
+  ActivatedRoute,
+  Router,
+  Event,
+  NavigationStart,
+  NavigationEnd
+} from "@angular/router";
 
 const SMALL_WIDTH_BREAKPOINT = 600;
 
@@ -16,6 +22,7 @@ export class NavbarComponent implements OnInit {
   public contentMargin: Number;
   public sideNavWidth: Number;
   isScreenSmall: Observable<boolean>;
+  public hideLoader: Boolean;
 
   public listItems = {
     key1: { name: "Home", icon: "home", link: "home" },
@@ -36,10 +43,24 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.hideLoader = false;
     this.isScreenSmall.subscribe(result => {
       result
         ? (this.contentMargin = 0) //mobile view
         : (this.sideNavWidth = this.contentMargin = 70); //desktop view
+    });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) this.hideLoader = false;
+      else if (event instanceof NavigationEnd) {
+        let timeout = 1000;
+        if (event.url.includes("download")) {
+          timeout = 8000;
+        }
+        setTimeout(() => {
+          this.hideLoader = true;
+        }, timeout);
+      }
     });
   }
 

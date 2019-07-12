@@ -4,6 +4,7 @@ import { CreateBioComponent } from "./create-bio/create-bio.component";
 import { DetailsBioComponent } from "./details-bio/details-bio.component";
 import { DownloadBioComponent } from "./download-bio/download-bio.component";
 import { CanDeactivateGuard } from "./services/can-deactivate-guard.service";
+import { DetailsResolverService } from "./services/details-resolver.service";
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
       {
         path: "details",
         component: DetailsBioComponent,
-        canDeactivate: [CanDeactivateGuard]
+        canDeactivate: [CanDeactivateGuard],
+        resolve: { detailsModel: DetailsResolverService }
       },
       {
         path: "download",
