@@ -1,12 +1,11 @@
 <div class="container">
-    <section class="header"><h1>Add Details</h1></section>
-
+  <section class="header"><h1>Add Details</h1></section>
   <div class="forms">
-<form #myForm="ngForm" [formGroup]="detailsForm">
-  <mat-accordion>
+    <form #myForm="ngForm" [formGroup]="detailsForm">
+      <mat-accordion>
 
     <!-- ############################## Personal Details ######################################### -->
-    <mat-expansion-panel
+        <mat-expansion-panel
       [expanded]="step === 0"
       (opened)="setStep(0)"
       hideToggle
@@ -364,15 +363,8 @@
 </form>
 </div>
 <div class="button-group" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-    <button mat-raised-button fxFlex="none" (click)="loadData()">Load</button>
+    <!-- <button mat-raised-button fxFlex="none" (click)="loadData()">Load</button> for testing purpose only -->
   <button mat-stroked-button fxFlex="none" id="reset" name="reset" (click)="resetForm()">Reset</button>
   <button mat-stroked-button fxFlex="none" id="create" name="create" (click)="createBiodata()" [disabled]="isDisabled">Create</button>
 </div>
 </div>
-
-<!-- 
-<div class="loader" fxLayout="row" fxLayoutAlign="center center" [fxHide]="hideLoader">
-    <img src="assets/loading.gif">
-  </div> 
-this.router.events.subscribe(enable at NavigationStart and disable at NavigationEnd/after ngOnInit);
--->

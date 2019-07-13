@@ -28,3 +28,5 @@ import { DetailsResolverService } from "./services/details-resolver.service";
   ]
 })
 export class BioModule {}
+
+// { provide: MAT_DATE_LOCALE, useValue: "en-GB" } is required for date format dd/mm/yyyy

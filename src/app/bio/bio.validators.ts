@@ -1,5 +1,15 @@
 import { AbstractControl } from "@angular/forms";
 
+/*
+ * Custom Validator - Class for defining custom validation for form controls.
+ * It returns null if there are no errors and a json object {key:true} if there is a mismatch.
+ * Methods -
+ *  ValidateHeight - For Height Validation - It accepts height in format foot'inches"
+ *  ValidateEmail - For Email Validation
+ *  ValidationContact - For Contact Validation - It accepts only 10 digit mobile number
+ * Validation Blood Group was defined inline.
+ */
+
 export class CustomValidator {
   static validateHeight(
     control: AbstractControl

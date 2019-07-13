@@ -1,12 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { BioService } from "../services/bio.service";
-import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "app-prepare-bio",
   templateUrl: "./prepare-bio.component.html",
   styleUrls: ["./prepare-bio.component.scss"]
 })
+
+/*
+ * Prepare Bio Component - This component is used to prepare the template for the biodata.
+ * variables are used here to reduce the repititive code on the html by extracting the nested controls.
+ */
 export class PrepareBioComponent implements OnInit {
   formData: any;
   data: any;
@@ -17,11 +21,7 @@ export class PrepareBioComponent implements OnInit {
   mUncles: any;
   mAunts: any;
 
-  constructor(
-    private _bioservice: BioService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
+  constructor(private _bioservice: BioService) {}
 
   ngOnInit() {
     this.formData = this._bioservice.getDetailsModel();

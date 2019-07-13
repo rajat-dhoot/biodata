@@ -5,6 +5,14 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./help.component.html",
   styleUrls: ["./help.component.scss"]
 })
+
+/*
+ * Help Component - This component gives user detailed information and guidelines required for filling the form
+ * The UI has five major sections (personal, family, paternal, maternal, contact) and their control fields as a button
+ * When the user clicks the button an instruction regarding the same appears in the action bar of the card
+ * When user clicks the button "getRule" function sets the rule object for that section using static predefined rules set.
+ * Since the data is two way binded the selected class appears even if user selects any other control from other section.
+ */
 export class HelpComponent implements OnInit {
   step = 0;
   setStep(index: number) {

@@ -17,12 +17,26 @@ import { ActivatedRoute, Router } from "@angular/router";
   templateUrl: "./details-bio.component.html",
   styleUrls: ["./details-bio.component.scss"]
 })
+
+/*
+  * Details Bio Component - This component is implemented to gather user details for creating biodata.
+  * Variables -
+    * step : for accordion
+    * detailsForm : Contains the form object
+    * model : Fetches the existing forms data
+    * isDisabled : Helps to toggle 'Create' button, to enable only when the form is valid and dirty
+    * minDate-maxDate : Specifies min and max date one can enter in the details form
+    * complexion : Static values for select (input)
+    * validationMessages : Contains validation messages apart from required message.
+    * formErrors : We insert errors in this object with the help of validation messages, 
+      LogValidationMessage and getRequiredMessage function. It is used in mat-error in the html view.
+*/
 export class DetailsBioComponent implements OnInit {
+  @ViewChild("myForm", { static: false }) myForm: NgForm;
   step = 0;
   detailsForm: FormGroup;
   model: FormGroup;
   isDisabled: boolean;
-  @ViewChild("myForm", { static: false }) myForm: NgForm;
   minDate = new Date(1975, 0, 1);
   maxDate = new Date(2002, 0, 1);
   complexion = ["light", "fair", "wheatish", "olive", "brown", "dark"];
@@ -35,6 +49,12 @@ export class DetailsBioComponent implements OnInit {
     invalidContact: "Enter a 10 digit valid contact number."
   };
   formErrors = {};
+
+  /*
+   * This function is called whenever there are any value or controls are changed in the form.
+   * It takes the form group and checks if its control is touched or dirty and is invalid to show required error message
+   * If the control is another form group or form array then the function is recursively called to check nested controls
+   */
 
   logValidationMessage(group: FormGroup = this.detailsForm): void {
     Object.keys(group.controls).forEach((key: string) => {
@@ -60,6 +80,30 @@ export class DetailsBioComponent implements OnInit {
     });
   }
 
+  // This method forms the required form error message using the key. - xyz field is required
+  getRequiredErrorMessage(key: string) {
+    let pos = /(?<!^)(?=[A-Z])/.exec(key);
+    let message = "";
+    if (pos) {
+      let index = pos.index;
+      let word = /([a-zA-Z]+)/.exec(key.substring(index, key.length))[0]; // for extracting number out of the word
+      message = `${this.capFirst(
+        key.substring(0, index)
+      )} ${word} is required.`;
+    } else {
+      let word = /([a-zA-Z]+)/.exec(key)[0];
+      message = this.capFirst(word) + " is required.";
+    }
+    return message;
+  }
+
+  /*
+   * Form Builder - For creating form object => ["", Validation]
+   * Bio Service - To save and retrieve exisiting form data
+   * Dialog Service - For CanDeactivate Guard
+   * Router and ActivatedRoute - for navigation and prefetching data from resolver.
+   */
+
   constructor(
     private fb: FormBuilder,
     private dialogService: DialogService,
@@ -70,6 +114,7 @@ export class DetailsBioComponent implements OnInit {
     this.model = this.route.snapshot.data["detailsModel"];
   }
 
+  // to initialize form object
   initializeForm() {
     this.detailsForm = this.fb.group({
       personal: this.fb.group({
@@ -157,6 +202,8 @@ export class DetailsBioComponent implements OnInit {
     this.router.navigate(["../download"], { relativeTo: this.route });
   }
 
+  // canDeactivate Guard method
+
   canDeactivate(): Observable<boolean> | boolean {
     if (this.myForm.dirty && !this.myForm.valid) {
       return this.dialogService.confirm(
@@ -165,6 +212,11 @@ export class DetailsBioComponent implements OnInit {
     }
     return true;
   }
+
+  /*
+   * addFormGroup - Helps in adding form groups dynamically addBrother, addSister, addUncle, addAunt
+   * addBrother, addSister, addUncle, addAunt - corresponding form array is extracted, form group with required key is created and pushed in the form array
+   */
 
   addFormGroup(person: string, index: number, para: string = ""): FormGroup {
     let name: string = person + "Name" + para + index;
@@ -208,116 +260,97 @@ export class DetailsBioComponent implements OnInit {
   capFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-
-  getRequiredErrorMessage(key: string) {
-    let pos = /(?<!^)(?=[A-Z])/.exec(key);
-    let message = "";
-    if (pos) {
-      let index = pos.index;
-      let word = /([a-zA-Z]+)/.exec(key.substring(index, key.length))[0]; // for extracting number out of the word
-      message = `${this.capFirst(
-        key.substring(0, index)
-      )} ${word} is required.`;
-    } else {
-      let word = /([a-zA-Z]+)/.exec(key)[0];
-      message = this.capFirst(word) + " is required.";
-    }
-    return message;
-  }
-
-  loadData() {
-    let data = {
-      personal: {
-        fullName: "Saurabh Maheshwari",
-        birthDate: new Date(1994, 5, 16),
-        birthTime: "10:20",
-        height: "5'11\"",
-        birthPlace: "Mumbai",
-        complexion: "fair",
-        bloodGroup: "O+",
-        qualification: "B.tech, BITS Pilani",
-        occupation: "Software Engineer, Amazon, Bangalore",
-        hobbies: "Reading, Dancing, Singing"
-      },
-      family: {
-        fatherName: "Rishab Maheshwari",
-        fatherOccupation: "Senior Manager, ICICI Bank, Mumbai",
-        motherName: "Saroj Maheshwari",
-        motherOccupation: "Homemaker",
-        brothers: [
-          {
-            brotherName0: "Abhishek Maheshari",
-            brotherOccupation0: "Pursuing CA"
-          }
-          // {
-          //   brotherName1: "Vijay",
-          //   brotherOccupation1: "Pursuing CA"
-          // }
-        ],
-        sisters: [
-          {
-            sisterName0: "Komal Maheshwari",
-            sisterOccupation0: "Tax Consultant, Deloitte, Hyderabad"
-          }
-        ]
-      },
-      contact: {
-        address: "Flat No. 4, Beach Towers, Prabha Devi, Dadar, Mumbai",
-        contact1: "9898989898",
-        contact2: "9898989898",
-        email: "rishab.maheshwari@gmail.com"
-      },
-      paternal: {
-        grandfatherName: "Govind Maheshwari",
-        grandmotherName: "Asha Maheshwari",
-        uncles: [
-          {
-            uncleName0: "Aakash Maheshwari",
-            uncleOccupation0: "Clothes Business, Indore"
-          },
-          {
-            uncleName1: "Aditya Maheshwari",
-            uncleOccupation1: "Manager, Cloud Operations, TCS, USA"
-          },
-          {
-            uncleName2: "Yash Maheshwari",
-            uncleOccupation2: "Professor, Delhi University"
-          }
-        ],
-        aunts: [{ auntName0: "Radhika Somani", auntOccupation0: "Housewife" }]
-      },
-      maternal: {
-        "grandfatherName#": "Ram Rathi",
-        "grandmotherName#": "Kanta Rathi",
-        "uncles#": [
-          {
-            "uncleName#0": "Suresh Rathi",
-            "uncleOccupation#0": "Grain Merchant, Bhopal"
-          },
-          {
-            "uncleName#1": "Manoj Rathi",
-            "uncleOccupation#1": "Hardware Retailer, Bhopal"
-          },
-          {
-            "uncleName#2": "Hardik Rathi",
-            "uncleOccupation#2": "Catering Services, Bhopal"
-          }
-        ],
-        "aunts#": [
-          {
-            "auntName#0": "Rajshree Maheshwari",
-            "auntOccupation#0": "Boutique Shop, Kolkata"
-          }
-        ]
-      }
-    };
-    data.family.brothers.forEach(brother => this.addBrother());
-    data.family.sisters.forEach(sister => this.addSister());
-    data.paternal.uncles.forEach(uncle => this.addUncle("paternal"));
-    data.paternal.aunts.forEach(aunt => this.addAunt("paternal"));
-    data.maternal["uncles#"].forEach(uncle => this.addUncle("maternal", "#"));
-    data.maternal["aunts#"].forEach(aunt => this.addAunt("maternal", "#"));
-    setTimeout(() => this.detailsForm.setValue({ ...data }), 1000);
-    this.detailsForm.markAsDirty();
-  }
 }
+
+/* Used for testing purpose - for automatically loading static data */
+// loadData() {
+//   let data = {
+//     personal: {
+//       fullName: "Saurabh Maheshwari",
+//       birthDate: new Date(1994, 5, 16),
+//       birthTime: "10:20",
+//       height: "5'11\"",
+//       birthPlace: "Mumbai",
+//       complexion: "fair",
+//       bloodGroup: "O+",
+//       qualification: "B.tech, BITS Pilani",
+//       occupation: "Software Engineer, Amazon, Bangalore",
+//       hobbies: "Reading, Dancing, Singing"
+//     },
+//     family: {
+//       fatherName: "Rishab Maheshwari",
+//       fatherOccupation: "Senior Manager, ICICI Bank, Mumbai",
+//       motherName: "Saroj Maheshwari",
+//       motherOccupation: "Homemaker",
+//       brothers: [
+//         {
+//           brotherName0: "Abhishek Maheshari",
+//           brotherOccupation0: "Pursuing CA"
+//         }
+//       ],
+//       sisters: [
+//         {
+//           sisterName0: "Komal Maheshwari",
+//           sisterOccupation0: "Tax Consultant, Deloitte, Hyderabad"
+//         }
+//       ]
+//     },
+//     contact: {
+//       address: "Flat No. 4, Beach Towers, Prabha Devi, Dadar, Mumbai",
+//       contact1: "9898989898",
+//       contact2: "9898989898",
+//       email: "rishab.maheshwari@gmail.com"
+//     },
+//     paternal: {
+//       grandfatherName: "Govind Maheshwari",
+//       grandmotherName: "Asha Maheshwari",
+//       uncles: [
+//         {
+//           uncleName0: "Aakash Maheshwari",
+//           uncleOccupation0: "Clothes Business, Indore"
+//         },
+//         {
+//           uncleName1: "Aditya Maheshwari",
+//           uncleOccupation1: "Manager, Cloud Operations, TCS, USA"
+//         },
+//         {
+//           uncleName2: "Yash Maheshwari",
+//           uncleOccupation2: "Professor, Delhi University"
+//         }
+//       ],
+//       aunts: [{ auntName0: "Radhika Somani", auntOccupation0: "Housewife" }]
+//     },
+//     maternal: {
+//       "grandfatherName#": "Ram Rathi",
+//       "grandmotherName#": "Kanta Rathi",
+//       "uncles#": [
+//         {
+//           "uncleName#0": "Suresh Rathi",
+//           "uncleOccupation#0": "Grain Merchant, Bhopal"
+//         },
+//         {
+//           "uncleName#1": "Manoj Rathi",
+//           "uncleOccupation#1": "Hardware Retailer, Bhopal"
+//         },
+//         {
+//           "uncleName#2": "Hardik Rathi",
+//           "uncleOccupation#2": "Catering Services, Bhopal"
+//         }
+//       ],
+//       "aunts#": [
+//         {
+//           "auntName#0": "Rajshree Maheshwari",
+//           "auntOccupation#0": "Boutique Shop, Kolkata"
+//         }
+//       ]
+//     }
+//   };
+//   data.family.brothers.forEach(brother => this.addBrother());
+//   data.family.sisters.forEach(sister => this.addSister());
+//   data.paternal.uncles.forEach(uncle => this.addUncle("paternal"));
+//   data.paternal.aunts.forEach(aunt => this.addAunt("paternal"));
+//   data.maternal["uncles#"].forEach(uncle => this.addUncle("maternal", "#"));
+//   data.maternal["aunts#"].forEach(aunt => this.addAunt("maternal", "#"));
+//   setTimeout(() => this.detailsForm.setValue({ ...data }), 1000);
+//   this.detailsForm.markAsDirty();
+// }

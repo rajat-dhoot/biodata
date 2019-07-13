@@ -1,6 +1,8 @@
 import { Pipe } from "@angular/core";
 import { PipeTransform } from "@angular/core";
 
+//capitalize the first letter
+
 @Pipe({ name: "capitalize" })
 export class CapitalizePipe implements PipeTransform {
   transform(value: any) {

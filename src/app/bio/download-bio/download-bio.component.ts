@@ -15,14 +15,23 @@ import html2pdf from "html2pdf.js";
   templateUrl: "./download-bio.component.html",
   styleUrls: ["./download-bio.component.scss"]
 })
+
+/*
+ * Download Bio Component - This component is used to convert biodata into pdf and display download page
+ * Variables -
+ * pdfHtml - required to read dynamic html container <prepare-bio-component> using ref variable
+ * requiredHtml - required Html is extracted from pdfHtml to convert it into pdf
+ * timeleft, timer - for displaying timer to user
+ * data - to check if the form data is not null otherwise redirect user to the home page
+ * html2pdf.js - It is used for converting html to pdf
+ */
 export class DownloadBioComponent implements OnInit, AfterViewInit {
   @ViewChild("htmlToConvert", { read: ViewContainerRef, static: false })
   pdfHTML;
-  hideLoader: boolean;
+  requiredHtml;
   timeleft: number = 5;
   timer: any;
   data;
-  requiredHtml;
 
   constructor(
     private _bioservice: BioService,
@@ -31,7 +40,6 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.hideLoader = false;
     this.data = this._bioservice.getDetailsModel();
     if (!this.data)
       this.router.navigate(["../details"], { relativeTo: this.route });
@@ -60,9 +68,6 @@ export class DownloadBioComponent implements OnInit, AfterViewInit {
       .set(opt)
       .from(this.requiredHtml)
       .save();
-    setTimeout(() => {
-      this.hideLoader = true;
-    }, 2000);
     setTimeout(() => {
       this.router.navigate(["/home"]);
     }, 4000);

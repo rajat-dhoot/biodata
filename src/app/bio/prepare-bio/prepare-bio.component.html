@@ -2,7 +2,12 @@
   <div class="ganeshaImg">
     <img src="assets/ganesha.png">
   </div>
+  <!-- The biodata is made using angular flex layout, not by table td tr. 
+    It enables it to be responsive. Using table td tr there were colspan rowspan issues
+    and while converting it in to pdf different layout was rendered.
+  -->
     <div class="container">
+      <!-- ############################## Personal ################################### -->
       <section>
       <div class="head">Personal Details</div>
       <div class="row" fxLayout="row">
@@ -48,6 +53,7 @@
         </div>
     </section>
 
+<!-- ############################## Family ################################### -->
    
     <section>
       <div class="head">Family Details</div>
@@ -91,6 +97,8 @@
           </div>
     </section>
 
+<!-- ############################## Paternal ################################### -->
+
     <section>
       <div class="head">Paternal Details</div>
       <div class="row" fxLayout="row">
@@ -126,6 +134,8 @@
               </div>
     </section>
 
+    <!-- ############################## Maternal ################################### -->
+
     <section>
         <div class="head">Maternal Details</div>
         <div class="row" fxLayout="row">
@@ -160,6 +170,9 @@
                   </div>
                 </div>
       </section>
+
+<!-- ############################## Contact Details ################################### -->
+
       <section>
         <div class="head">Contact Details</div>
           <div class="row" fxLayout="row">

@@ -6,8 +6,7 @@
     @include header();
   }
   mat-card {
-    height: 120px;
-    width: 180px;
+    @include box(180px, 120px);
     margin: 50px;
     mat-card-header {
       text-align: center;
