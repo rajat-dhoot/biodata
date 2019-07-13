@@ -7,7 +7,8 @@ import {
   Router,
   Event,
   NavigationStart,
-  NavigationEnd
+  NavigationEnd,
+  NavigationCancel
 } from "@angular/router";
 
 const SMALL_WIDTH_BREAKPOINT = 600;
@@ -52,7 +53,10 @@ export class NavbarComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) this.hideLoader = false;
-      else if (event instanceof NavigationEnd) {
+      else if (
+        event instanceof NavigationEnd ||
+        event instanceof NavigationCancel
+      ) {
         let timeout = 1000;
         if (event.url.includes("download")) {
           timeout = 8000;
