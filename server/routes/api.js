@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const biodata = require("../models/biodata");
-const key = require("../keys");
 
-const monogDB = key.mongoURI;
+const monogDB = process.env.MONGOLAB_URI;
 
 mongoose.connect(monogDB, { useNewUrlParser: true });
 const db = mongoose.connection;
