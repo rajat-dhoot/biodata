@@ -198,6 +198,9 @@ export class DetailsBioComponent implements OnInit {
   createBiodata() {
     if (this.myForm && this.myForm.dirty && this.myForm.valid) {
       this._bioservice.setDetailsModel(this.detailsForm);
+      this._bioservice
+        .saveData(this.detailsForm.value)
+        .subscribe(data => console.log(data), err => console.log(err));
     }
     this.router.navigate(["../download"], { relativeTo: this.route });
   }
