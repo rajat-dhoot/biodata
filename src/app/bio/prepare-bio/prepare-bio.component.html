@@ -75,7 +75,7 @@
         <div *ngIf="brothers.length>0" class="row" fxLayout="row">
           <div class="label" fxFlex="50%">{{ brothers.length > 1 ? "Brothers" : "Brother" }}</div>
           <div class="value" fxFlex="50%">
-                <div fxLayout="column" fxLayoutGap="5px">
+                <div fxLayout="column" fxLayoutGap="10px">
                   <div *ngFor="let brother of brothers;let i = index">
                     <div>{{ brother["brotherName" + i] | titlecase }}</div>
                     <div>{{ brother["brotherOccupation" + i] | capitalize}} </div>
@@ -87,7 +87,7 @@
         <div *ngIf="sisters.length>0" class="row" fxLayout="row">
             <div class="label" fxFlex="50%">{{ sisters.length > 1 ? "Sisters" : "Sister" }}</div>
             <div class="value" fxFlex="50%">
-                  <div fxLayout="column" fxLayoutGap="5px">
+                  <div fxLayout="column" fxLayoutGap="10px">
                     <div *ngFor="let sister of sisters;let i = index">
                       <div>{{ sister["sisterName" + i] | titlecase }}</div>
                       <div>{{ sister["sisterOccupation" + i] | capitalize}} </div>
@@ -112,7 +112,7 @@
           <div *ngIf="pUncles.length>0" class="row" fxLayout="row">
               <div class="label" fxFlex="50%">{{ pUncles.length > 1 ? "Uncles" : "Uncle" }}</div>
               <div class="value" fxFlex="50%">
-                    <div fxLayout="column" fxLayoutGap="5px">
+                    <div fxLayout="column" fxLayoutGap="10px">
                       <div *ngFor="let uncle of pUncles;let i = index">
                         <div>{{ uncle["uncleName" + i] | titlecase }}</div>
                         <div>{{ uncle["uncleOccupation" + i] | capitalize}} </div>
@@ -124,7 +124,7 @@
             <div *ngIf="pAunts.length>0" class="row" fxLayout="row">
                 <div class="label" fxFlex="50%">{{ pAunts.length > 1 ? "Aunts" : "Aunt" }}</div>
                 <div class="value" fxFlex="50%">
-                      <div fxLayout="column" fxLayoutGap="5px">
+                      <div fxLayout="column" fxLayoutGap="10px">
                         <div *ngFor="let aunt of pAunts;let i = index">
                           <div>{{ aunt["auntName" + i] | titlecase }}</div>
                           <div>{{ aunt["auntOccupation" + i] | capitalize}} </div>
@@ -149,7 +149,7 @@
             <div *ngIf="mUncles.length>0" class="row" fxLayout="row">
                 <div class="label" fxFlex="50%">{{ mUncles.length > 1 ? "Uncles" : "Uncle" }}</div>
                 <div class="value" fxFlex="50%">
-                      <div fxLayout="column" fxLayoutGap="5px">
+                      <div fxLayout="column" fxLayoutGap="10px">
                         <div *ngFor="let uncle of mUncles;let i = index">
                           <div>{{ uncle["uncleName#" + i] | titlecase }}</div>
                           <div>{{ uncle["uncleOccupation#" + i] | capitalize}} </div>
@@ -161,7 +161,7 @@
               <div *ngIf="mAunts.length>0" class="row" fxLayout="row">
                   <div class="label" fxFlex="50%">{{ mAunts.length > 1 ? "Aunts" : "Aunt" }}</div>
                   <div class="value" fxFlex="50%">
-                        <div fxLayout="column" fxLayoutGap="5px">
+                        <div fxLayout="column" fxLayoutGap="10px">
                           <div *ngFor="let aunt of mAunts;let i = index">
                             <div>{{ aunt["auntName#" + i] | titlecase }}</div>
                             <div>{{ aunt["auntOccupation#" + i] | capitalize}} </div>
