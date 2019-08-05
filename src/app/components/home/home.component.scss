@@ -6,13 +6,6 @@
     @include header();
   }
 
-  .sample {
-    @include fullDiv(20px);
-    .sampleBiodata > mat-card {
-      @include box(250px, 350px);
-    }
-  }
-
   .visual {
     padding: 50px 0px 40px;
     width: 100%;
